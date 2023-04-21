@@ -2,6 +2,7 @@ package com.tenco.hobby.repository.model;
 
 import java.sql.Timestamp;
 
+import com.tenco.hobby.enums.UserRole;
 import lombok.Data;
 
 @Data
@@ -13,7 +14,7 @@ public class User {
 	private String username;
 	private int age;
 	private String phone;
-	private String userRole;
+	private UserRole userRole;
 	private Timestamp createdAt;
 
 }
