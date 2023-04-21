@@ -7,17 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-		로그인
-		
-		<form action="/user/log-in" method="post">
-		
-		
-			<input type="text" value="gildong@gmail.com">
-			<input type="date">
-			<button type="submit">로그인</button>		
-		
-		
-		</form>
-		
+	
+	<a href="/user/log-in">로그인</a>
+	<a href="/user/join-up">회원가입</a>
 </body>
 </html>

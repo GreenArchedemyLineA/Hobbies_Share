@@ -12,12 +12,12 @@
 	<form action="/user/join-up" method="post">
 	
 		<input type="text" value="gildong@gmail.com">
-		<submit >
+		<input type="text" value="gildong@gmail.com">
+		<input type="text" value="gildong@gmail.com">
+		<input type="text" value="gildong@gmail.com">
+		<button type="submit">회원가입</button>
 		
 		
-	
-	
-	
 	
 	
 	</form>

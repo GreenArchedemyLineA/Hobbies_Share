@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tenco.hobby.repository.interfaces.UserRepository">
+
+	<insert id="insert">
+		insert into user_tb (email, password, username, birth, phone, user_role, created_at)
+		values (#{email}, #{password}, #{username}, #{birth}, #{phone}, #{userRole}, now())
+	</insert>
+	
+	<update id="updateById">
+		update user_tb set username = #{username}, phone = #{phone} where id = #{id}
+	</update>
+	
+	<update id="updatePasswordById">
+		update user_tb set password = #{password} where id= #{id}
+	</update>
+		
+	<delete id="deleteById">
+		delete from user_tb where id = #{id}
+	</delete>
+
+	<select id="findById" resultType="com.tenco.hobby.repository.model.User">
+		select * from user_tb where id = #{id}
+	</select>
+
+</mapper>

@@ -1,15 +1,15 @@
-package com.tenco.hobby.repository.model;
+package com.tenco.hobby.dto;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 
 import com.tenco.hobby.enums.UserRole;
+
 import lombok.Data;
 
 @Data
-public class User {
+public class JoinUpDto {
 
-	private Long id;
 	private String email;
 	private String password;
 	private String username;
