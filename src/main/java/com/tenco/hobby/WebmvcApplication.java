@@ -1,4 +1,4 @@
-package com.tenco.bankapp;
+package com.tenco.hobby;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
