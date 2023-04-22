@@ -14,6 +14,7 @@ import com.tenco.hobby.dto.LogInDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.UserService;
+import com.tenco.hobby.util.Define;
 
 @Controller
 @RequestMapping("/user")
@@ -24,10 +25,6 @@ public class UserController {
 
 	@Autowired
 	private HttpSession session;
-
-	public String signUp() {
-		return "";
-	}
 
 	@GetMapping("/admin")
 	public String adminSignUp() {
@@ -103,6 +100,18 @@ public class UserController {
 	@PostMapping("/log-in")
 	public String logInProc(LogInDto logInDto) {
 
+		if (logInDto.getEmail() == null || logInDto.getEmail().isEmpty()) {
+			throw new CustomRestfullException("이메일을 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		if (logInDto.getPassword() == null || logInDto.getPassword().isEmpty()) {
+			throw new CustomRestfullException("비밀번호를 입력해주세요", HttpStatus.BAD_REQUEST);
+		}
+
+		User principal = userService.logIn(logInDto);
+		principal.setPassword(null);
+		session.setAttribute(Define.PRINCIPAL, principal);
+
 		return "/layout/main";
 	}
 
@@ -113,7 +122,7 @@ public class UserController {
 	 */
 	@GetMapping("/log-out")
 	public String logOut() {
-
+		session.invalidate();
 		return "redirect:/layout/main";
 	}
 

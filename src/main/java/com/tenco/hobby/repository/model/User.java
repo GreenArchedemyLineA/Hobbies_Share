@@ -15,7 +15,7 @@ public class User {
 	private String username;
 	private Date birth;
 	private String phone;
-	private UserRole userRole;
+	private UserRole userRole;  // Enum
 	private Timestamp createdAt;
 
 }

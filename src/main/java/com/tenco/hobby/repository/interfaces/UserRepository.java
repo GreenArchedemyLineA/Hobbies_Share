@@ -3,6 +3,7 @@ package com.tenco.hobby.repository.interfaces;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tenco.hobby.dto.JoinUpDto;
+import com.tenco.hobby.dto.LogInDto;
 import com.tenco.hobby.repository.model.User;
 
 @Mapper
@@ -16,6 +17,6 @@ public interface UserRepository {
 
 	public int deleteById(Integer id);
 
-	public User findById(Integer id);
+	public User findByEmail(LogInDto logInDto);
 
 }

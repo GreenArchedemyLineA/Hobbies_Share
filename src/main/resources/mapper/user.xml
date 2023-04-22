@@ -20,8 +20,8 @@
 		delete from user_tb where id = #{id}
 	</delete>
 
-	<select id="findById" resultType="com.tenco.hobby.repository.model.User">
-		select * from user_tb where id = #{id}
+	<select id="findByEmail" resultType="com.tenco.hobby.repository.model.User">
+		select * from user_tb where email = #{email}
 	</select>
 
 </mapper>
