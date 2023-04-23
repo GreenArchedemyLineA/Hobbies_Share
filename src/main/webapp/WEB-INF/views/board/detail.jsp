@@ -18,6 +18,7 @@
 				<th>제목</th>
 				<th>내용</th>
 				<th>userId</th>
+				<th>취미목록</th>
 				<th>createdAt</th>
 			</tr>
 		</thead>
@@ -27,7 +28,8 @@
 				<td><a href="#">제목이요</a></td>
 				<td>상세내용이요상세</td>
 				<td>나에요</td>
-				<td>현재시간</td>
+				<td>취미</td>
+				<td>시간</td>
 			</tr>
 		</tbody>
 	</table>

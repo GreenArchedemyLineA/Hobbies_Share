@@ -8,11 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>게시글쓰기</h1>
+	<h1>게시글 수정</h1>
 	<form action="#" method="post">
 
-		<input type="text" id="title" name="title" value="제목이요"> <input
-			type="text" id="content" name="content" value="내용이요">
+		<input type="text" id="title" name="title" value="제목이요">
+		<input type="text" id="content" name="content" value="내용이요">
 		<!-- UserId  -->
 		<select>
 			<option>맛집</option>
@@ -20,6 +20,8 @@
 			<option>쇼핑</option>
 			<option>취미</option>
 		</select>
+		<input type="submit" value="수정완료">
+
 	</form>
 
 </body>
