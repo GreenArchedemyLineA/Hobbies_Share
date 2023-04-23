@@ -1,5 +1,7 @@
 package com.tenco.hobby.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -64,6 +66,31 @@ public class UserService {
 			throw new CustomRestfullException("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
 		}
 		return userEntity;
+	}
+
+	/**
+	 * 회원 정보 읽기
+	 * 
+	 * @param id
+	 * @return userEntity 응답
+	 */
+	@Transactional
+	public User readInfo(Integer id) {
+
+		User userEntity = userRepository.findById(id);
+
+		if (userEntity == null) {
+			throw new CustomRestfullException("회원 정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return userEntity;
+	}
+
+	public List<User> readUserInfo(Long id) {
+
+		List<User> userInfo = userRepository.readUserInfo(id);
+
+		return userInfo;
+
 	}
 
 }

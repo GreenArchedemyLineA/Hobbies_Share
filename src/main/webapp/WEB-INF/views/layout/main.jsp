@@ -11,7 +11,9 @@
 		<div class="">
 			<a href="/user/join-up">회원가입</a>
 			<a href="/user/log-in">로그인</a>
-		<button ></button>
+			<a href="/user/update">회원 정보 수정</a>
+			<a href="/user/log-out">로그아웃</a>
+			<a href="#">회원 탈퇴</a>
 		</div>
 		<div class="front-banner">
 			배너사진

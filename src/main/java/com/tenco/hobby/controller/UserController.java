@@ -1,16 +1,21 @@
 package com.tenco.hobby.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tenco.hobby.dto.JoinUpDto;
 import com.tenco.hobby.dto.LogInDto;
+import com.tenco.hobby.dto.UpdateInfoDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.UserService;
@@ -115,6 +120,52 @@ public class UserController {
 		return "/layout/main";
 	}
 
+	@GetMapping("/update/{id}")
+	public String updateInfo(@PathVariable Integer id, Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		List<User> infoList = userService.readUserInfo(principal.getId());
+		if (infoList.isEmpty()) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
+
+		return "redirect:/user/updateInfo";
+	}
+
+	/**
+	 * 회원 정보 수정 처리
+	 * 
+	 * @param updateInfoDto
+	 * @return 메인 페이지
+	 */
+	@PostMapping("/update")
+	public String updateInfoProc(UpdateInfoDto updateInfoDto) {
+
+//		유효성 검사
+		if (updateInfoDto.getEmail() == null || updateInfoDto.getEmail().isEmpty()) {
+			throw new CustomRestfullException("이메일을 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		if (updateInfoDto.getPassword() == null || updateInfoDto.getPassword().isEmpty()) {
+			throw new CustomRestfullException("비밀번호를 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		if (updateInfoDto.getUsername() == null || updateInfoDto.getUsername().isEmpty()) {
+			throw new CustomRestfullException("이름을 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		if (updateInfoDto.getPhone() == null || updateInfoDto.getPhone().isEmpty()) {
+			throw new CustomRestfullException("전화번호를 입력해주세요", HttpStatus.BAD_REQUEST);
+		}
+
+		return "/layout/main";
+
+	}
+
 	/**
 	 * 로그아웃
 	 * 
@@ -123,7 +174,7 @@ public class UserController {
 	@GetMapping("/log-out")
 	public String logOut() {
 		session.invalidate();
-		return "redirect:/layout/main";
+		return "/layout/main";
 	}
 
 	public String deleteProc() {

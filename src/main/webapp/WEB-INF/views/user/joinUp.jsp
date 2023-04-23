@@ -14,7 +14,7 @@
 
 				<div class="form-group">
 					<label for="email">이메일:</label>
-					<input type="email" class="form-control" placeholder="사용할 이메일을 입력해주세요." id="email" name="email" value="gildong@gmail.com">
+					<input type="email" class="form-control" placeholder="사용할 이메일을 입력해주세요." id="email" name="email" value="gildong@hobby.com">
 				</div>
 
 				<div class="form-group">
