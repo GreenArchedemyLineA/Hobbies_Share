@@ -22,6 +22,10 @@
 	<select id="findAll" resultType="com.tenco.hobby.repository.model.Board">
 		select * from board_tb
 	</select>
+	
+	<select id="findById" resultType="com.tenco.hobby.repository.model.Board">
+		select * from board_tb where id = #{id}
+	</select>
 
 
 </mapper>

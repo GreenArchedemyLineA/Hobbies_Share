@@ -1,6 +1,9 @@
 package com.tenco.hobby.dto;
 
-public class UpdateDTO {
+import lombok.Data;
+
+@Data
+public class UpdateFormDTO {
 	
 	private String title;
 	private String content;

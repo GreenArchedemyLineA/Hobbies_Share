@@ -9,8 +9,8 @@
 </head>
 <body>
 	<h1>게시글 상세조회</h1>
-	<a href="/board/update">수정하자구</a>
-	<a href="/board/delete">삭제하자구</a>
+	<a href="/board/update/${board.id}">수정하자구</a>
+	<a href="/board/delete/${board.id}">삭제하자구</a>
 	<table>
 		<thead>
 			<tr>
@@ -24,12 +24,12 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>1</td>
-				<td><a href="#">제목이요</a></td>
-				<td>상세내용이요상세</td>
-				<td>나에요</td>
-				<td>취미</td>
-				<td>시간</td>
+				<td>${board.id}</td>
+				<td>${board.title}</td>
+				<td>${board.content}</td>
+				<td>${board.userId}</td>
+				<td>${board.hobbyId}</td>
+				<td>${board.createdAt}</td>
 			</tr>
 		</tbody>
 	</table>
