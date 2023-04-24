@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,21 +7,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>°Ô½Ã±Û¾²±â</h1>
+	<h1>ê²Œì‹œê¸€ì“°ê¸°</h1>
 	<form action="/board/write-proc" method="post">
 
-		<input type="text" id="title" name="title" placeholder="Á¦¸ñÀÌ¿ä">
-		<input type="text" id="content" name="content" placeholder="³»¿ëÀÌ¿ä">
+		<input type="text" id="title" name="title" placeholder="ì œëª©ì´ìš”">
+		<input type="text" id="content" name="content" placeholder="ë‚´ìš©ì´ìš”">
 		<!-- UserId  -->
 		<select name="hobbyId">
-			<!-- Å×½ºÆ®¿ë -->
+			<!-- í…ŒìŠ¤íŠ¸ìš© -->
 			<option>1</option>
 			<option>2</option>
-			<option>¸ÀÁý</option>
-			<option>¿µÈ­</option>
-			<option>¼îÇÎ</option>
-			<option>Ãë¹Ì</option>
-		</select> <input type="submit" value="¾÷·Îµå">
+			<option>ë§›ì§‘</option>
+			<option>ì˜í™”</option>
+			<option>ì‡¼í•‘</option>
+			<option>ì·¨ë¯¸</option>
+		</select> <input type="submit" value="ì—…ë¡œë“œ">
 	</form>
 
 </body>

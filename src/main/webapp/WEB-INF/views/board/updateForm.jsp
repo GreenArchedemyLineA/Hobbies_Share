@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>°Ô½Ã±Û ¼öÁ¤</h1>
+	<h1>ê²Œì‹œê¸€ ìˆ˜ì •</h1>
 	<form action="/board/update-proc/${board.id}" method="post">
 
 		<input type="text" id="title" name="title" value="${board.title}">
@@ -18,7 +17,7 @@
 			<option selected="selected">${board.hobbyId}</option>
 			<option></option>								
 		</select>
-		<input type="submit" value="¼öÁ¤¿Ï·á">
+		<input type="submit" value="ìˆ˜ì •ì™„ë£Œ">
 
 	</form>
 

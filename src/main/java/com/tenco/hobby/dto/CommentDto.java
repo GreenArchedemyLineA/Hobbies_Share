@@ -3,9 +3,8 @@ package com.tenco.hobby.dto;
 import lombok.Data;
 
 @Data
-public class WriteFormDto {
+public class CommentDto {
 	
-	private String title;
 	private String content;
-	private Long hobbyId;
+
 }

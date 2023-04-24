@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,16 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>°Ô½Ã±Û ÀüÃ¼Á¶È¸</h1>
-	<a href="/board/write">±Û¾²ÀÚ</a>
+	<h1>ê²Œì‹œê¸€ ì „ì²´ì¡°íšŒ</h1>
+	<a href="/board/write">ê¸€ì“°ì</a>
 	<table>
 		<thead>
 			<tr>
 				<th>id</th>
-				<th>Á¦¸ñ</th>
-				<th>³»¿ë</th>
+				<th>ì œëª©</th>
+				<th>ë‚´ìš©</th>
 				<th>userId</th>
-				<th>Ãë¹Ì¸ñ·Ï</th>
+				<th>ì·¨ë¯¸ëª©ë¡</th>
 				<th>createdAt</th>
 			</tr>
 		</thead>

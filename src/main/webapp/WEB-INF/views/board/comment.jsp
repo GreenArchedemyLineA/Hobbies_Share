@@ -32,37 +32,6 @@
 			</tr>
 		</tbody>
 	</table>
-	<br>
-	<br>
-	<table>
-		<h4>댓글</h4>
-		<thead>
-			<th>id</th>
-			<th>내용</th>
-			<th>userId</th>
-			<th>boardId</th>
-			<th>createdAt</th>
-		</thead>
-		<tbody>
-			<c:forEach var="comment" items="${commentList}">
-				<tr>
-					<td>${comment.id}</td>
-					<td>${comment.content}</td>
-					<td>${comment.userId}</td>
-					<td>${comment.boardId}</td>
-					<td>${comment.createdAt}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-	<form action="/board/comment/${board.id}" method="post">
-		<input type="text" id="content" name="content">
-		<!-- userId - 세션 -->
-		<input type="submit" value="댓글적는디">
-	</form>
-		
-	
-	
+
 </body>
 </html>

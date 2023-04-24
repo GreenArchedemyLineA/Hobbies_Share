@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tenco.hobby.repository.model.Board;
+import com.tenco.hobby.repository.model.Comment;
 
 @Mapper
 public interface BoardRepository {

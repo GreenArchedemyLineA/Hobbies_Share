@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tenco.hobby.repository.interfaces.CommentRepository">
+
+	<select id="findByBoardId" resultType="com.tenco.hobby.repository.model.Comment" >
+		select * from comment_tb
+		where board_id in (select board_id from board_tb where board_id = #{boardId})
+	</select>
+	
+	<insert id="insert">
+		insert into comment_tb (content, user_id, board_id)
+		values (#{content}, #{userId}, #{boardId})		
+	</insert>
+
+</mapper>
