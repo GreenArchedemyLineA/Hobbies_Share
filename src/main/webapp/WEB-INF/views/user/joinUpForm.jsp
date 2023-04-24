@@ -26,6 +26,12 @@
 					<label for="username">이름:</label>
 					<input type="text" class="form-control" placeholder="이름을 입력해주세요" id="username" name="username" value="고길동">
 				</div>
+
+				<div class="form-group">
+					<label for="nickname">닉네임:</label>
+					<input type="text" class="form-control" placeholder="사용할 닉네임을 입력해주세요" id="nickname" name="nickname" value="길동이 아죠씨">
+				</div>
+
 				<div class="form-group">
 					<label for="birth">생일:</label>
 					<input type="text" class="form-control" id="birth" name="birth" value="1956-11-18">

@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 
 @Data
-public class AvatarDto {
+public class AvatarSelecFormDto {
 
 	private Long id;
 	private Long userId;

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.hobby.dto.AdminSignInDTO;
-import com.tenco.hobby.dto.JoinUpDto;
-import com.tenco.hobby.dto.LogInDto;
+import com.tenco.hobby.dto.JoinUpFormDto;
+import com.tenco.hobby.dto.LogInFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.UserRepository;
 import com.tenco.hobby.repository.model.User;
@@ -30,13 +30,13 @@ public class UserService {
 	 * @param joinUpDto
 	 */
 	@Transactional
-	public void createUser(JoinUpDto joinUpDto) {
+	public void createUser(JoinUpFormDto joinUpFormDto) {
 
-		String rawPwd = joinUpDto.getPassword();
+		String rawPwd = joinUpFormDto.getPassword();
 		String hashPwd = passwordEncoder.encode(rawPwd);
-		joinUpDto.setPassword(hashPwd);
+		joinUpFormDto.setPassword(hashPwd);
 
-		int result = userRepository.insert(joinUpDto);
+		int result = userRepository.insert(joinUpFormDto);
 		if (result != 1) {
 			throw new CustomRestfullException("회원가입 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -50,7 +50,7 @@ public class UserService {
 	 * @return userEntity 응답
 	 */
 	@Transactional
-	public User logIn(LogInDto logInDto) {
+	public User logIn(LogInFormDto logInDto) {
 
 		String pwd = logInDto.getPassword();
 
@@ -107,6 +107,12 @@ public class UserService {
 		}
 
 		return userEntity;
+	}
+
+	public void deleteUser(String password) {
+
+		userRepository.deleteById(password);
+
 	}
 
 }

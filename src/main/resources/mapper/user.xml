@@ -4,9 +4,13 @@
 <mapper namespace="com.tenco.hobby.repository.interfaces.UserRepository">
 
 	<insert id="insert">
-		insert into user_tb (email, password, username, birth, phone, created_at)
-		values (#{email}, #{password}, #{username}, #{birth}, #{phone}, now())
+		insert into user_tb (email, password, username, nickname, birth, phone, created_at)
+		values (#{email}, #{password}, #{username}, #{nickname}, #{birth}, #{phone}, now())
 	</insert>
+
+	<update id="updateAvatar">
+		update user_tb set nickname = #{nickname}, origin_file_name = #{originFileName}, upload_file_name = #{uploadFileName} where id =#{id}
+	</update>
 
 	<update id="updateById">
 		update user_tb set username = #{username}, phone = #{phone} where id = #{id}
@@ -23,15 +27,15 @@
 	<select id="findByEmail" resultType="com.tenco.hobby.repository.model.User">
 		select * from user_tb where email = #{email}
 	</select>
-	
+
 	<select id="findById" resultType="com.tenco.hobby.repository.model.User">
 		select * from user_tb where id = #{id}
 	</select>
-	
+
 	<select id="findByAdminEmail" resultType="com.tenco.hobby.repository.model.User">
 		select * from user_tb where email = #{email} and user_role = "ADMIN"
 	</select>
-	
+
 	<select id="findByAll" resultType="com.tenco.hobby.repository.model.User">
 		select * from user_tb
 	</select>

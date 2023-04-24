@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tenco.hobby.dto.AvatarDto;
-import com.tenco.hobby.dto.JoinUpDto;
-import com.tenco.hobby.dto.LogInDto;
-import com.tenco.hobby.dto.UpdateInfoDto;
+import com.tenco.hobby.dto.AvatarSelecFormDto;
+import com.tenco.hobby.dto.JoinUpFormDto;
+import com.tenco.hobby.dto.LogInFormDto;
+import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.UserService;
@@ -41,7 +41,7 @@ public class UserController {
 	@GetMapping("/join-up")
 	public String joinUp() {
 
-		return "/user/joinUp";
+		return "/user/joinUpForm";
 	}
 
 	/**
@@ -51,30 +51,34 @@ public class UserController {
 	 * @return 리다이렉트 로그인 페이지
 	 */
 	@PostMapping("/join-up")
-	public String joinUpProc(JoinUpDto joinUpDto) {
+	public String joinUpProc(JoinUpFormDto joinUpFormDto) {
 
 //		유효성 검사
-		if (joinUpDto.getEmail() == null || joinUpDto.getEmail().isEmpty()) {
+		if (joinUpFormDto.getEmail() == null || joinUpFormDto.getEmail().isEmpty()) {
 			throw new CustomRestfullException("이메일을 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		if (joinUpDto.getPassword() == null || joinUpDto.getPassword().isEmpty()) {
+		if (joinUpFormDto.getPassword() == null || joinUpFormDto.getPassword().isEmpty()) {
 			throw new CustomRestfullException("비밀번호를 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		if (joinUpDto.getUsername() == null || joinUpDto.getUsername().isEmpty()) {
+		if (joinUpFormDto.getUsername() == null || joinUpFormDto.getUsername().isEmpty()) {
 			throw new CustomRestfullException("이름을 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		if (joinUpDto.getBirth() == null) {
+		if (joinUpFormDto.getNickname() == null || joinUpFormDto.getNickname().isEmpty()) {
+			throw new CustomRestfullException("이름을 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		if (joinUpFormDto.getBirth() == null) {
 			throw new CustomRestfullException("생일을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
-		if (joinUpDto.getPhone() == null || joinUpDto.getPhone().isEmpty()) {
+		if (joinUpFormDto.getPhone() == null || joinUpFormDto.getPhone().isEmpty()) {
 			throw new CustomRestfullException("전화번호를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
-		userService.createUser(joinUpDto);
+		userService.createUser(joinUpFormDto);
 
 		return "redirect:/user/log-in";
 	}
@@ -86,7 +90,7 @@ public class UserController {
 	@GetMapping("/log-in")
 	public String logIn() {
 
-		return "/user/logIn";
+		return "/user/logInForm";
 	}
 
 	/**
@@ -95,27 +99,27 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/log-in")
-	public String logInProc(LogInDto logInDto) {
+	public String logInProc(LogInFormDto logInFormDto) {
 
-		if (logInDto.getEmail() == null || logInDto.getEmail().isEmpty()) {
+		if (logInFormDto.getEmail() == null || logInFormDto.getEmail().isEmpty()) {
 			throw new CustomRestfullException("이메일을 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		if (logInDto.getPassword() == null || logInDto.getPassword().isEmpty()) {
+		if (logInFormDto.getPassword() == null || logInFormDto.getPassword().isEmpty()) {
 			throw new CustomRestfullException("비밀번호를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
-		User principal = userService.logIn(logInDto);
+		User principal = userService.logIn(logInFormDto);
 		principal.setPassword(null);
 		session.setAttribute(Define.PRINCIPAL, principal);
 
 		return "redirect:/main/";
 	}
 
-	@GetMapping("/auth/avatar")
-	public String avatar() {
+	@GetMapping("/auth/avatarSelec")
+	public String avatarSelec() {
 
-		return "/user/avatar";
+		return "/user/avatarSelecForm";
 	}
 
 	/**
@@ -124,8 +128,8 @@ public class UserController {
 	 * @param avatarDto
 	 * @return
 	 */
-	@PostMapping("/auth/avatar")
-	public String avatarSelect(AvatarDto avatarDto) {
+	@PostMapping("/auth/avatarSelec")
+	public String avatarSelecProc(AvatarSelecFormDto avatarDto) {
 
 		MultipartFile file = avatarDto.getFile();
 		if (file.isEmpty() == false) {
@@ -159,7 +163,7 @@ public class UserController {
 			}
 		}
 
-		return "redirect:/";
+		return "redirect:/main/";
 	}
 
 	/**
@@ -180,7 +184,7 @@ public class UserController {
 		} else {
 			model.addAttribute("infoList", infoList);
 		}
-		return "user/updateInfo";
+		return "/user/updateInfoForm";
 	}
 
 	/**
@@ -190,7 +194,7 @@ public class UserController {
 	 * @return 메인 페이지
 	 */
 	@PostMapping("/auth/update")
-	public String updateInfoProc(UpdateInfoDto updateInfoDto) {
+	public String updateInfoProc(UpdateInfoFormDto updateInfoDto) {
 
 //		유효성 검사
 		if (updateInfoDto.getEmail() == null || updateInfoDto.getEmail().isEmpty()) {
@@ -224,9 +228,20 @@ public class UserController {
 		return "redirect:/main/";
 	}
 
-	@PostMapping("/auth/delete")
-	public String deleteProc() {
+	@GetMapping("/auth/drop")
+	public String drop() {
 
-		return "";
+		return "/user/dropForm";
+	}
+
+	@PostMapping("/auth/drop")
+	public String dropProc(String password) {
+
+		if (password == null || password.isEmpty()) {
+			throw new CustomRestfullException("비밀번호를 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		session.invalidate();
+		return "redirect:/main/";
 	}
 }

@@ -3,7 +3,7 @@ package com.tenco.hobby.dto;
 import lombok.Data;
 
 @Data
-public class UpdateInfoDto {
+public class UpdateInfoFormDto {
 	
 	private String email;
 	private String password;

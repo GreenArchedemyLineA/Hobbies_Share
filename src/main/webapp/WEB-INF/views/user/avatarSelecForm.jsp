@@ -10,10 +10,11 @@
 		<h2>아바타 설정</h2>
 
 		<div>
-			<form action="/user/avatar" method="post">
+			<form action="/user/auth/avatarSelec" method="post">
 
 				<div class="form-group">
-					<label for="email">닉네임:</label> <input type="email" class="form-control" placeholder="사용할 별명을 입력해주세요." id="email" name="email" value="길동">
+					<label for="email">닉네임:</label>
+					<input type="email" class="form-control" id="email" name="email" value="${principal.nickname}">
 				</div>
 
 

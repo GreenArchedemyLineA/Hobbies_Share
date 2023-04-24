@@ -13,6 +13,7 @@ public class User {
 	private String email;
 	private String password;
 	private String username;
+	private String nickname;
 	private Date birth;
 	private String phone;
 	private UserRole userRole; // Enum

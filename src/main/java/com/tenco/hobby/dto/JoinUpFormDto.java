@@ -8,11 +8,12 @@ import com.tenco.hobby.enums.UserRole;
 import lombok.Data;
 
 @Data
-public class JoinUpDto {
+public class JoinUpFormDto {
 
 	private String email;
 	private String password;
 	private String username;
+	private String nickname;
 	private Date birth;
 	private String phone;
 	private UserRole userRole;
