@@ -76,7 +76,7 @@ public class UserService {
 	 * @return userEntity 응답
 	 */
 	@Transactional
-	public User readInfo(Integer id) {
+	public User readInfo(Long id) {
 
 		User userEntity = userRepository.findById(id);
 

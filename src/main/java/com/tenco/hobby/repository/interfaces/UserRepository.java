@@ -19,14 +19,14 @@ public interface UserRepository {
 
 	public int updatePasswordById(User user);
 
-	public int deleteById(Integer id);
+	public int deleteById(Long id);
 
 	public User findByEmail(LogInDto logInDto);
 	
 	public User findByAdminEmail(AdminSignInDTO adminSignUpDTO);
 
 //	회원 정보 찾기
-	public User findById(Integer id);
+	public User findById(Long id);
 	
 	public List<User> readUserInfo(@Param("id") Long id);
 

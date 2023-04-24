@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,12 @@ public class UserController {
 	@Autowired
 	private HttpSession session;
 
+	@GetMapping("/")
+	public String main(Model model) {
+		User user = (User) session.getAttribute(Define.PRINCIPAL);
+		model.addAttribute("user", user);
+		return "/layout/main";
+	}
 	/**
 	 * 
 	 * @return 회원 가입 페이지
@@ -107,23 +114,22 @@ public class UserController {
 		principal.setPassword(null);
 		session.setAttribute(Define.PRINCIPAL, principal);
 
-		return "/layout/main";
+		return "redirect:/user";
 	}
 
 	@GetMapping("/update/{id}")
-	public String updateInfo(@PathVariable Integer id, Model model) {
+	public String updateInfo(@PathVariable Long id, Model model) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
-		List<User> infoList = userService.readUserInfo(principal.getId());
-		if (infoList.isEmpty()) {
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
 			model.addAttribute("infoList", null);
 
 		} else {
 			model.addAttribute("infoList", infoList);
 		}
-
-		return "redirect:/user/updateInfo";
+		return "user/updateInfo";
 	}
 
 	/**
@@ -152,7 +158,7 @@ public class UserController {
 			throw new CustomRestfullException("전화번호를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
-		return "/layout/main";
+		return "/redirect:/user";
 
 	}
 
@@ -164,7 +170,7 @@ public class UserController {
 	@GetMapping("/log-out")
 	public String logOut() {
 		session.invalidate();
-		return "/layout/main";
+		return "redirect:/user";
 	}
 
 	public String deleteProc() {
