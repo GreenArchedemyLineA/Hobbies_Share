@@ -4,7 +4,7 @@ import com.tenco.hobby.enums.UserRole;
 import lombok.Data;
 
 @Data
-public class AdminSignUpDTO {
+public class AdminSignInDTO {
     private String email;
     private String password;
     private UserRole userRole = UserRole.ADMIN;

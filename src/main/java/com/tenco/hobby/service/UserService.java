@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.JoinUpDto;
 import com.tenco.hobby.dto.LogInDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
@@ -22,7 +23,7 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
 	/**
 	 * 회원가입 처리
 	 * 
@@ -91,6 +92,22 @@ public class UserService {
 
 		return userInfo;
 
+	}
+	
+	@Transactional
+	public User adminLogin(AdminSignInDTO adminSignInDTO) {
+		User userEntity = userRepository.findByAdminEmail(adminSignInDTO);
+		
+		if(userEntity == null) {
+			throw new CustomRestfullException("해당 관리자는 존재하지 않습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		String adminPasword = userEntity.getPassword();
+		if(!passwordEncoder.matches(adminSignInDTO.getPassword(), adminPasword)) {
+			throw new CustomRestfullException("아이디 혹은 비밀번호가 일치하지 않습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return userEntity;
 	}
 
 }

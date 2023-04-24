@@ -8,9 +8,9 @@
 	<link rel="stylesheet" href="https://andybrewer.github.io/mvp/">
 </head>
 <body>
-	<form>
-		<input type="email" name="email" value="admin">
-		<input type="password" name="pw" value="admin">
+	<form method="post" action="/admin/admin-proc">
+		<input type="email" name="email" value="admin@tenco.com">
+		<input type="password" name="password" value="admin1234">
 		<input type="submit">
 	</form>
 </body>

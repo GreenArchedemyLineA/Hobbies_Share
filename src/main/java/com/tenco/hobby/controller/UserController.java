@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.JoinUpDto;
 import com.tenco.hobby.dto.LogInDto;
 import com.tenco.hobby.dto.UpdateInfoDto;
@@ -30,17 +31,6 @@ public class UserController {
 
 	@Autowired
 	private HttpSession session;
-
-	@GetMapping("/admin")
-	public String adminSignUp() {
-
-		return "user/adminLogin";
-	}
-
-	@PostMapping("/admin-proc")
-	public String adminSignUpProc(User user) {
-		return null;
-	}
 
 	/**
 	 * 

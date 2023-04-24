@@ -3,6 +3,7 @@ package com.tenco.hobby.handler;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.tenco.hobby.handler.exception.AdminUnAuthorizedException;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.handler.exception.UnAuthorizedException;
 
@@ -26,7 +27,7 @@ public class RestfullExceptionHandler {
 	}
 
 	@ExceptionHandler(UnAuthorizedException.class)
-	public String unAuUnAuthorizedException(UnAuthorizedException e) {
+	public String unAuthorizedException(UnAuthorizedException e) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script>");
 		sb.append("alert('" + e.getMessage() + "');");
@@ -34,6 +35,16 @@ public class RestfullExceptionHandler {
 		sb.append("</script>");
 		return sb.toString();
 
+	}
+	
+	@ExceptionHandler(AdminUnAuthorizedException.class)
+	public String adminUnAuthorizedException(AdminUnAuthorizedException e) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<script>");
+		sb.append("alert('" + e.getMessage() + "');");
+		sb.append("location.href = \"/admin/login\";");
+		sb.append("</script>");
+		return sb.toString();
 	}
 
 }
