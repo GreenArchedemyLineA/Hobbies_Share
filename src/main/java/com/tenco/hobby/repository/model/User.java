@@ -15,7 +15,14 @@ public class User {
 	private String username;
 	private Date birth;
 	private String phone;
-	private UserRole userRole;  // Enum
+	private UserRole userRole; // Enum
 	private Timestamp createdAt;
+
+	private String uploadFileName;
+
+	public String setUpUserImage() {
+
+		return uploadFileName == null ? "" : "/images/uploads/" + uploadFileName;
+	}
 
 }

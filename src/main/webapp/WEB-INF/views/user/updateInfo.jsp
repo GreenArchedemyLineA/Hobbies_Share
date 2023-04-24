@@ -12,7 +12,7 @@
 		<h2>회원 정보 수정</h2>
 
 		<div>
-			<form action="/user/update" method="post">
+			<form action="/user/auth/update" method="post">
 				<div class="form-group">
 					<label for="email">이메일:</label> <input type="email"
 						class="form-control" placeholder="사용할 이메일을 입력해주세요." id="email"

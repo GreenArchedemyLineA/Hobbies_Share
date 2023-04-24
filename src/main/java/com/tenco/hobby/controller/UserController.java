@@ -1,20 +1,21 @@
 package com.tenco.hobby.controller;
 
-import java.util.List;
+import java.io.File;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.tenco.hobby.dto.AdminSignInDTO;
+import com.tenco.hobby.dto.AvatarDto;
 import com.tenco.hobby.dto.JoinUpDto;
 import com.tenco.hobby.dto.LogInDto;
 import com.tenco.hobby.dto.UpdateInfoDto;
@@ -33,12 +34,6 @@ public class UserController {
 	@Autowired
 	private HttpSession session;
 
-	@GetMapping("/")
-	public String main(Model model) {
-		User user = (User) session.getAttribute(Define.PRINCIPAL);
-		model.addAttribute("user", user);
-		return "/layout/main";
-	}
 	/**
 	 * 
 	 * @return 회원 가입 페이지
@@ -50,7 +45,7 @@ public class UserController {
 	}
 
 	/**
-	 * 회원 가인 처리
+	 * 회원 가입 처리
 	 * 
 	 * @param joinUpDto
 	 * @return 리다이렉트 로그인 페이지
@@ -114,10 +109,66 @@ public class UserController {
 		principal.setPassword(null);
 		session.setAttribute(Define.PRINCIPAL, principal);
 
-		return "redirect:/user";
+		return "redirect:/main/";
 	}
 
-	@GetMapping("/update/{id}")
+	@GetMapping("/auth/avatar")
+	public String avatar() {
+
+		return "/user/avatar";
+	}
+
+	/**
+	 * 일단 이미지 올리는 것만
+	 * 
+	 * @param avatarDto
+	 * @return
+	 */
+	@PostMapping("/auth/avatar")
+	public String avatarSelect(AvatarDto avatarDto) {
+
+		MultipartFile file = avatarDto.getFile();
+		if (file.isEmpty() == false) {
+
+			if (file.getSize() > Define.MAX_FILE_SIZE) {
+				throw new CustomRestfullException("해당 이미지는 용량 초과입니다.", HttpStatus.BAD_REQUEST);
+			}
+
+			try {
+
+				String saveDirectory = Define.UPLOAD_DIRECTORY;
+
+				File dir = new File(saveDirectory);
+				if (dir.exists() == false) {
+					dir.mkdirs();
+				}
+
+				UUID uuid = UUID.randomUUID();
+				String fileName = uuid + "_" + file.getOriginalFilename();
+
+				String uploadPath = Define.UPLOAD_DIRECTORY + File.separator + fileName;
+
+				File destination = new File(uploadPath);
+				file.transferTo(destination);
+
+				avatarDto.setOriginFileName(file.getOriginalFilename());
+				avatarDto.setUploadFileName(fileName);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return "redirect:/";
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return 회원 정보 수정 페이지
+	 */
+	@GetMapping("/auth/update/{id}")
 	public String updateInfo(@PathVariable Long id, Model model) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
@@ -138,7 +189,7 @@ public class UserController {
 	 * @param updateInfoDto
 	 * @return 메인 페이지
 	 */
-	@PostMapping("/update")
+	@PostMapping("/auth/update")
 	public String updateInfoProc(UpdateInfoDto updateInfoDto) {
 
 //		유효성 검사
@@ -158,7 +209,7 @@ public class UserController {
 			throw new CustomRestfullException("전화번호를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
-		return "/redirect:/user";
+		return "redirect:/main/";
 
 	}
 
@@ -167,12 +218,13 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("/log-out")
+	@GetMapping("/auth/log-out")
 	public String logOut() {
 		session.invalidate();
-		return "redirect:/user";
+		return "redirect:/main/";
 	}
 
+	@PostMapping("/auth/delete")
 	public String deleteProc() {
 
 		return "";

@@ -23,7 +23,7 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	/**
 	 * 회원가입 처리
 	 * 
@@ -91,22 +91,21 @@ public class UserService {
 		List<User> userInfo = userRepository.readUserInfo(id);
 
 		return userInfo;
-
 	}
-	
+
 	@Transactional
 	public User adminLogin(AdminSignInDTO adminSignInDTO) {
 		User userEntity = userRepository.findByAdminEmail(adminSignInDTO);
-		
-		if(userEntity == null) {
+
+		if (userEntity == null) {
 			throw new CustomRestfullException("해당 관리자는 존재하지 않습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		String adminPasword = userEntity.getPassword();
-		if(!passwordEncoder.matches(adminSignInDTO.getPassword(), adminPasword)) {
+		if (!passwordEncoder.matches(adminSignInDTO.getPassword(), adminPasword)) {
 			throw new CustomRestfullException("아이디 혹은 비밀번호가 일치하지 않습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		return userEntity;
 	}
 
