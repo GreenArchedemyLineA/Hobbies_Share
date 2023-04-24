@@ -32,5 +32,9 @@
 		select * from user_tb where email = #{email} and user_role = "ADMIN"
 	</select>
 	
+	<select id="findByAll" resultType="com.tenco.hobby.repository.model.User">
+		select * from user_tb
+	</select>
+
 
 </mapper>
