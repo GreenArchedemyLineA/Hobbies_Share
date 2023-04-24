@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.hobby.dto.AdminSignInDTO;
+import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
@@ -85,14 +86,7 @@ public class UserService {
 		}
 		return userEntity;
 	}
-
-	public List<User> readUserInfo(Long id) {
-
-		List<User> userInfo = userRepository.readUserInfo(id);
-
-		return userInfo;
-	}
-
+	
 	@Transactional
 	public User adminLogin(AdminSignInDTO adminSignInDTO) {
 		User userEntity = userRepository.findByAdminEmail(adminSignInDTO);
@@ -109,9 +103,37 @@ public class UserService {
 		return userEntity;
 	}
 
-	public void deleteUser(String password) {
+	/**
+	 * 회원 탈퇴 기능
+	 * 
+	 * @param email
+	 * @param password
+	 */
+	@Transactional
+	public void deleteUser(DropFormDto dropFormDto) {
 
-		userRepository.deleteById(password);
+		String pwd = dropFormDto.getPassword();
+
+		// 1. 이메일과 비밀번호로 select 하기
+
+		// 2. select 결과에서 getId하기
+
+		// 3. getId 한 값 매개변수에 넣기
+		User userEntity = userRepository.findForDelete(dropFormDto);
+		System.out.println(userEntity);
+
+		if (userEntity == null) {
+			throw new CustomRestfullException("해당 계정이 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		String hashPwd = userEntity.getPassword();
+		boolean isMatched = passwordEncoder.matches(pwd, hashPwd);
+
+		if (isMatched == false) {
+			throw new CustomRestfullException("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+		}
+
+		userRepository.deleteByEmailAndPassword(dropFormDto);
 
 	}
 

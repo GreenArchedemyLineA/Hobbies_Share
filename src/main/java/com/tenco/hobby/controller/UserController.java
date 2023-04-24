@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tenco.hobby.dto.AvatarSelecFormDto;
+import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
@@ -213,6 +214,9 @@ public class UserController {
 			throw new CustomRestfullException("전화번호를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
+//		업데이트 기능 호출
+//		userService.
+
 		return "redirect:/main/";
 
 	}
@@ -228,18 +232,40 @@ public class UserController {
 		return "redirect:/main/";
 	}
 
+	/**
+	 * 회원 탈퇴 페이지
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/auth/drop")
 	public String drop() {
-
+		
 		return "/user/dropForm";
 	}
 
+	/**
+	 * 회원 탈퇴 처리
+	 * 
+	 * @param dropFormDto
+	 * @return 리다이렉트 메인
+	 */
 	@PostMapping("/auth/drop")
-	public String dropProc(String password) {
+	public String dropProc(DropFormDto dropFormDto) {
 
-		if (password == null || password.isEmpty()) {
+
+
+		
+		if (dropFormDto.getEmail() == null || dropFormDto.getEmail().isEmpty()) {
+			throw new CustomRestfullException("이메일을 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		if (dropFormDto.getPassword() == null || dropFormDto.getPassword().isEmpty()) {
 			throw new CustomRestfullException("비밀번호를 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
+
+		userService.deleteUser(dropFormDto);
 
 		session.invalidate();
 		return "redirect:/main/";
