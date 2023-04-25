@@ -9,11 +9,15 @@
 		<association property="user" javaType="com.tenco.hobby.repository.model.User">
 			<result column="id" property="id"/>
 			<result column="email" property="email"/>
+			<result column="username" property="username"/>
+			<result column="birth" property="birth"/>
+			<result column="phone" property="phone"/>
+			<result column="user_role" property="userRole"/>
 		</association>
 	</resultMap>
 
 	<select id="findByAll" resultMap="UserHobbies">
-		select u.id, u.email, h.hobby
+		select u.*, h.hobby
 		from user_tb as u
 		join user_hobbies as uh
 		on u.id = uh.user_id

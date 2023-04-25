@@ -1,10 +1,8 @@
 package com.tenco.hobby.util;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +38,9 @@ public class RecommendSystem {
 		this.hobbyRepository = hobbyRepository;
 		List<User> userList = userRepository.findByAll();
 		List<UserHobbies> hobbiesList = hobbyRepository.findByAll();
-//		List<UserHobbies> userHobbies;
+		List<UserHobbies> userHobbies;
 		setUserAgeMap(userList);
-//		setUserHobbiesMap(hobbiesList);
+		setUserHobbiesMap(hobbiesList);
 	}
 	public List<User> userAgeRecommend(User user){
 		int userYear = user.getBirth().getYear();
@@ -98,8 +96,8 @@ public class RecommendSystem {
 		for(int i = 0; i < userHobbies.length; i++) {
 			userHobbiesMap.put(userHobbies[i], new ArrayList<User>());
 		}
-		hobbiesList.stream().forEach(user -> {
-//			userHobbiesMap.get(user.getHobby()).add(null);
+		hobbiesList.stream().forEach(hobbies -> {
+			userHobbiesMap.get(hobbies.getHobby()).add(hobbies.getUser());
 		});
 	}
 	
