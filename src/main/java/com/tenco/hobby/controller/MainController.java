@@ -29,7 +29,7 @@ public class MainController {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		model.addAttribute(Define.PRINCIPAL, principal);
-		return "/layout/main";
+		return "/layout/index";
 	}
 
 }

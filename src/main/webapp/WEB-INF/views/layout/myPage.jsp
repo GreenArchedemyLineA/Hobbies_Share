@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,8 +26,11 @@
 								<img alt="" src="<c:url value="${principal.setUpUserImage()}"/>">
 							</a>
 						</li>
-						<li><a href="/user/auth/myPage">마이페이지</a></li>
+						<li><a href="/user/auth/avatarSelec/${principal.id}">프로필 수정</a></li>
+						<li><a href="/user/auth/update/${principal.id}">회원 정보 수정</a></li>
+						<li><a href="/user/auth/updatePwd/${principal.id}">비밀 번호 변경</a></li>
 						<li><a href="/user/auth/log-out">로그아웃</a></li>
+						<li><a href="/user/auth/drop/${principal.id}">회원 탈퇴</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="/user/join-up">회원가입</a></li>

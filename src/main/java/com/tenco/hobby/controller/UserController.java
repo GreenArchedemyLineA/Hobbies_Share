@@ -42,6 +42,12 @@ public class UserController {
 //		User user = (User) session.getAttribute(Define.PRINCIPAL); 
 //		return user;
 //	}
+	
+	@GetMapping("/auth/myPage")
+	public String myPage() {
+		
+		return "/layout/myPage";
+	}
 
 	/**
 	 * 

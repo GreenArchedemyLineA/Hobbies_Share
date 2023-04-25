@@ -187,7 +187,7 @@ public class UserService {
 		String checkPwd = updatePwdFormDto.getCheckPwd();
 
 		if (NewPwd.equals(checkPwd)) {
-//			throw new CustomRestfullException("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
 		}
 
 		String hashPwd = passwordEncoder.encode(NewPwd);
@@ -196,7 +196,7 @@ public class UserService {
 		int result = userRepository.updatePasswordById(updatePwdFormDto);
 
 		if (result != 1) {
-//			throw new CustomRestfullException("비밀번호 변경 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new CustomRestfullException("비밀번호 변경 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
