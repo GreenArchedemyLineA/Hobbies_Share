@@ -13,6 +13,7 @@
 				<c:when test="${principal != null}">
 					<a href="/user/auth/avatarSelec/${principal.id}">프로필 수정</a>
 					<a href="/user/auth/update/${principal.id}">회원 정보 수정</a>
+					<a href="/user/auth/update/${principal.id}">비밀 번호 변경</a>
 					<a href="/user/auth/log-out">로그아웃</a>
 					<a href="/user/auth/drop/${principal.id}">회원 탈퇴</a>
 				</c:when>
@@ -29,18 +30,17 @@
 						<img alt="" src="<c:url value="${principal.setUpUserImage()}"/>">
 					</c:when>
 					<c:otherwise>
-
-						<img alt="" src="https://www.flaticon.com/kr/free-icon/ghost_782280?term=%EC%9C%A0%EB%A0%B9&page=4&position=33&origin=style&related_id=782280">
+						<div></div>
 					</c:otherwise>
 
 				</c:choose>
 
 			</div>
 
-		<div class="front-banner">배너사진</div>
-		<div>내용물</div>
+			<div class="front-banner">배너사진</div>
+			<div>내용물</div>
 
 
-	</div>
+		</div>
 </body>
 </html>

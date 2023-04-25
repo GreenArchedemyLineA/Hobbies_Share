@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,12 @@ public class UserController {
 
 	@Autowired
 	private HttpSession session;
+
+//	@ModelAttribute(Define.PRINCIPAL)
+//	public User setUser() {
+//		User user = (User) session.getAttribute(Define.PRINCIPAL); 
+//		return user;
+//	}
 
 	/**
 	 * 
@@ -75,7 +82,8 @@ public class UserController {
 			throw new CustomRestfullException("생일을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
-		if (joinUpFormDto.getPhone() == null || joinUpFormDto.getPhone().isEmpty()) {
+		if (joinUpFormDto.getPhone() == null || joinUpFormDto.getPhone().isEmpty()
+				|| joinUpFormDto.getPhone().length() > 11) {
 			throw new CustomRestfullException("전화번호를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
@@ -117,10 +125,18 @@ public class UserController {
 		return "redirect:/main/";
 	}
 
+	/**
+	 * @param id
+	 * @return 프로필 수정 페이지
+	 */
 	@GetMapping("/auth/avatarSelec/{id}")
-	public String avatarSelec(@PathVariable Long id) {
+	public String avatarSelec(@PathVariable Long id, Model model) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+
+		model.addAttribute("infoList", infoList);
 
 		return "/user/avatarSelecForm";
 	}
@@ -129,12 +145,18 @@ public class UserController {
 	 * 일단 이미지 올리는 것만
 	 * 
 	 * @param avatarDto
-	 * @return
+	 * @return 메인 페이지
 	 */
-	@PostMapping("/auth/avatarSelec")
-	public String avatarSelecProc(AvatarSelecFormDto avatarDto) {
+	@PostMapping("/auth/avatarSelec/{id}")
+	public String avatarSelecProc(@PathVariable Long id, AvatarSelecFormDto avatarSelecFormDto) {
 
-		MultipartFile file = avatarDto.getFile();
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		if (avatarSelecFormDto.getNickname() == null || avatarSelecFormDto.getNickname().isEmpty()) {
+			throw new CustomRestfullException("닉네임을 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		MultipartFile file = avatarSelecFormDto.getFile();
 		if (file.isEmpty() == false) {
 
 			if (file.getSize() > Define.MAX_FILE_SIZE) {
@@ -150,21 +172,21 @@ public class UserController {
 					dir.mkdirs();
 				}
 
-				UUID uuid = UUID.randomUUID();
+				String uuid = UUID.randomUUID().toString();
 				String fileName = uuid + "_" + file.getOriginalFilename();
 
 				String uploadPath = Define.UPLOAD_DIRECTORY + File.separator + fileName;
 
-				File destination = new File(uploadPath);
-				file.transferTo(destination);
+				file.transferTo(new File(uploadPath));
 
-				avatarDto.setOriginFileName(file.getOriginalFilename());
-				avatarDto.setUploadFileName(fileName);
+				avatarSelecFormDto.setOriginFileName(file.getOriginalFilename());
+				avatarSelecFormDto.setUploadFileName(fileName);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		userService.updateAvatar(avatarSelecFormDto);
 
 		return "redirect:/main/";
 	}

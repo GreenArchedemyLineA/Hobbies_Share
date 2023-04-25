@@ -33,12 +33,6 @@
 		delete from user_tb where email = #{email}
 	</delete>
 
-	<select id="findForDelete" resultType="com.tenco.hobby.repository.model.User">
-		select * from user_tb where email = #{email} and password = #{password}
-	</select>
-
-
-
 
 	<!-- 로그인 -->
 	<select id="findByEmail" resultType="com.tenco.hobby.repository.model.User">

@@ -8,7 +8,6 @@ import lombok.Data;
 public class AvatarSelecFormDto {
 
 	private Long id;
-	private Long userId;
 	private String nickname;
 
 //	이미지 관련

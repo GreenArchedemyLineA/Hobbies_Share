@@ -10,10 +10,10 @@
 		<h2>아바타 설정</h2>
 
 		<div>
-			<form action="/user/auth/avatarSelec" method="post">
+			<form action="/user/auth/avatarSelec/${principal.id}" method="post" enctype="multipart/form-data">
 
 				<div class="form-group">
-					<label for="nickname">닉네임:</label> <input type="text" class="form-control" id="nickname" name="nickname" value="${principal.nickname}">
+					<label for="nickname">닉네임:</label> <input type="text" class="form-control" id="nickname" name="nickname" value="${infoList.nickname}">
 				</div>
 
 

@@ -114,10 +114,19 @@ public class UserService {
 
 		return userEntity;
 	}
-	
-	
+
+	/**
+	 * 프로필 수정 처리
+	 * 
+	 * @param avatarSelecFormDto
+	 */
+	@Transactional
 	public void updateAvatar(AvatarSelecFormDto avatarSelecFormDto) {
-		
+
+		int result = userRepository.updateAvatar(avatarSelecFormDto);
+		if (result != 1) {
+			throw new CustomRestfullException("프로필 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
 		
 	}

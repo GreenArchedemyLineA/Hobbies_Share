@@ -25,7 +25,8 @@ public class User {
 
 	public String setUpUserImage() {
 
-		return uploadFileName == null ? "" : "/images/uploads/" + uploadFileName;
+		return uploadFileName == null ? "C:\\hobby-fi\\upload\\profile/unkown.png"
+				: "/images/uploads/" + uploadFileName;
 	}
 
 }
