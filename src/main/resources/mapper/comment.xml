@@ -12,6 +12,14 @@
 	<insert id="insert">
 		insert into comment_tb (content, user_id, board_id)
 		values (#{content}, #{userId}, #{boardId})		
-	</insert>
+	</insert>	
+	
+	<update id="updateById">
+		update comment_tb set content = #{content} where id = #{id}
+	</update>
+	
+	<delete id="deleteById">
+		delete from comment_tb where id = #{id};
+	</delete>
 
 </mapper>

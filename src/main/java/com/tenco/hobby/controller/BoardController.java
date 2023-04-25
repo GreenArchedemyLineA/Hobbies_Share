@@ -1,6 +1,5 @@
 package com.tenco.hobby.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +30,11 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	// 글 전체조회
+	/**
+	 * 
+	 * @param model
+	 * @return 게시글 전체 조회
+	 */
 	@GetMapping("/list")
 	public String list(Model model) {
 
@@ -39,16 +42,23 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 		return "/board/list";
 	}
-
-	// 글 쓰기
+	
+	/**
+	 * 
+	 * @return 글쓰기 페이지
+	 */
 	@GetMapping("/write")
 	public String write() {
 
 		return "/board/writeForm";
 	}
 
+	/** Todo 세션추가
+	 * 글쓰기 페이지
+	 * @param writeFormDto
+	 * @return 게시글 전체 조회
+	 */
 	@PostMapping("/write-proc")
-	// Todo 세션추가
 	// public String writeProc(WriteFormDto writeFormDTO, Long principalId ) {
 	public String writeProc(WriteFormDto writeFormDto) {
 
@@ -77,15 +87,22 @@ public class BoardController {
 	@GetMapping("/detail/{id}")
 	public String detail(@PathVariable Long id, Model model) {
 
-		// User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		Board board = boardService.readBoard(id);
 		List<Comment> commentList = boardService.readComment(id);
 		model.addAttribute("board", board);
-		model.addAttribute("commentList", commentList);
-
+		model.addAttribute("comment", commentList);
+		model.addAttribute(Define.PRINCIPAL, principal);
 		return "/board/detail";
+		
 	}
 
+	/**
+	 * 댓글 작성
+	 * @param commentDto
+	 * @param boardId
+	 * @return 글 상세페이지
+	 */
 	@PostMapping("/comment/{boardId}")
 	public String comment(CommentDto commentDto, @PathVariable Long boardId) {
 		
@@ -100,7 +117,7 @@ public class BoardController {
 	 * 
 	 * @param id
 	 * @param model
-	 * @return 글 수정
+	 * @return 글 수정 폼
 	 */
 	@GetMapping("/update/{id}")
 	public String update(@PathVariable Long id, Model model) {
@@ -110,6 +127,12 @@ public class BoardController {
 		return "/board/updateForm";
 	}
 
+	/**
+	 * 글 수정 폼
+	 * @param id
+	 * @param updateFormDTO
+	 * @return 글 전체 조회
+	 */
 	@PostMapping("/update-proc/{id}")
 	public String updateProc(@PathVariable Long id, UpdateFormDto updateFormDTO) {
 
@@ -125,13 +148,50 @@ public class BoardController {
 		boardService.updatePost(updateFormDTO, 1, id);
 		return "redirect:/board/list";
 	}
+	
+	
+	@GetMapping("/update-cmt/{id}/{boardId}")
+	public String updateComment(@PathVariable Long id, @PathVariable Long boardId, Model model) {
+		
+		Board board = boardService.readBoard(boardId);		
+		List<Comment> commentList = boardService.readComment(boardId);
+		model.addAttribute("board", board);
+		model.addAttribute("comment", commentList);
+		model.addAttribute( "cid" ,id);
+			
+		return "/board/updateCmtFrom" ;
+		
+	}
+	
+	
+	@PostMapping("/cmt-proc/{id}/{boardId}")
+	public String updateCommentProc(@PathVariable Long id, @PathVariable Long boardId, CommentDto commentDto) {
+		
+		boardService.updateComment(commentDto, id);
+		
+		return "redirect:/board/detail/" + boardId;
+		
+		
+	}
+	
 
+	/**
+	 * 글 삭제
+	 * @param id
+	 * @return 글 전체 조회
+	 */
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id) {
 
 		boardService.deletePost(id);
 		return "redirect:/board/list";
-
+	}
+	
+	@GetMapping("/delete-cmt/{id}/{boardId}")
+	public String deleteComment(@PathVariable Long id, @PathVariable Long boardId) {
+		
+		boardService.deleteComment(id);
+		return "redirect:/board/detail/" + boardId;
 	}
 
 }

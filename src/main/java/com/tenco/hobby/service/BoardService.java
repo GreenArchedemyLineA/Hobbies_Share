@@ -92,8 +92,20 @@ public class BoardService {
 		}
 
 	}
+	
+	public void updateComment(CommentDto commentDto, Long id) {
+		
+		Comment comment = new Comment();
+		comment.setContent(commentDto.getContent());
+		comment.setId(id);
+		int resultRowCount = commentRepository.updateById(comment);
+		if(resultRowCount != 1) {
+			// throw new
+		}
+	}
+	
+	
 
-	// delete from board_tb where id = #{id}
 	public void deletePost(Long id) {
 
 		int resultRowCount = boardRepository.deleteById(id);
@@ -101,5 +113,14 @@ public class BoardService {
 			// throw new
 		}
 	}
+	
+	public void deleteComment(Long id) {
+		int resultRowCount = commentRepository.deleteById(id);
+		if(resultRowCount != 1) {
+			// throw new
+		}
+	}
+	
+	
 
 }
