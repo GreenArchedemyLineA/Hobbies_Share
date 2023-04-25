@@ -9,6 +9,7 @@ import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.JoinUpDto;
 import com.tenco.hobby.dto.LogInDto;
 import com.tenco.hobby.repository.model.User;
+import com.tenco.hobby.repository.model.UserHobbies;
 
 @Mapper
 public interface UserRepository {
@@ -30,5 +31,4 @@ public interface UserRepository {
 
 	public List<User> findByAll();
 	public List<User> readUserInfo(@Param("id") Long id);
-
 }
