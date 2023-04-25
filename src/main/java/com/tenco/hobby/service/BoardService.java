@@ -3,11 +3,13 @@ package com.tenco.hobby.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.tenco.hobby.dto.CommentDto;
 import com.tenco.hobby.dto.UpdateFormDto;
 import com.tenco.hobby.dto.WriteFormDto;
+import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.BoardRepository;
 import com.tenco.hobby.repository.interfaces.CommentRepository;
 import com.tenco.hobby.repository.model.Board;
@@ -29,6 +31,11 @@ public class BoardService {
 
 	}
 
+	/**
+	 * 전체글 조회
+	 * @param id
+	 * @return
+	 */
 	public Board readBoard(Long id) {
 
 		Board boardEntity = boardRepository.findById(id);
@@ -36,8 +43,7 @@ public class BoardService {
 	}
 
 	/**
-	 * 댓글 조회
-	 * 
+	 * 댓글 조회	 
 	 * @param boardId
 	 * @return comment
 	 */
@@ -47,9 +53,12 @@ public class BoardService {
 		return commentList;
 	}
 
-	// TODO 세션추가
-	// public void createPost(WriteFormDto writeFormDto, Long principalId) {
-	public void createPost(WriteFormDto writeFormDto, int principalId) {
+	/**
+	 * 글쓰기	 
+	 * @param writeFormDto
+	 * @param principalId
+	 */
+	public void createPost(WriteFormDto writeFormDto, Long principalId) {
 
 		Board board = new Board();
 		board.setTitle(writeFormDto.getTitle());
@@ -58,27 +67,36 @@ public class BoardService {
 		board.setHobbyId(writeFormDto.getHobbyId());
 		int resultRowCount = boardRepository.insert(board);
 		if (resultRowCount != 1) {
-			// throw new
+			throw new CustomRestfullException("글쓰기를 실패했습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	// TODO 세션추가
-	// public void createComment(CommentDto commentDto, Long principalId, Long boardId) {
-	public void createComment(CommentDto commentDto, int principalId, Long boardId) {
+	
+	/**
+	 * 댓글 작성
+	 * @param commentDto
+	 * @param principalId
+	 * @param boardId
+	 */
+	public void createComment(CommentDto commentDto, Long principalId, Long boardId) {
 
 		Comment comment = new Comment();
 		comment.setContent(commentDto.getContent());
 		comment.setUserId(principalId);
 		comment.setBoardId(boardId);
 		int resultRowCount = commentRepository.insert(comment);
-		if(resultRowCount != 1) {
-			// throw new
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("댓글작성 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
 
-	// public void updatePost(UpdateFormDTO updateFormDTO, Long principalId) {
-	public void updatePost(UpdateFormDto updateFormDto, int principalId, Long id) {
+	/**
+	 * 글 수정
+	 * @param updateFormDto
+	 * @param principalId
+	 * @param id
+	 */
+	public void updatePost(UpdateFormDto updateFormDto, Long principalId, Long id) {
 
 		Board board = new Board();
 		board.setTitle(updateFormDto.getTitle());
@@ -88,39 +106,48 @@ public class BoardService {
 		board.setId(id);
 		int resultRowCount = boardRepository.updateById(board);
 		if (resultRowCount != 1) {
-			// throw new
+			throw new CustomRestfullException("글수정 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
-	
+
+	/**
+	 * 댓글 수정
+	 * @param commentDto
+	 * @param id
+	 */
 	public void updateComment(CommentDto commentDto, Long id) {
-		
+
 		Comment comment = new Comment();
 		comment.setContent(commentDto.getContent());
 		comment.setId(id);
 		int resultRowCount = commentRepository.updateById(comment);
-		if(resultRowCount != 1) {
-			// throw new
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("댓글수정에 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
 
+	/**
+	 * 글삭제
+	 * @param id
+	 */
 	public void deletePost(Long id) {
 
 		int resultRowCount = boardRepository.deleteById(id);
 		if (resultRowCount != 1) {
-			// throw new
+			throw new CustomRestfullException("글삭제 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
+	/**
+	 * 댓글 삭제
+	 * @param id
+	 */
 	public void deleteComment(Long id) {
 		int resultRowCount = commentRepository.deleteById(id);
-		if(resultRowCount != 1) {
-			// throw new
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("댓글삭제 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
 
 }

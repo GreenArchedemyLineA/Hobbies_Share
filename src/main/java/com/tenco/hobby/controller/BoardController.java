@@ -1,11 +1,11 @@
 package com.tenco.hobby.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.tenco.hobby.dto.CommentDto;
 import com.tenco.hobby.dto.UpdateFormDto;
 import com.tenco.hobby.dto.WriteFormDto;
+import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.Comment;
 import com.tenco.hobby.repository.model.User;
@@ -43,9 +44,8 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 		return "/board/list";
 	}
-	
+
 	/**
-	 * 
 	 * @return 글쓰기 페이지
 	 */
 	@GetMapping("/write")
@@ -54,28 +54,23 @@ public class BoardController {
 		return "/board/writeForm";
 	}
 
-	/** Todo 세션추가
-	 * 글쓰기 페이지
+	/**
 	 * @param writeFormDto
 	 * @return 게시글 전체 조회
 	 */
 	@PostMapping("/write-proc")
-	// public String writeProc(WriteFormDto writeFormDTO, Long principalId ) {
-	public String writeProc(WriteFormDto writeFormDto) {
+	public String writeProc(WriteFormDto writeFormDto, Long principalId ) {
 
-		// TODO
-		// 세션
-		User principal = (User) session.getAttribute("principal");
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
 		if (writeFormDto.getTitle() == null || writeFormDto.getTitle().isEmpty()) {
-			//
+			throw new CustomRestfullException("제목을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 		if (writeFormDto.getContent() == null || writeFormDto.getContent().isEmpty()) {
-			//
+			throw new CustomRestfullException("내용을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 
-		// boardService.createPost(writeFormDTO, principal.getId());
-		boardService.createPost(writeFormDto, 1);
+		boardService.createPost(writeFormDto, principal.getId());
 		return "redirect:/board/list";
 	}
 
@@ -96,21 +91,25 @@ public class BoardController {
 		model.addAttribute(Define.PRINCIPAL, principal);
 
 		return "/board/detail";
-		
+
 	}
 
 	/**
 	 * 댓글 작성
+	 * 
 	 * @param commentDto
 	 * @param boardId
 	 * @return 글 상세페이지
 	 */
 	@PostMapping("/comment/{boardId}")
 	public String comment(CommentDto commentDto, @PathVariable Long boardId) {
-		
+
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		//Comment comment = boardService.createComment(commentDto, principal.getId(), boardId);
-		boardService.createComment(commentDto, 1, boardId );
+		
+		if(commentDto.getContent() == null || commentDto.getContent().isEmpty()) {
+			throw new CustomRestfullException("내용을 입력하시오", HttpStatus.BAD_REQUEST);
+		}
+		boardService.createComment(commentDto, principal.getId(), boardId);
 
 		return "redirect:/board/detail/" + boardId;
 	}
@@ -141,45 +140,43 @@ public class BoardController {
 
 		User principal = (User) session.getAttribute("principal");
 		if (updateFormDTO.getTitle() == null || updateFormDTO.getTitle().isEmpty()) {
-			//
+			throw new CustomRestfullException("제목을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 		if (updateFormDTO.getContent() == null || updateFormDTO.getContent().isEmpty()) {
-			//
+			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
-		// boardService.updatePost(updateFormDTO, principal.getId(), id);
-		boardService.updatePost(updateFormDTO, 1, id);
+		boardService.updatePost(updateFormDTO, principal.getId(), id);
 		return "redirect:/board/list";
 	}
-	
-	
+
 	@GetMapping("/update-cmt/{id}/{boardId}")
 	public String updateComment(@PathVariable Long id, @PathVariable Long boardId, Model model) {
-		
-		Board board = boardService.readBoard(boardId);		
+
+		Board board = boardService.readBoard(boardId);
 		List<Comment> commentList = boardService.readComment(boardId);
 		model.addAttribute("board", board);
 		model.addAttribute("comment", commentList);
-		model.addAttribute( "cid" ,id);
-			
-		return "/board/updateCmtFrom" ;
-		
+		model.addAttribute("cid", id);
+
+		return "/board/updateCmtForm";
+
 	}
-	
-	
+
 	@PostMapping("/cmt-proc/{id}/{boardId}")
 	public String updateCommentProc(@PathVariable Long id, @PathVariable Long boardId, CommentDto commentDto) {
 		
+		if(commentDto.getContent() == null || commentDto.getContent().isEmpty()) {
+			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
+		}
 		boardService.updateComment(commentDto, id);
-		
+
 		return "redirect:/board/detail/" + boardId;
-		
-		
+
 	}
-	
 
 	/**
-	 * 글 삭제
+	 * 글 삭제	 
 	 * @param id
 	 * @return 글 전체 조회
 	 */
@@ -189,10 +186,10 @@ public class BoardController {
 		boardService.deletePost(id);
 		return "redirect:/board/list";
 	}
-	
+
 	@GetMapping("/delete-cmt/{id}/{boardId}")
 	public String deleteComment(@PathVariable Long id, @PathVariable Long boardId) {
-		
+
 		boardService.deleteComment(id);
 		return "redirect:/board/detail/" + boardId;
 	}
