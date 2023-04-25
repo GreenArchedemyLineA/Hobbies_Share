@@ -9,19 +9,25 @@
 		values (#{email}, #{password}, #{username}, #{nickname}, #{birth}, #{phone}, now())
 	</insert>
 
+	<!-- 로그인 -->
+	<select id="findByEmail" resultType="com.tenco.hobby.repository.model.User">
+		select * from user_tb where email = #{email}
+	</select>
+
 	<!-- 프로필 변경 시 -->
 	<update id="updateAvatar">
 		update user_tb set nickname = #{nickname}, origin_file_name = #{originFileName}, upload_file_name = #{uploadFileName} where id = #{id}
 	</update>
 
+	<!-- 정보 찾기 -->
+	<select id="findById" resultType="com.tenco.hobby.repository.model.User">
+		select * from user_tb where id = #{id}
+	</select>
+
 	<!-- 회원 정보 변경 시 -->
 	<update id="updateUserByEmail">
 		update user_tb set username = #{username}, phone = #{phone} where email = #{email}
 	</update>
-
-	<select id="findById" resultType="com.tenco.hobby.repository.model.User">
-		select * from user_tb where id = #{id}
-	</select>
 
 	<!-- 비밀번호 변경 시 -->
 	<update id="updatePasswordById">
@@ -32,12 +38,6 @@
 	<delete id="deleteByEmail">
 		delete from user_tb where email = #{email}
 	</delete>
-
-
-	<!-- 로그인 -->
-	<select id="findByEmail" resultType="com.tenco.hobby.repository.model.User">
-		select * from user_tb where email = #{email}
-	</select>
 
 	<!-- 관리자 -->
 	<select id="findByAdminEmail" resultType="com.tenco.hobby.repository.model.User">

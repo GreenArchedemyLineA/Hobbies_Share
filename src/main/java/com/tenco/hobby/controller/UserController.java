@@ -21,6 +21,7 @@ import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
+import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.UserService;
@@ -245,6 +246,40 @@ public class UserController {
 
 		return "redirect:/main/";
 
+	}
+
+	/**
+	 * 
+	 * @return 비밀 번호 변경 페이지
+	 */
+	@GetMapping("/auth/updatePwd/{id}")
+	public String updatePwd(@PathVariable Long id) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+//		User infoList = userService.readInfo(principal.getId());
+
+//		model.addAttribute("infoList", infoList);
+
+		return "/user/updatePwdForm";
+	}
+
+	@PostMapping("/auth/updatePwd/{id}")
+	public String updatePwdProc(UpdatePwdFormDto updatePwdFormDto) {
+
+		if (updatePwdFormDto.getPassword() == null || updatePwdFormDto.getPassword().isEmpty()) {
+			throw new CustomRestfullException("현재 사용중인 비밀번호를 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+		if (updatePwdFormDto.getNewPwd() == null || updatePwdFormDto.getNewPwd().isEmpty()) {
+			throw new CustomRestfullException("새 비밀번호를 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+		if (updatePwdFormDto.getCheckPwd() == null || updatePwdFormDto.getCheckPwd().isEmpty()) {
+			throw new CustomRestfullException("비밀번호 확인을 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		userService.updatePwd(updatePwdFormDto, session);
+
+		return "redirect:/main/";
 	}
 
 	/**

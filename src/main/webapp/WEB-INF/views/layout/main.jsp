@@ -13,7 +13,7 @@
 				<c:when test="${principal != null}">
 					<a href="/user/auth/avatarSelec/${principal.id}">프로필 수정</a>
 					<a href="/user/auth/update/${principal.id}">회원 정보 수정</a>
-					<a href="/user/auth/update/${principal.id}">비밀 번호 변경</a>
+					<a href="/user/auth/updatePwd/${principal.id}">비밀 번호 변경</a>
 					<a href="/user/auth/log-out">로그아웃</a>
 					<a href="/user/auth/drop/${principal.id}">회원 탈퇴</a>
 				</c:when>

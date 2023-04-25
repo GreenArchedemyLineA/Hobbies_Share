@@ -3,10 +3,13 @@ package com.tenco.hobby.service;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties.Reactive.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.AvatarSelecFormDto;
@@ -14,6 +17,7 @@ import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
+import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.UserRepository;
 import com.tenco.hobby.repository.model.User;
@@ -51,7 +55,7 @@ public class UserService {
 	 * 관리자 로그인 처리
 	 * 
 	 * @param adminSignInDTO
-	 * @return
+	 * @return userEntity 응답
 	 */
 	@Transactional
 	public User adminLogin(AdminSignInDTO adminSignInDTO) {
@@ -127,17 +131,16 @@ public class UserService {
 		if (result != 1) {
 			throw new CustomRestfullException("프로필 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		
+
 	}
 
 	/**
 	 * 회원 정보 수정 처리
 	 * 
 	 * @param updateInfoFormDto
-	 * @return
-	 * @return
+	 * @param session
 	 */
+
 	@Transactional
 	public void updateInfo(UpdateInfoFormDto updateInfoFormDto, HttpSession session) {
 
@@ -158,6 +161,43 @@ public class UserService {
 			throw new CustomRestfullException("정보 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+	}
+
+	/**
+	 * 비밀번호 변경 기능
+	 * 
+	 * @param updatePwdFormDto
+	 * @param session
+	 */
+	@Transactional
+	public void updatePwd(UpdatePwdFormDto updatePwdFormDto, HttpSession session) {
+
+		String userInputPassword = updatePwdFormDto.getPassword();
+
+		User loginUser = (User) session.getAttribute(Define.PRINCIPAL);
+
+		String sessionPassword = userRepository.findById(loginUser.getId()).getPassword();
+		boolean isMatched = passwordEncoder.matches(userInputPassword, sessionPassword);
+
+		if (isMatched == false) {
+			throw new CustomRestfullException("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+		}
+
+		String NewPwd = updatePwdFormDto.getNewPwd();
+		String checkPwd = updatePwdFormDto.getCheckPwd();
+
+		if (NewPwd.equals(checkPwd)) {
+//			throw new CustomRestfullException("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+		}
+
+		String hashPwd = passwordEncoder.encode(NewPwd);
+		updatePwdFormDto.setPassword(hashPwd);
+
+		int result = userRepository.updatePasswordById(updatePwdFormDto);
+
+		if (result != 1) {
+//			throw new CustomRestfullException("비밀번호 변경 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**
