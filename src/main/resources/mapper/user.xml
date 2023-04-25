@@ -11,12 +11,12 @@
 
 	<!-- 프로필 변경 시 -->
 	<update id="updateAvatar">
-		update user_tb set nickname = #{nickname}, origin_file_name = #{originFileName}, upload_file_name = #{uploadFileName} where id =#{id}
+		update user_tb set nickname = #{nickname}, origin_file_name = #{originFileName}, upload_file_name = #{uploadFileName} where id = #{id}
 	</update>
 
 	<!-- 회원 정보 변경 시 -->
-	<update id="updateById">
-		update user_tb set username = #{username}, phone = #{phone} where id = #{id}
+	<update id="updateUserByEmail">
+		update user_tb set username = #{username}, phone = #{phone} where email = #{email}
 	</update>
 
 	<select id="findById" resultType="com.tenco.hobby.repository.model.User">
@@ -29,7 +29,7 @@
 	</update>
 
 	<!-- 회원 탈퇴 시 -->
-	<delete id="deleteByEmailAndPassword">
+	<delete id="deleteByEmail">
 		delete from user_tb where email = #{email}
 	</delete>
 

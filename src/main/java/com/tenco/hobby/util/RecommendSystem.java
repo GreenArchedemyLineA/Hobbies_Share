@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.tenco.hobby.enums.UserHobby;
+import com.tenco.hobby.repository.interfaces.HobbyRepository;
 import com.tenco.hobby.repository.interfaces.UserRepository;
 import com.tenco.hobby.repository.model.User;
+import com.tenco.hobby.repository.model.UserHobbies;
 
 @Component
 public class RecommendSystem {
@@ -24,17 +26,23 @@ public class RecommendSystem {
 	private final int AGE40 = 40;
 	private final int AGE50 = 50;
 	private final int AGE60 = 60;
-	private UserRepository repository;
+	private UserRepository userRepository;
+	private HobbyRepository hobbyRepository;
 	private static Map<Integer, List<User>> userAgeMap = new HashMap<>();;
 	private static Map<UserHobby, List<User>> userHobbiesMap = new HashMap<>();;
 
 	@Autowired // 생성자 주입
-	public RecommendSystem(UserRepository userRepository) throws NoSuchFieldException, IllegalAccessException {
-		this.repository = userRepository;
-		List<User> userList = repository.findByAll();
+	public RecommendSystem(
+			UserRepository userRepository,
+			HobbyRepository hobbyRepository
+			) throws NoSuchFieldException, IllegalAccessException {
+		this.userRepository = userRepository;
+		this.hobbyRepository = hobbyRepository;
+		List<User> userList = userRepository.findByAll();
+		List<UserHobbies> hobbiesList = hobbyRepository.findByAll();
 //		List<UserHobbies> userHobbies;
 		setUserAgeMap(userList);
-		setUserHobbiesMap(userList);
+//		setUserHobbiesMap(hobbiesList);
 	}
 	public List<User> userAgeRecommend(User user){
 		int userYear = user.getBirth().getYear();
@@ -84,14 +92,14 @@ public class RecommendSystem {
 		userAgeMap.put(60, userList10);
 	}
 
-	private void setUserHobbiesMap(List<User> userList) throws NoSuchFieldException, IllegalAccessException {
+	private void setUserHobbiesMap(List<UserHobbies> hobbiesList) throws NoSuchFieldException, IllegalAccessException {
 		UserHobby[] userHobbies = getEnumValues(UserHobby.class);
-		System.out.println(userHobbies.length);
+		System.out.println(hobbiesList.toString());
 		for(int i = 0; i < userHobbies.length; i++) {
 			userHobbiesMap.put(userHobbies[i], new ArrayList<User>());
 		}
-		userList.stream().forEach(user -> {
-			
+		hobbiesList.stream().forEach(user -> {
+//			userHobbiesMap.get(user.getHobby()).add(null);
 		});
 	}
 	
@@ -111,12 +119,12 @@ public class RecommendSystem {
 			nowGeneration = AGE20;
 		}
 		if(nowYear - year <= 19) {
-			return AGE10;
+			nowGeneration = AGE10;
 		}
 		return nowGeneration;
 	}
 	
-	private static<E extends UserHobby> E[] getEnumValues(Class<E> enumClass) throws NoSuchFieldException, IllegalAccessException{
+	private <E extends UserHobby> E[] getEnumValues(Class<E> enumClass) throws NoSuchFieldException, IllegalAccessException{
 		Field[] f = enumClass.getDeclaredFields();
 		Object o = null;
 		for(Field filed : f) {

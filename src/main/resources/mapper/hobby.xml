@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @author 이현서 -->
+<!-- JoinQuery -->
+<mapper namespace="com.tenco.hobby.repository.interfaces.HobbyRepository">
+	<resultMap type="com.tenco.hobby.repository.model.UserHobbies" id="UserHobbies">
+		<result column="hobby" property="hobby" />
+		<association property="user" javaType="com.tenco.hobby.repository.model.User">
+			<result column="id" property="id"/>
+			<result column="email" property="email"/>
+		</association>
+	</resultMap>
+
+	<select id="findByAll" resultMap="UserHobbies">
+		select u.id, u.email, h.hobby
+		from user_tb as u
+		join user_hobbies as uh
+		on u.id = uh.user_id
+		join hobbies as h
+		on uh.hobby = h.id
+		order by u.id;
+	</select>
+</mapper>

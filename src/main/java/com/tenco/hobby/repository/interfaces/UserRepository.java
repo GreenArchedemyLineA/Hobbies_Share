@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tenco.hobby.dto.AdminSignInDTO;
+import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
@@ -21,23 +22,25 @@ public interface UserRepository {
 	public User findByEmail(LogInFormDto logInDto);
 
 //	프로필 수정
-	public int updateAvatar();
+	public int updateAvatar(AvatarSelecFormDto avatarSelecFormDto);
 
-	public int updateById(User user);
+//	회원 정보 수정
+	public int updateUserByEmail(UpdateInfoFormDto updateInfoFormDto);
 
+//	비밀번호 변경
 	public int updatePasswordById(User user);
 
 	public User findById(UpdateInfoFormDto updateInfoFormDto);
 
-	public int deleteByEmailAndPassword(DropFormDto dropFormDto);
+//	회원 탈퇴
+	public int deleteByEmail(DropFormDto dropFormDto);
 
-	public User findForDelete(DropFormDto dropFormDto);
-
+//	관리자
 	public User findByAdminEmail(AdminSignInDTO adminSignUpDTO);
 
 //	회원 정보 찾기
 	public User findById(Long id);
 
 	public List<User> findByAll();
-
+//	public List<User> readUserInfo(@Param("id") Long id);
 }

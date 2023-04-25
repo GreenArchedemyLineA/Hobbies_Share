@@ -11,6 +11,7 @@
 		<div class="">
 			<c:choose>
 				<c:when test="${principal != null}">
+					<a href="/user/auth/avatarSelec/${principal.id}">프로필 수정</a>
 					<a href="/user/auth/update/${principal.id}">회원 정보 수정</a>
 					<a href="/user/auth/log-out">로그아웃</a>
 					<a href="/user/auth/drop/${principal.id}">회원 탈퇴</a>
@@ -35,7 +36,6 @@
 				</c:choose>
 
 			</div>
-		</div>
 
 		<div class="front-banner">배너사진</div>
 		<div>내용물</div>

@@ -117,8 +117,10 @@ public class UserController {
 		return "redirect:/main/";
 	}
 
-	@GetMapping("/auth/avatarSelec")
-	public String avatarSelec() {
+	@GetMapping("/auth/avatarSelec/{id}")
+	public String avatarSelec(@PathVariable Long id) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
 		return "/user/avatarSelecForm";
 	}
@@ -195,27 +197,29 @@ public class UserController {
 	 * @return 메인 페이지
 	 */
 	@PostMapping("/auth/update")
-	public String updateInfoProc(UpdateInfoFormDto updateInfoDto) {
+	public String updateInfoProc(UpdateInfoFormDto updateInfoFormDto) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
 //		유효성 검사
-		if (updateInfoDto.getEmail() == null || updateInfoDto.getEmail().isEmpty()) {
+		if (updateInfoFormDto.getEmail() == null || updateInfoFormDto.getEmail().isEmpty()) {
 			throw new CustomRestfullException("이메일을 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		if (updateInfoDto.getPassword() == null || updateInfoDto.getPassword().isEmpty()) {
+		if (updateInfoFormDto.getPassword() == null || updateInfoFormDto.getPassword().isEmpty()) {
 			throw new CustomRestfullException("비밀번호를 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		if (updateInfoDto.getUsername() == null || updateInfoDto.getUsername().isEmpty()) {
+		if (updateInfoFormDto.getUsername() == null || updateInfoFormDto.getUsername().isEmpty()) {
 			throw new CustomRestfullException("이름을 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		if (updateInfoDto.getPhone() == null || updateInfoDto.getPhone().isEmpty()) {
+		if (updateInfoFormDto.getPhone() == null || updateInfoFormDto.getPhone().isEmpty()) {
 			throw new CustomRestfullException("전화번호를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
 //		업데이트 기능 호출
-//		userService.
+		userService.updateInfo(updateInfoFormDto, session);
 
 		return "redirect:/main/";
 
@@ -239,9 +243,11 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/auth/drop")
-	public String drop() {
-		
+	@GetMapping("/auth/drop/{id}")
+	public String drop(@PathVariable Long id) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
 		return "/user/dropForm";
 	}
 
@@ -254,9 +260,6 @@ public class UserController {
 	@PostMapping("/auth/drop")
 	public String dropProc(DropFormDto dropFormDto) {
 
-
-
-		
 		if (dropFormDto.getEmail() == null || dropFormDto.getEmail().isEmpty()) {
 			throw new CustomRestfullException("이메일을 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
@@ -265,7 +268,7 @@ public class UserController {
 			throw new CustomRestfullException("비밀번호를 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		userService.deleteUser(dropFormDto);
+		userService.deleteUser(dropFormDto, session);
 
 		session.invalidate();
 		return "redirect:/main/";

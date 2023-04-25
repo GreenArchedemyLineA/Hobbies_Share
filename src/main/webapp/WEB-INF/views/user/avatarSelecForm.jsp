@@ -13,8 +13,7 @@
 			<form action="/user/auth/avatarSelec" method="post">
 
 				<div class="form-group">
-					<label for="email">닉네임:</label>
-					<input type="email" class="form-control" id="email" name="email" value="${principal.nickname}">
+					<label for="nickname">닉네임:</label> <input type="text" class="form-control" id="nickname" name="nickname" value="${principal.nickname}">
 				</div>
 
 
