@@ -49,10 +49,27 @@
 			<c:forEach var="comment" items="${comment}">
 				<tr>
 					<td>${comment.id}</td>
-					<td>${comment.content}</td>
+					<c:choose>
+
+						<c:when test="${comment.id == cid}">
+							<td>
+							<form action="/board/cmt-proc/${cid}/${board.id}" method="post">
+								<input type="text" id="content" name="content" value="${comment.content}"> 
+								<input type="submit" value="수정완료">
+							</form>
+							</td>
+
+						</c:when>
+
+						<c:otherwise>
+							<td>${comment.content}</td>
+						</c:otherwise>
+					</c:choose>
+
 					<td>${comment.userId}</td>
 					<td>${comment.boardId}</td>
 					<td>${comment.createdAt}</td>
+
 
 
 					<c:choose>
@@ -62,9 +79,7 @@
 							<td><a href="#">삭제</a></td>
 						</c:when>
 						<c:otherwise>
-							<td><a href="#">답글</a></td>
-							<td><a href="/board/update-cmt/${comment.id}/${board.id}">수정</a></td>
-							<td><a href="/board/delete-cmt/${comment.id}/${board.id}">삭제</a></td>
+
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -79,5 +94,8 @@
 		<!-- userId - 세션 -->
 		<input type="submit" value="댓글적는디">
 	</form>
+
+
+
 </body>
 </html>

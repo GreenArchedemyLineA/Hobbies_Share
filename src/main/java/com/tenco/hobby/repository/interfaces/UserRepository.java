@@ -42,5 +42,5 @@ public interface UserRepository {
 	public User findById(Long id);
 
 	public List<User> findByAll();
-//	public List<User> readUserInfo(@Param("id") Long id);
+
 }

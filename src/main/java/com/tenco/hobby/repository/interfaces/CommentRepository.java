@@ -11,5 +11,7 @@ public interface CommentRepository {
 	
 	public int insert(Comment comment); 
 	public List<Comment> findByBoardId(Long boardId);
+	public int updateById(Comment comment);
+	public int deleteById(Long id);
 
 }

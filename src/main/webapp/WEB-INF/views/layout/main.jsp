@@ -23,24 +23,25 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+	</div>
+	<div>
 		<div>
-			<div>
-				<c:choose>
-					<c:when test="${principal != null}">
-						<img alt="" src="<c:url value="${principal.setUpUserImage()}"/>">
-					</c:when>
-					<c:otherwise>
-						<div></div>
-					</c:otherwise>
+			<c:choose>
+				<c:when test="${principal != null}">
+					<img alt="" src="<c:url value="${principal.setUpUserImage()}"/>">
+				</c:when>
+				<c:otherwise>
+					<div></div>
+				</c:otherwise>
 
-				</c:choose>
-
-			</div>
-
-			<div class="front-banner">배너사진</div>
-			<div>내용물</div>
-
+			</c:choose>
 
 		</div>
+
+		<div class="front-banner">배너사진</div>
+		<div>내용물</div>
+
+
+	</div>
 </body>
 </html>
