@@ -13,5 +13,8 @@ public class Board {
 	private Long userId;	
 	private Long hobbyId;
 	private Timestamp createdAt;
+	
+	private String nickname;
+	private String hobby;
 
 }

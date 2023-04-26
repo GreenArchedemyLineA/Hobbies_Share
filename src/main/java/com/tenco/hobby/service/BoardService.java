@@ -12,8 +12,11 @@ import com.tenco.hobby.dto.WriteFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.BoardRepository;
 import com.tenco.hobby.repository.interfaces.CommentRepository;
+import com.tenco.hobby.repository.interfaces.HobbyRepository;
 import com.tenco.hobby.repository.model.Board;
+import com.tenco.hobby.repository.model.BoardHobbies;
 import com.tenco.hobby.repository.model.Comment;
+import com.tenco.hobby.repository.model.Hobby;
 
 @Service
 public class BoardService {
@@ -22,19 +25,28 @@ public class BoardService {
 	private BoardRepository boardRepository;
 	@Autowired
 	private CommentRepository commentRepository;
+	@Autowired
+	private HobbyRepository hobbyRepository;
 
-	public List<Board> ReadBoardList() {
-
+	/**
+	 * 전체 글조회
+	 */
+	public List<Board> readBoardList() {
 		List<Board> list = boardRepository.findAll();
-
 		return list;
-
 	}
 
 	/**
-	 * 전체글 조회
+	 * 취미 전체조회
+	 */
+	public List<BoardHobbies> readHobbyList() {
+		List<BoardHobbies> list = hobbyRepository.findAllHobbies();
+		return list;
+	}
+
+	/**
+	 * 글선택조회
 	 * @param id
-	 * @return
 	 */
 	public Board readBoard(Long id) {
 
@@ -43,7 +55,7 @@ public class BoardService {
 	}
 
 	/**
-	 * 댓글 조회	 
+	 * 댓글 조회 
 	 * @param boardId
 	 * @return comment
 	 */
@@ -54,7 +66,7 @@ public class BoardService {
 	}
 
 	/**
-	 * 글쓰기	 
+	 * 글작성
 	 * @param writeFormDto
 	 * @param principalId
 	 */
@@ -70,7 +82,7 @@ public class BoardService {
 			throw new CustomRestfullException("글쓰기를 실패했습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 댓글 작성
 	 * @param commentDto
@@ -87,7 +99,6 @@ public class BoardService {
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("댓글작성 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 
 	/**

@@ -1,99 +1,78 @@
-* {
-	outline: 0;
-	padding: 0;
-	margin: 0;
+*{
+    outline: 0;
+    padding: 0;
+    margin: 0;
+}
+html, body{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header > ul{
+    display: flex;
+    justify-content: flex-end;
+}
+.header > ul > li{
+    list-style-type: none;
+    margin: 10px;
+}
+.service_list{
+    display: flex;
+    justify-content: center;
 }
 
-html, body {
-	width: 100%;
-	height: 100%;
+.service_list > div{
+    margin: 10px;
 }
 
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.guideContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    height: 180px;
+    width: 180px;
 }
 
-.header>ul {
-	display: flex;
-	justify-content: flex-end;
+.nolja{
+    text-align: center;
+}
+.asidebar{
+    display: flex;
+    position: fixed;
+    align-items: center;
+    height: 70%;
+    top: 10%;
+    right: 0;
 }
 
-.header>ul>li {
-	list-style-type: none;
-	margin: 10px;
+.aside-hidden{
+    display: none;
+    align-items: center;
+}
+.recommend{
+    text-align: right;
 }
 
-.header>ul>li>a {
-	text-decoration: none;
-	color: black;
-	font-weight: bold;
+#hide-show{
+    background-color: transparent;
+    border-color: transparent;
 }
 
-.header>ul>li>a>img {
-	height: 30px;
-	
-	
+#hide-show:hover{
+    cursor: pointer;
 }
-
-.service_list {
-	display: flex;
-	justify-content: center;
+.container{
+    min-height: calc(100vh - 10rem);
 }
-
-.service_list>div {
-	margin: 10px;
-}
-
-.guideContainer {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: aqua;
-	height: 180px;
-	width: 180px;
-}
-
-.nolja {
-	text-align: center;
-}
-
-.asidebar {
-	display: flex;
-	position: fixed;
-	align-items: center;
-	height: 70%;
-	top: 10%;
-	right: 0;
-}
-
-.aside-hidden {
-	display: none;
-	align-items: center;
-}
-
-.recommend {
-	text-align: right;
-}
-
-#hide-show {
-	background-color: transparent;
-	border-color: transparent;
-}
-
-#hide-show:hover {
-	cursor: pointer;
-}
-
-.container {
-	min-height: calc(100vh - 10rem);
-}
-
-.footer {
-	height: 10rem;
-	background-color: burlywood;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.footer{
+    height: 10rem;
+    background-color: burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,0 +1,41 @@
+input[type=text] {
+	padding: 0 10px;
+	line-height: 35px;
+	width: 60%;
+}
+
+select {
+	padding: 0 10px;
+	height: 35px;
+	
+}
+
+
+form {
+	margin: 10px 0;
+}
+
+button {
+	border: none;
+	outline: none;
+	width: 82px;
+	height: 35px;
+	line-height: 31px;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	background-color: #3b9061;
+	border-color: #297c63;
+	text-shadow: #1d614a;
+	color: #fff
+}
+
+#output {
+	width: 80%;
+	height: 400px;
+	border: 1px solid #111;
+}
+
+.active {
+	border: 1px solid crimson;
+}

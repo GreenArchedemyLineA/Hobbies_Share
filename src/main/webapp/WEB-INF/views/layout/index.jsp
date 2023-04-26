@@ -50,7 +50,7 @@
 			<div class="aside" id="aside-recommend">
 				<h3>추천</h3>
 				<div class="recommend">
-					<a href="#">asdfaaaaaaaaaaaaaaaaa</a>
+					<a href="/board/list">asdfaaaaaaaaaaaaaaaaa</a>
 				</div>
 				<div class="recommend">
 					<a href="#">asdf</a>
