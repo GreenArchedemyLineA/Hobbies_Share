@@ -283,8 +283,8 @@ public class UserController {
 		}
 
 		userService.updatePwd(updatePwdFormDto, session);
-
-		return "redirect:/main/";
+		session.invalidate();
+		return "redirect:/user/log-in";
 	}
 
 	/**

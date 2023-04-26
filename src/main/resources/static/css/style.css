@@ -2,6 +2,7 @@
 	outline: 0;
 	padding: 0;
 	margin: 0;
+	box-sizing: border-box;
 }
 
 html, body {
@@ -92,7 +93,37 @@ html, body {
 	border: 0 1px solid #ccc;
 }
 
-.btn{
+.custom-file {
+	display: flex;
+	margin: 25px;
+	justify-content: space-between;
+}
+
+.custom-file-input {
+	width: 0;
+	overflow: hidden;
+}
+
+.custom-file-label {
+	display: flex;
+	width: 250px;
+	height: 30px;
+	justify-content: space-between;
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #ced4da;
+	border-radius: 5px;
+	align-items: center;
+}
+
+.custom-file-label::after {
+	content: "사진 찾기";
+	background-color: #ccc;
+	border-radius: 0 5px 5px 0;
+	padding: 5px 10px;
+}
+
+.btn {
 	width: 150px;
 	height: 50px;
 	margin: 30px auto;

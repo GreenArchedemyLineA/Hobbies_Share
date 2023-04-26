@@ -183,10 +183,11 @@ public class UserService {
 			throw new CustomRestfullException("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
 		}
 
-		String NewPwd = updatePwdFormDto.getNewPwd();
-		String checkPwd = updatePwdFormDto.getCheckPwd();
+		String NewPwd = updatePwdFormDto.getNewPwd().toString();
+		String checkPwd = updatePwdFormDto.getCheckPwd().toString();
+		
 
-		if (NewPwd.equals(checkPwd)) {
+		if (NewPwd.equals(checkPwd)==false) {
 			throw new CustomRestfullException("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
 		}
 
@@ -198,6 +199,7 @@ public class UserService {
 		if (result != 1) {
 			throw new CustomRestfullException("비밀번호 변경 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
 	}
 
 	/**
