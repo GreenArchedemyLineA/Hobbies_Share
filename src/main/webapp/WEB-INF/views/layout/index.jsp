@@ -17,7 +17,6 @@
 				<h3>추천</h3>
 				<div class="recommend">
 					<a href="/board/list">asdfaaaaaaaaaaaaaaaaa</a>
-
 				</div>
 				<div class="recommend">
 					<a href="#">엥??</a>
@@ -48,7 +47,7 @@
 				</div>
 			</div>
 		</div>
-		
+		<script src="/static/js/recommend.js"></script>
 		<div class="service">
 			<div class="service_list">
 				<div class="guideContainer">

@@ -52,7 +52,8 @@ public class RecommendSystem {
 		List<User> userList60 = new ArrayList<User>();
 		userList.stream().forEach(user -> {
 			// 세대별 분리
-			int age = seperateGeneration(user.getBirth().getYear());
+			int age = seperateGeneration(user.getBirth().getYear() + 1900);
+			user.setPassword(null);
 			switch(age) {
 			case 10:
 				userList10.add(user);
