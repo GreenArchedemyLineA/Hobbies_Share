@@ -8,8 +8,15 @@
 </head>
 <body>
 	<h1>게시글 상세조회</h1>
-	<a href="/board/update/${board.id}">수정하자구</a>
-	<a href="/board/delete/${board.id}">삭제하자구</a>
+
+	<c:choose>
+		<c:when test="${principal.id == board.userId}">
+			<a href="/board/update/${board.id}">수정하자구</a>
+			<a href="/board/delete/${board.id}">삭제하자구</a>
+		</c:when>
+		<c:otherwise>
+		</c:otherwise>
+	</c:choose>
 	<table>
 		<thead>
 			<tr>
@@ -57,14 +64,12 @@
 
 					<c:choose>
 						<c:when test="${principal.id == comment.userId}">
-							<td><a href="#">본인</a></td>
-							<td><a href="#">수정</a></td>
-							<td><a href="#">삭제</a></td>
-						</c:when>
-						<c:otherwise>
-							<td><a href="#">답글</a></td>
+							<td>본인</td>
 							<td><a href="/board/update-cmt/${comment.id}/${board.id}">수정</a></td>
 							<td><a href="/board/delete-cmt/${comment.id}/${board.id}">삭제</a></td>
+						</c:when>
+						<c:otherwise>
+							<td>본인만수정가능</td>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -76,7 +81,6 @@
 
 	<form action="/board/comment/${board.id}" method="post">
 		<input type="text" id="content" name="content">
-		<!-- userId - 세션 -->
 		<input type="submit" value="댓글적는디">
 	</form>
 </body>

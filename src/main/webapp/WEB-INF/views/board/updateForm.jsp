@@ -12,7 +12,6 @@
 
 		<input type="text" id="title" name="title" value="${board.title}">
 		<input type="text" id="content" name="content" value="${board.content}">
-		<!-- UserId  -->
 		<select name="hobbyId">
 			<option selected="selected">${board.hobbyId}</option>
 			<option></option>								

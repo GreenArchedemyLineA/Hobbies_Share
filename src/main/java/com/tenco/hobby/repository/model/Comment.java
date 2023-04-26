@@ -9,8 +9,7 @@ public class Comment {
 	
 	private Long id;
 	private String content;
-	//private Long userId;
-	private int userId;
+	private Long userId;
 	private Long boardId;
 	private Timestamp createdAt;	
 
