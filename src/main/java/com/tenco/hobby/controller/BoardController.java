@@ -18,7 +18,9 @@ import com.tenco.hobby.dto.UpdateFormDto;
 import com.tenco.hobby.dto.WriteFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.Board;
+import com.tenco.hobby.repository.model.BoardHobbies;
 import com.tenco.hobby.repository.model.Comment;
+import com.tenco.hobby.repository.model.Hobby;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.BoardService;
 import com.tenco.hobby.util.Define;
@@ -40,26 +42,30 @@ public class BoardController {
 	@GetMapping("/list")
 	public String list(Model model) {
 
-		List<Board> boardList = boardService.ReadBoardList();
+		List<Board> boardList = boardService.readBoardList();
 		model.addAttribute("boardList", boardList);
 		return "/board/list";
 	}
 
 	/**
-	 * @return 글쓰기 페이지
+	 * @return 글작성 폼
 	 */
 	@GetMapping("/write")
-	public String write() {
+	public String write(Model model) {
 
+		List<BoardHobbies> hobbyList = boardService.readHobbyList();
+		model.addAttribute("hobbyList", hobbyList);
 		return "/board/writeForm";
 	}
 
 	/**
+	 * 글작성
+	 * 
 	 * @param writeFormDto
 	 * @return 게시글 전체 조회
 	 */
 	@PostMapping("/write-proc")
-	public String writeProc(WriteFormDto writeFormDto, Long principalId ) {
+	public String writeProc(WriteFormDto writeFormDto, Long principalId) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
@@ -75,7 +81,6 @@ public class BoardController {
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param model
 	 * @return 글 상세조회
@@ -91,7 +96,6 @@ public class BoardController {
 		model.addAttribute(Define.PRINCIPAL, principal);
 
 		return "/board/detail";
-
 	}
 
 	/**
@@ -105,8 +109,8 @@ public class BoardController {
 	public String comment(CommentDto commentDto, @PathVariable Long boardId) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
-		if(commentDto.getContent() == null || commentDto.getContent().isEmpty()) {
+
+		if (commentDto.getContent() == null || commentDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력하시오", HttpStatus.BAD_REQUEST);
 		}
 		boardService.createComment(commentDto, principal.getId(), boardId);
@@ -115,7 +119,6 @@ public class BoardController {
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param model
 	 * @return 글 수정
@@ -125,12 +128,15 @@ public class BoardController {
 	public String update(@PathVariable Long id, Model model) {
 
 		Board board = boardService.readBoard(id);
+		List<BoardHobbies> hobbyList = boardService.readHobbyList();
 		model.addAttribute("board", board);
+		model.addAttribute("hobbyList", hobbyList);
 		return "/board/updateForm";
 	}
 
 	/**
 	 * 글 수정 폼
+	 * 
 	 * @param id
 	 * @param updateFormDTO
 	 * @return 글 전체 조회
@@ -165,8 +171,8 @@ public class BoardController {
 
 	@PostMapping("/cmt-proc/{id}/{boardId}")
 	public String updateCommentProc(@PathVariable Long id, @PathVariable Long boardId, CommentDto commentDto) {
-		
-		if(commentDto.getContent() == null || commentDto.getContent().isEmpty()) {
+
+		if (commentDto.getContent() == null || commentDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 		boardService.updateComment(commentDto, id);
@@ -176,7 +182,8 @@ public class BoardController {
 	}
 
 	/**
-	 * 글 삭제	 
+	 * 글 삭제
+	 * 
 	 * @param id
 	 * @return 글 전체 조회
 	 */

@@ -6,25 +6,37 @@
 
 	<insert id="insert">
 		insert into board_tb (title, content, user_id, hobby_id)
-		values ( #{title}, #{content}, #{userId}, #{hobbyId})				
+		values ( #{title}, #{content}, #{userId}, #{hobbyId})
 	</insert>
 
 	<update id="updateById">
-		update board_tb 
+		update board_tb
 		set title = #{title}, content = #{content}, user_id = #{userId}, hobby_id = #{hobbyId}
 		where id = #{id}
 	</update>
-	
+
 	<delete id="deleteById">
 		delete from board_tb where id = #{id}
 	</delete>
-	                              
+
 	<select id="findAll" resultType="com.tenco.hobby.repository.model.Board">
-		select * from board_tb
+		select b.*, nickname, hobby
+		from board_tb as b
+		inner join user_tb as u
+		on b.user_id = u.id
+		inner join hobbies as h
+		on b.hobby_id = h.id
+		order by id desc
 	</select>
-	
+
 	<select id="findById" resultType="com.tenco.hobby.repository.model.Board">
-		select * from board_tb where id = #{id}
+		select b.*, nickname, hobby
+		from board_tb as b
+		inner join user_tb as u
+		on b.user_id = u.id
+		inner join hobbies as h
+		on b.hobby_id = h.id
+		where b.id = #{id}
 	</select>
 
 

@@ -16,7 +16,8 @@
 			<div class="aside" id="aside-recommend">
 				<h3>추천</h3>
 				<div class="recommend">
-					<a href="#">뭘 띄어야하낭</a>
+					<a href="/board/list">asdfaaaaaaaaaaaaaaaaa</a>
+
 				</div>
 				<div class="recommend">
 					<a href="#">엥??</a>

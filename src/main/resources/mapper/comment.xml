@@ -4,20 +4,24 @@
 
 <mapper namespace="com.tenco.hobby.repository.interfaces.CommentRepository">
 
-	<select id="findByBoardId" resultType="com.tenco.hobby.repository.model.Comment" >
-		select * from comment_tb
+	<select id="findByBoardId" resultType="com.tenco.hobby.repository.model.Comment">
+		select c.*, nickname
+		from comment_tb as c
+		inner join user_tb as u
+		on c.user_id = u.id
 		where board_id in (select board_id from board_tb where board_id = #{boardId})
+		order by id asc
 	</select>
-	
+
 	<insert id="insert">
 		insert into comment_tb (content, user_id, board_id)
-		values (#{content}, #{userId}, #{boardId})		
-	</insert>	
-	
+		values (#{content}, #{userId}, #{boardId})
+	</insert>
+
 	<update id="updateById">
 		update comment_tb set content = #{content} where id = #{id}
 	</update>
-	
+
 	<delete id="deleteById">
 		delete from comment_tb where id = #{id};
 	</delete>

@@ -42,15 +42,6 @@ public class RecommendSystem {
 		setUserAgeMap(userList);
 		setUserHobbiesMap(hobbiesList);
 	}
-	public List<User> userAgeRecommend(User user){
-		int userYear = user.getBirth().getYear();
-		List<User> userAgeRecommendList = userAgeMap.get(userYear);
-		return userAgeRecommendList;
-	}
-	public List<User> userHobbiesRecommend(UserHobby userHobbies){
-		List<User> userhobbyRecommendList = userHobbiesMap.get(userHobbies);
-		return userhobbyRecommendList;
-	}
 	
 	private void setUserAgeMap(List<User> userList) {
 		List<User> userList10 = new ArrayList<User>();
@@ -136,5 +127,13 @@ public class RecommendSystem {
 //        Object o = f.get(null);
 //        return (E[]) o;
 //        return null;
+	}
+	public List<User> ageRecommendUserList(Integer id) {
+		List<User> userAgeRecommendList = userAgeMap.get(id);
+		return userAgeRecommendList;
+	}
+	public List<User> hobbyRecommendUserList(UserHobby name) {
+		List<User> userhobbyRecommendList = userHobbiesMap.get(name);
+		return userhobbyRecommendList;
 	}
 }

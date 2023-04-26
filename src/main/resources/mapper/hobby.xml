@@ -23,4 +23,10 @@
 		on uh.hobby = h.id
 		order by u.id;
 	</select>
+	
+	<select id="findAllHobbies" resultType="com.tenco.hobby.repository.model.BoardHobbies">
+		select * from hobbies
+	</select>
+	
+	
 </mapper>
