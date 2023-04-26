@@ -42,10 +42,14 @@ public class UserController {
 //		User user = (User) session.getAttribute(Define.PRINCIPAL); 
 //		return user;
 //	}
-	
+
 	@GetMapping("/auth/myPage")
-	public String myPage() {
-		
+	public String myPage(Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		User infoList = userService.readInfo(principal.getId());
+		model.addAttribute(Define.PRINCIPAL, principal);
+		model.addAttribute("infoList", infoList);
 		return "/layout/myPage";
 	}
 
@@ -87,11 +91,6 @@ public class UserController {
 
 		if (joinUpFormDto.getBirth() == null) {
 			throw new CustomRestfullException("생일을 입력해주세요", HttpStatus.BAD_REQUEST);
-		}
-
-		if (joinUpFormDto.getPhone() == null || joinUpFormDto.getPhone().isEmpty()
-				|| joinUpFormDto.getPhone().length() > 11) {
-			throw new CustomRestfullException("전화번호를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
 		userService.createUser(joinUpFormDto);
@@ -259,13 +258,13 @@ public class UserController {
 	 * @return 비밀 번호 변경 페이지
 	 */
 	@GetMapping("/auth/updatePwd/{id}")
-	public String updatePwd(@PathVariable Long id) {
+	public String updatePwd(@PathVariable Long id, Model model) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
-//		User infoList = userService.readInfo(principal.getId());
+		User infoList = userService.readInfo(principal.getId());
 
-//		model.addAttribute("infoList", infoList);
+		model.addAttribute("infoList", infoList);
 
 		return "/user/updatePwdForm";
 	}
@@ -307,9 +306,13 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping("/auth/drop/{id}")
-	public String drop(@PathVariable Long id) {
+	public String drop(@PathVariable Long id, Model model) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+
+		model.addAttribute("infoList", infoList);
 
 		return "/user/dropForm";
 	}
