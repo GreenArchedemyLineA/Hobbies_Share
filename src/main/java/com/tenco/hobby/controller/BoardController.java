@@ -75,6 +75,10 @@ public class BoardController {
 		if (writeFormDto.getContent() == null || writeFormDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
+		
+		if (writeFormDto.getHobbyId() == null) {
+			throw new CustomRestfullException("취미를 선택해주세요", HttpStatus.BAD_REQUEST);
+		}
 
 		boardService.createPost(writeFormDto, principal.getId());
 		return "redirect:/board/list";
