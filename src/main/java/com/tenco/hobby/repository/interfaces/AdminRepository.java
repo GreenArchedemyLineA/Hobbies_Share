@@ -10,4 +10,5 @@ import com.tenco.hobby.repository.model.QandA;
 public interface AdminRepository {
 	List<QandA> findAllQandA();
 	QandA findbyIdQuestion(Integer id);
+	List<QandA> findRangeQandA(Integer id);
 }

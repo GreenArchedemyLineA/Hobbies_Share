@@ -41,6 +41,7 @@ public class RecommendSystem {
 		List<UserHobbies> userHobbies;
 		setUserAgeMap(userList);
 		setUserHobbiesMap(hobbiesList);
+		System.out.println(9/10);
 	}
 	
 	private void setUserAgeMap(List<User> userList) {
