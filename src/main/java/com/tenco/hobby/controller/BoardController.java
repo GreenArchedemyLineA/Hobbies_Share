@@ -43,9 +43,26 @@ public class BoardController {
 	public String list(Model model) {
 
 		List<Board> boardList = boardService.readBoardList();
+		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("hobbyList", hobbyList);
 		return "/board/list";
 	}
+	
+	@GetMapping("/hobbyList/{id}")
+	public String hobbyList(@PathVariable Long id, Model model) {
+		
+		List<Board> boardList = boardService.readHobbyList(id);
+		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("hobbyList", hobbyList);
+		
+		
+		return "/board/hobbyList";		
+	}
+	
+
+	
 
 	/**
 	 * @return 글작성 폼
@@ -53,7 +70,7 @@ public class BoardController {
 	@GetMapping("/write")
 	public String write(Model model) {
 
-		List<BoardHobbies> hobbyList = boardService.readHobbyList();
+		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("hobbyList", hobbyList);
 		return "/board/writeForm";
 	}
@@ -75,7 +92,7 @@ public class BoardController {
 		if (writeFormDto.getContent() == null || writeFormDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
-		
+		// 확인*******************************************************************
 		if (writeFormDto.getHobbyId() == null) {
 			throw new CustomRestfullException("취미를 선택해주세요", HttpStatus.BAD_REQUEST);
 		}
@@ -95,9 +112,11 @@ public class BoardController {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		Board board = boardService.readBoard(id);
 		List<Comment> commentList = boardService.readComment(id);
+		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();		
 		model.addAttribute("board", board);
 		model.addAttribute("comment", commentList);
 		model.addAttribute(Define.PRINCIPAL, principal);
+		model.addAttribute("hobbyList", hobbyList);
 
 		return "/board/detail";
 	}
@@ -132,7 +151,7 @@ public class BoardController {
 	public String update(@PathVariable Long id, Model model) {
 
 		Board board = boardService.readBoard(id);
-		List<BoardHobbies> hobbyList = boardService.readHobbyList();
+		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("board", board);
 		model.addAttribute("hobbyList", hobbyList);
 		return "/board/updateForm";
@@ -165,9 +184,11 @@ public class BoardController {
 
 		Board board = boardService.readBoard(boardId);
 		List<Comment> commentList = boardService.readComment(boardId);
+		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();		
 		model.addAttribute("board", board);
 		model.addAttribute("comment", commentList);
 		model.addAttribute("cid", id);
+		model.addAttribute("hobbyList", hobbyList);
 
 		return "/board/updateCmtForm";
 

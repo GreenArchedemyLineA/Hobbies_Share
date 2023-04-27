@@ -35,15 +35,7 @@ public class BoardService {
 		List<Board> list = boardRepository.findAll();
 		return list;
 	}
-
-	/**
-	 * 취미 전체조회
-	 */
-	public List<BoardHobbies> readHobbyList() {
-		List<BoardHobbies> list = hobbyRepository.findAllHobbies();
-		return list;
-	}
-
+	
 	/**
 	 * 글선택조회
 	 * @param id
@@ -52,6 +44,24 @@ public class BoardService {
 
 		Board boardEntity = boardRepository.findById(id);
 		return boardEntity;
+	}
+
+	/**
+	 * 
+	 * @return 취미 전체조회
+	 */
+	public List<BoardHobbies> readHobbyCategory() {
+		List<BoardHobbies> list = hobbyRepository.findAllHobbies();
+		return list;
+	}
+	
+	/**
+	 * @param id
+	 * @return 취미카테고리 글 조회
+	 */
+	public List<Board> readHobbyList(Long id){		
+		List<Board>	list = boardRepository.findByHobbyId(id);	
+		return list;
 	}
 
 	/**

@@ -15,7 +15,7 @@
 				<select name="hobbyId" >
 						<option value="none">취미 카테고리</option>
 					<c:forEach var="hobby" items="${hobbyList}">
-						<option value="${hobby.id}">${hobby.hobby}</option>
+						<option value="${hobby.id}">${hobby.hobby.getName()}</option>
 					</c:forEach>
 				</select>
 				

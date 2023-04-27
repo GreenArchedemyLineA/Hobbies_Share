@@ -86,7 +86,6 @@ public class RecommendSystem {
 
 	private void setUserHobbiesMap(List<UserHobbies> hobbiesList) throws NoSuchFieldException, IllegalAccessException {
 		UserHobby[] userHobbies = getEnumValues(UserHobby.class);
-		System.out.println(hobbiesList.toString());
 		for(int i = 0; i < userHobbies.length; i++) {
 			userHobbiesMap.put(userHobbies[i], new ArrayList<User>());
 		}
@@ -118,11 +117,11 @@ public class RecommendSystem {
 	}
 	
 	private <E extends UserHobby> E[] getEnumValues(Class<E> enumClass) throws NoSuchFieldException, IllegalAccessException{
-		Field[] f = enumClass.getDeclaredFields();
-		Object o = null;
-		for(Field filed : f) {
-			filed.setAccessible(true);
-			o = filed.get(null);
+		Field[] f = enumClass.getFields();
+		UserHobby[] o = new UserHobby[f.length];
+		for(int i = 0; i<f.length; i++) {
+			f[i].setAccessible(true);
+			o[i] = (UserHobby) f[i].get(null);
 		}
 		return (E[]) o;
 //        f.setAccessible(true);

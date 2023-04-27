@@ -342,14 +342,7 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/write-question")
-	public String writeQuest(QuestionFormDto questionFormDto) {
-		
-		
-		
-		userService.writeQuestion(questionFormDto);
-		
-	}
+
 	
 	
 	

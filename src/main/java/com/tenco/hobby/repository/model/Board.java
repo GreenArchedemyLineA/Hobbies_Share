@@ -2,6 +2,7 @@ package com.tenco.hobby.repository.model;
 
 import java.sql.Timestamp;
 
+import com.tenco.hobby.enums.UserHobby;
 import com.tenco.hobby.util.TimestampUtil;
 
 import lombok.Data;
@@ -17,7 +18,7 @@ public class Board {
 	private Timestamp createdAt;
 	
 	private String nickname;
-	private String hobby;
+	private UserHobby hobby;
 	
 	public String formatCreatedAt() {
 		return TimestampUtil.timestampToString(createdAt);

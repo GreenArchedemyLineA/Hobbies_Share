@@ -27,7 +27,7 @@ public class WebMVCConfig implements WebMvcConfigurer {
 				.excludePathPatterns("/admin/admin-proc");
 
 		registry.addInterceptor(authInterceptor).addPathPatterns("/user/auth/**").addPathPatterns("/board/**")
-				.excludePathPatterns("/board/list").excludePathPatterns("/board/detail/**");
+				.excludePathPatterns("/board/list").excludePathPatterns("/board/detail/**").excludePathPatterns("/board/hobbyList/**");
 		
 		
 	}

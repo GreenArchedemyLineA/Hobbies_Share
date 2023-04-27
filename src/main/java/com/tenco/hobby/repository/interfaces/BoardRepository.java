@@ -15,6 +15,6 @@ public interface BoardRepository {
 	public int deleteById(Long id);
 	public List<Board> findAll();
 	public Board findById(Long id);
-	// public List<Board> findByHobby(Long hobbyId);
+	public List<Board> findByHobbyId(Long hobbyId);
 
 }
