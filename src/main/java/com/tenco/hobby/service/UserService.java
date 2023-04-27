@@ -3,7 +3,6 @@ package com.tenco.hobby.service;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties.Reactive.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +15,7 @@ import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
+import com.tenco.hobby.dto.QuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
@@ -234,7 +234,14 @@ public class UserService {
 		}
 
 		userRepository.deleteByEmail(dropFormDto);
-
 	}
+	
+	@Transactional
+	public void writeQuestion(QuestionFormDto questionFormDto) {
+		
+		
+		
+	}
+	
 
 }

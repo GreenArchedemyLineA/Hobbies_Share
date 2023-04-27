@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 
 		<div class="main">
-			<img src="https://plchldr.co/i/1920x400" id="main">
+			<img src="/static/images/banner.png" id="main">
 		</div>
 		
 		<div class="asidebar" id="asidebar">
@@ -49,16 +49,23 @@
 		</div>
 		<script src="/static/js/recommend.js"></script>
 		<div class="service">
-			<div class="service_list">
+			<div class="service-list">
 				<div class="guideContainer">
 					<div>기능1</div>
 				</div>
 				<div class="guideContainer">
 					<div>기능2</div>
 				</div>
-				<div class="guideContainer">
+				<div class="guideContainer" style="cursor: pointer;" onclick="goQnA()">
+		
 					<div>Q & A</div>
 				</div>
+		
+				<script type="text/javascript">
+					function goQnA() {
+						location.href = "/main/Q_A";
+					}
+				</script>
 			</div>
 		</div>
 		

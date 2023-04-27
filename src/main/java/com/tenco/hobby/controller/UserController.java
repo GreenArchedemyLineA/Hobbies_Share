@@ -20,6 +20,7 @@ import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
+import com.tenco.hobby.dto.QuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
@@ -194,7 +195,7 @@ public class UserController {
 		}
 		userService.updateAvatar(avatarSelecFormDto);
 
-		return "redirect:/main/";
+		return "redirect:/user/auth/myPage";
 	}
 
 	/**
@@ -249,7 +250,7 @@ public class UserController {
 //		업데이트 기능 호출
 		userService.updateInfo(updateInfoFormDto, session);
 
-		return "redirect:/main/";
+		return "redirect:/user/auth/myPage";
 
 	}
 
@@ -339,4 +340,19 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/main/";
 	}
+	
+	
+	@GetMapping("/write-question")
+	public String writeQuest(QuestionFormDto questionFormDto) {
+		
+		
+		
+		userService.writeQuestion(questionFormDto);
+		
+	}
+	
+	
+	
+	
+	
 }

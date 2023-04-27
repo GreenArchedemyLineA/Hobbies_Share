@@ -9,6 +9,7 @@
 <title>HOBBY-FI</title>
 <link rel="shortcut icon" sizes="90x90" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/7081/7081314.png">
 <link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/static/css/mypage.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>

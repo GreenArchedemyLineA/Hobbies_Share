@@ -21,7 +21,7 @@ import com.tenco.hobby.util.Define;
 @Controller
 @RequestMapping("/main")
 public class MainController {
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -34,11 +34,18 @@ public class MainController {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
 		model.addAttribute(Define.PRINCIPAL, principal);
-		if(principal != null) {
+		if (principal != null) {
 			User infoList = userService.readInfo(principal.getId());
-			model.addAttribute("infoList", infoList);			
+			model.addAttribute("infoList", infoList);
 		}
 		return "/layout/index";
+	}
+
+	@GetMapping("/Q_A")
+	public String q_n() {
+
+		return "/user/questionForm";
+
 	}
 
 }

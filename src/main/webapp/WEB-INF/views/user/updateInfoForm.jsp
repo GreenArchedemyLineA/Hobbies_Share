@@ -29,7 +29,7 @@
 						</div>
 						<div class="form-group">
 							<label for="phone">휴대폰 번호&nbsp;&nbsp;</label>
-							<input type="text" class="form-control" placeholder="휴대폰 번호를 입력해주세요" id="phone" name="phone" value="${infoList.formatPhone()}">
+							<input type="text" class="form-control" placeholder="휴대폰 번호를 입력해주세요" id="phone" name="phone" value="${infoList.phone}">
 						</div>
 		
 						<button type="submit" class="btn btn-primary">정보 수정</button>
