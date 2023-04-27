@@ -48,7 +48,7 @@ public class AdminController {
 		
 		return "admin/adminPage";
 	}
-	@GetMapping("/question/{id}")
+	@GetMapping("/main/question/{id}")
 	public String questionForm(@PathVariable Integer id, Model model) {
 		System.out.println(id);
 		QandA question = adminService.questionfindById(id);

@@ -14,7 +14,7 @@
 						${q_a.id}
 					</td>
 					<td>
-						<a href="question/${q_a.id}">${q_a.content}</a>
+						<a href="main/question/${q_a.id}">${q_a.content}</a>
 					</td>				
 				</tr>
 			</c:forEach>
