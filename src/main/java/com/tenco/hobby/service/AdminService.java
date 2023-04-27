@@ -22,4 +22,11 @@ public class AdminService {
 		QandA qandA = adminRepository.findbyIdQuestion(id);
 		return qandA;
 	}
+	
+	public List<QandA> pagefindById(Integer id) {
+		Integer findId = (id-1) * 10; 
+		
+		List<QandA> qandAList = adminRepository.findRangeQandA(findId);
+		return qandAList;
+	}
 }

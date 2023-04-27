@@ -5,10 +5,17 @@
 <mapper namespace="com.tenco.hobby.repository.interfaces.AdminRepository">
 	
 	<select id="findAllQandA" resultType="com.tenco.hobby.repository.model.QandA">
-		select * from question where proceed = 0;
+		select * from question_tb where proceed = 0;
 	</select>
 	
 	<select id="findbyIdQuestion" resultType="com.tenco.hobby.repository.model.QandA">
-		select * from question where id = #{id};
+		select * from question_tb where id = #{id};
+	</select>
+	
+	<select id="findRangeQandA" resultType="com.tenco.hobby.repository.model.QandA">
+		select * 
+		from question_tb 
+		where proceed = 0
+		limit #{id}, 10;
 	</select>
 </mapper>
