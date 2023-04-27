@@ -1,5 +1,7 @@
 package com.tenco.hobby.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,19 +9,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
-import com.tenco.hobby.dto.QuestionFormDto;
+import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
+import com.tenco.hobby.repository.interfaces.QuestionRepository;
 import com.tenco.hobby.repository.interfaces.UserRepository;
+import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.util.Define;
 
@@ -28,6 +30,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private QuestionRepository questionRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -185,9 +190,8 @@ public class UserService {
 
 		String NewPwd = updatePwdFormDto.getNewPwd().toString();
 		String checkPwd = updatePwdFormDto.getCheckPwd().toString();
-		
 
-		if (NewPwd.equals(checkPwd)==false) {
+		if (NewPwd.equals(checkPwd) == false) {
 			throw new CustomRestfullException("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
 		}
 
@@ -199,7 +203,7 @@ public class UserService {
 		if (result != 1) {
 			throw new CustomRestfullException("비밀번호 변경 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 	}
 
 	/**
@@ -216,11 +220,6 @@ public class UserService {
 		User loginUser = (User) session.getAttribute(Define.PRINCIPAL);
 
 		String userEntity = loginUser.getEmail();
-		// 1. 이메일과 비밀번호로 select 하기
-
-		// 2. select 결과에서 getId하기
-
-		// 3. getId 한 값 매개변수에 넣기
 
 		if (userEntity == null) {
 			throw new CustomRestfullException("해당 계정이 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -235,13 +234,40 @@ public class UserService {
 
 		userRepository.deleteByEmail(dropFormDto);
 	}
-	
+
+	/**
+	 * QnA 전체조회 기능
+	 * 
+	 * @return QnA 리스트
+	 */
 	@Transactional
-	public void writeQuestion(QuestionFormDto questionFormDto) {
-		
-		
-		
+	public List<QandA> readQuestionList() {
+
+		List<QandA> questionList = questionRepository.findAll();
+		return questionList;
 	}
-	
+
+	/**
+	 * QnA 작성 기능
+	 * 
+	 * @param writeQuestionFormDto
+	 * @param session
+	 */
+	@Transactional
+	public void createQuestion(WriteQuestionFormDto writeQuestionFormDto, HttpSession session) {
+
+		User loginUser = (User) session.getAttribute(Define.PRINCIPAL);
+
+		QandA qna = new QandA();
+		qna.setUserId(loginUser.getId());
+		qna.setContent(writeQuestionFormDto.getContent());
+
+		int result = questionRepository.insert(writeQuestionFormDto);
+
+		if (result != 1) {
+			throw new CustomRestfullException("문의사항 등록에 실패 하였습니다.", HttpStatus.BAD_REQUEST);
+		}
+
+	}
 
 }

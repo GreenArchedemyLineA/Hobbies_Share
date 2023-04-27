@@ -1,5 +1,7 @@
 package com.tenco.hobby.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.UserService;
 import com.tenco.hobby.util.Define;
@@ -42,10 +45,18 @@ public class MainController {
 	}
 
 	@GetMapping("/Q_A")
-	public String q_n() {
+	public String q_n(Model model) {
 
-		return "/user/questionForm";
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
+		User infoList = userService.readInfo(principal.getId());
+
+		model.addAttribute("infoList", infoList);
+
+		List<QandA> questionList = userService.readQuestionList();
+		model.addAttribute("questionList", questionList);
+
+		return "/user/questionListForm";
 	}
 
 }

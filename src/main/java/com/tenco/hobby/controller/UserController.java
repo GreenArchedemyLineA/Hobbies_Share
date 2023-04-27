@@ -20,7 +20,7 @@ import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
-import com.tenco.hobby.dto.QuestionFormDto;
+import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
@@ -67,7 +67,7 @@ public class UserController {
 	/**
 	 * 회원 가입 처리
 	 * 
-	 * @param joinUpDto
+	 * @param joinUpFormDto
 	 * @return 리다이렉트 로그인 페이지
 	 */
 	@PostMapping("/join-up")
@@ -112,7 +112,8 @@ public class UserController {
 	/**
 	 * 로그인 처리
 	 * 
-	 * @return
+	 * @param logInFormDto
+	 * @return 리다이렉트 메인 페이지
 	 */
 	@PostMapping("/log-in")
 	public String logInProc(LogInFormDto logInFormDto) {
@@ -133,7 +134,9 @@ public class UserController {
 	}
 
 	/**
+	 * 
 	 * @param id
+	 * @param model
 	 * @return 프로필 수정 페이지
 	 */
 	@GetMapping("/auth/avatarSelec/{id}")
@@ -149,10 +152,10 @@ public class UserController {
 	}
 
 	/**
-	 * 일단 이미지 올리는 것만
 	 * 
-	 * @param avatarDto
-	 * @return 메인 페이지
+	 * @param id
+	 * @param avatarSelecFormDto
+	 * @return 리다이렉트 마이페이지
 	 */
 	@PostMapping("/auth/avatarSelec/{id}")
 	public String avatarSelecProc(@PathVariable Long id, AvatarSelecFormDto avatarSelecFormDto) {
@@ -270,6 +273,12 @@ public class UserController {
 		return "/user/updatePwdForm";
 	}
 
+	/**
+	 * 비밀 번호 변경 처리
+	 * 
+	 * @param updatePwdFormDto
+	 * @return 로그인 페이지
+	 */
 	@PostMapping("/auth/updatePwd/{id}")
 	public String updatePwdProc(UpdatePwdFormDto updatePwdFormDto) {
 
@@ -289,9 +298,9 @@ public class UserController {
 	}
 
 	/**
-	 * 로그아웃
+	 * 로그아웃 처리
 	 * 
-	 * @return
+	 * @return 리다이렉트 메인
 	 */
 	@GetMapping("/auth/log-out")
 	public String logOut() {
@@ -300,11 +309,10 @@ public class UserController {
 	}
 
 	/**
-	 * 회원 탈퇴 페이지
 	 * 
 	 * @param id
 	 * @param model
-	 * @return
+	 * @return 회원 탈퇴 페이지
 	 */
 	@GetMapping("/auth/drop/{id}")
 	public String drop(@PathVariable Long id, Model model) {
@@ -340,19 +348,37 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/main/";
 	}
-	
-	
-	@GetMapping("/write-question")
-	public String writeQuest(QuestionFormDto questionFormDto) {
-		
-		
-		
-		userService.writeQuestion(questionFormDto);
-		
+
+	/**
+	 * 
+	 * @param writeQuestionFormDto
+	 * @return 문의사항 작성 페이지
+	 */
+	@GetMapping("/auth/write-question")
+	public String writeQuest(Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+
+		model.addAttribute("infoList", infoList);
+
+		return "/user/writeQuestionForm";
+
 	}
-	
-	
-	
-	
-	
+
+	@PostMapping("/auth/write-question")
+	public String writeQuestion(WriteQuestionFormDto writeQuestionFormDto) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		if (writeQuestionFormDto.getContent() == null || writeQuestionFormDto.getContent().isEmpty()) {
+			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
+		}
+
+		userService.createQuestion(writeQuestionFormDto, session);
+
+		return "redirect:/main/Q_A";
+	}
+
 }

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.tenco.hobby.repository.interfaces.QuestionRepository">
 
-	<!-- 질문 -->
+	<!-- 질문 생성 -->
 	<insert id="insert">
 		insert into question_tb (user_id, content)
 		values (#{userId}, #{content})
@@ -22,7 +22,10 @@
 	
 	<!-- 조회 -->
 	<select id="findAll" resultType="com.tenco.hobby.repository.model.QandA">
-		select * from question_tb
+		select q.*, u.nickname
+		from question_tb as q 
+		inner join user_tb as u
+		on q.user_id = u.id
 	</select>
 	
 </mapper>
