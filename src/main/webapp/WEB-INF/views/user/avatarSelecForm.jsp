@@ -21,6 +21,7 @@
 						<label class="custom-file-label" for="customFile">&nbsp;사진 선택</label>
 					</div>
 		
+					<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 					<script>
 						// Add the following code if you want the name of the file appear on select
 						$(".custom-file-input").on(

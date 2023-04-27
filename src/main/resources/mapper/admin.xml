@@ -5,10 +5,10 @@
 <mapper namespace="com.tenco.hobby.repository.interfaces.AdminRepository">
 	
 	<select id="findAllQandA" resultType="com.tenco.hobby.repository.model.QandA">
-		select * from q_a where proceed = 0;
+		select * from question where proceed = 0;
 	</select>
 	
 	<select id="findbyIdQuestion" resultType="com.tenco.hobby.repository.model.QandA">
-		select * from q_a where id = #{id};
+		select * from question where id = #{id};
 	</select>
 </mapper>
