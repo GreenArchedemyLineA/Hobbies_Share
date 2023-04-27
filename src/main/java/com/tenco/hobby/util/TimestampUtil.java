@@ -10,15 +10,7 @@ public class TimestampUtil {
 
 	public static String timestampToString(Timestamp timestamp) {
 
-		if (timestamp.getMonth() > 9) {
-			if (timestamp.getDate() > 9) {
 				sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			} else {
-				sdf = new SimpleDateFormat("yyyy-MM-d HH:mm");
-			}
-		} else {
-			sdf = new SimpleDateFormat("yyyy-M-dd HH:mm");
-		}
 
 		return sdf.format(timestamp);
 	}
