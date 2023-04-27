@@ -371,12 +371,13 @@ public class UserController {
 	public String writeQuestion(WriteQuestionFormDto writeQuestionFormDto) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		System.out.println(principal.getId());
 
 		if (writeQuestionFormDto.getContent() == null || writeQuestionFormDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
-		userService.createQuestion(writeQuestionFormDto, session);
+		userService.createQuestion(writeQuestionFormDto, principal.getId());
 
 		return "redirect:/main/Q_A";
 	}

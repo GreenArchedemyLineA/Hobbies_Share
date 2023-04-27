@@ -13,6 +13,7 @@
 				<th>NO</th>
 				<th>내용</th>
 				<th>작성자</th>
+				<th>응답 현황</th>
 				<th>작성일</th>
 			</tr>
 		</thead>
@@ -24,7 +25,7 @@
 					<td>${questionList.content}</td>
 					<td>${questionList.formatName()}</td>
 					<td>${questionList.proceed}</td>
-					<td>${questionList.createdAt}</td>
+					<td>${questionList.formatCreatedAt()}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
