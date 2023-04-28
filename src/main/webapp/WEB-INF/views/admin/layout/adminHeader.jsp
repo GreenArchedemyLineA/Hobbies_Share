@@ -16,10 +16,10 @@
 			<a href="main">Hobby-Fi 관리자 페이지</a>
 		</div>
 		<ul>
-			<li><a href="main?checkId=1">유저관리</a></li>
-			<li><a href="main?checkId=2">Q & A 확인</a></li>
-			<li><a href="main?checkId=3">신고글 확인</a>
-			<li><a href="main?checkId=4">신고댓글 확인</a></li>
-			<li><a href="logout"><span class="material-symbols-outlined">logout</span></a></li>
+			<li><a href="/admin/main?checkId=1">유저관리</a></li>
+			<li><a href="/admin/main?checkId=2">Q & A 확인</a></li>
+			<li><a href="/admin/main?checkId=3">신고글 확인</a>
+			<li><a href="/admin/main?checkId=4">신고댓글 확인</a></li>
+			<li><a href="/admin/logout"><span class="material-symbols-outlined">logout</span></a></li>
 		</ul>
 	</div>

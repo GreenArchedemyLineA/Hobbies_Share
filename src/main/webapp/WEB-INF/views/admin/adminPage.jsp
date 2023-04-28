@@ -11,19 +11,28 @@
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>내용</th>
+					<th>고객이름</th>
+					<th>닉네임</th>
 				</tr>
 			</thead>
 			<c:forEach items="${userList}" var="user" >
-				<tr>
+				<tr onclick="goUser(${user.id})">
 					<td>
 						${user.id}
 					</td>
 					<td>
-						<a href="main/question/${user.id}">${user.username}</a>
-					</td>				
+						${user.username}
+					</td>
+					<td>
+						${user.nickname}
+					</td>		
 				</tr>
 			</c:forEach>
+			<script>
+				function goUser(id){
+					location.href = '/admin/main/user/'+id;
+				}
+			</script>
 			</table>
 		</c:when>
 		<c:when test="${QandA != null}">
