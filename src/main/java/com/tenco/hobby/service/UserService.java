@@ -10,15 +10,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tenco.hobby.controller.MainController;
 import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
-import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
+import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.QuestionRepository;
 import com.tenco.hobby.repository.interfaces.UserRepository;
@@ -299,6 +298,11 @@ public class UserService {
 
 	}
 
+	/**
+	 * Q&A 삭제 기능
+	 * 
+	 * @param id
+	 */
 	@Transactional
 	public void deleteQuestion(Long id) {
 

@@ -206,7 +206,7 @@ ul>li>a {
 }
 
 .recommend {
-	text-align: left;
+	text-align: right;
 }
 .recommend > a{
 	font-size: 20px;
@@ -237,4 +237,9 @@ ul>li>a {
 
 #hide-show:hover {
 	cursor: pointer;
+}
+
+.main{
+	display: flex;
+	justify-content: center;
 }

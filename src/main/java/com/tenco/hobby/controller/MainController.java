@@ -50,7 +50,6 @@ public class MainController {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
 		User infoList = userService.readInfo(principal.getId());
-
 		model.addAttribute("infoList", infoList);
 
 		List<QandA> questionList = userService.readQuestionList();

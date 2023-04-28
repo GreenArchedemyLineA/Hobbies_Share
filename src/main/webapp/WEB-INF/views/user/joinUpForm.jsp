@@ -37,8 +37,8 @@
 					
 					<div class="form-group">
 						<label for="phone">휴대폰 번호&nbsp;&nbsp;</label>
-						<input type="text" class="form-control" placeholder="휴대폰 번호를 입력해주세요" id="phone" name="phone">
-					</div>
+						<input type="text" class="form-control" placeholder="휴대폰 번호를 하이픈('-') 없이 입력해주세요" id="phone" name="phone">
+					</div> 
 		
 					<button type="submit" class="btn btn-primary">회원가입</button>
 		

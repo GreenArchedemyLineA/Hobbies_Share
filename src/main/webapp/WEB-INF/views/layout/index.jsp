@@ -52,7 +52,7 @@
 				<div class="guideContainer" style="cursor: pointer;" onclick="goQnA()">
 					<div>Q & A</div>
 				</div>
-		
+			
 				<script type="text/javascript">
 					const boardContainer = document.getElementById("boardContainer");
 					boardContainer.addEventListener("click", ()=>{
@@ -64,7 +64,9 @@
 				</script>
 			</div>
 		</div>
-		
+		<div>
+			<img src="https://cdn.crowdpic.net/detail-thumb/thumb_d_2F583E5543F7E19139C6FCFFBF9607A6.jpg"
+			></div>
 		<div class="nolja">취미를 같이 공유하자!</div>
 	</div>
 

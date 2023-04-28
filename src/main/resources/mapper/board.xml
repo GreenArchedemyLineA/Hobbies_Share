@@ -38,7 +38,7 @@
 		on b.hobby_id = h.id
 		where b.id = #{id}
 	</select>
-	
+
 	<select id="findByHobbyId" resultType="com.tenco.hobby.repository.model.Board">
 		select b.*, nickname
 		from board_tb as b
@@ -47,6 +47,14 @@
 		inner join hobbies as h
 		on b.hobby_id = h.id
 		where h.id = #{id}
+	</select>
+
+	<select id="findForOtherUserBoardList" resultType="com.tenco.hobby.repository.model.Board">
+		select * 
+		from board_tb as b
+		inner join hobbies as h
+		on b.hobby_id=h.id
+		where user_id = #{userId}
 	</select>
 
 

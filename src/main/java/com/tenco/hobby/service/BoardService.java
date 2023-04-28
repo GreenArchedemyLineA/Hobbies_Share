@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.hobby.dto.CommentDto;
 import com.tenco.hobby.dto.UpdateFormDto;
@@ -35,9 +36,10 @@ public class BoardService {
 		List<Board> list = boardRepository.findAll();
 		return list;
 	}
-	
+
 	/**
 	 * 글선택조회
+	 * 
 	 * @param id
 	 */
 	public Board readBoard(Long id) {
@@ -54,18 +56,19 @@ public class BoardService {
 		List<BoardHobbies> list = hobbyRepository.findAllHobbies();
 		return list;
 	}
-	
+
 	/**
 	 * @param id
 	 * @return 취미카테고리 글 조회
 	 */
-	public List<Board> readHobbyList(Long id){		
-		List<Board>	list = boardRepository.findByHobbyId(id);	
+	public List<Board> readHobbyList(Long id) {
+		List<Board> list = boardRepository.findByHobbyId(id);
 		return list;
 	}
 
 	/**
-	 * 댓글 조회 
+	 * 댓글 조회
+	 * 
 	 * @param boardId
 	 * @return comment
 	 */
@@ -77,6 +80,7 @@ public class BoardService {
 
 	/**
 	 * 글작성
+	 * 
 	 * @param writeFormDto
 	 * @param principalId
 	 */
@@ -95,6 +99,7 @@ public class BoardService {
 
 	/**
 	 * 댓글 작성
+	 * 
 	 * @param commentDto
 	 * @param principalId
 	 * @param boardId
@@ -113,6 +118,7 @@ public class BoardService {
 
 	/**
 	 * 글 수정
+	 * 
 	 * @param updateFormDto
 	 * @param principalId
 	 * @param id
@@ -134,6 +140,7 @@ public class BoardService {
 
 	/**
 	 * 댓글 수정
+	 * 
 	 * @param commentDto
 	 * @param id
 	 */
@@ -150,6 +157,7 @@ public class BoardService {
 
 	/**
 	 * 글삭제
+	 * 
 	 * @param id
 	 */
 	public void deletePost(Long id) {
@@ -162,6 +170,7 @@ public class BoardService {
 
 	/**
 	 * 댓글 삭제
+	 * 
 	 * @param id
 	 */
 	public void deleteComment(Long id) {
@@ -169,6 +178,22 @@ public class BoardService {
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("댓글삭제 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@Transactional
+	public List<Board> readOtherUserBoardList(Long userId) {
+
+		List<Board> otherUserBoardList = boardRepository.findForOtherUserBoardList(userId);
+
+		return otherUserBoardList;
+	}
+
+	@Transactional
+	public List<Comment> readOtherUserCommentList(Long userId) {
+
+		List<Comment> otherUserCommentList = commentRepository.findForOtherUserComment(userId);
+
+		return otherUserCommentList;
 	}
 
 }

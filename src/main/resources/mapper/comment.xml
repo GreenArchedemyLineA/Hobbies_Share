@@ -25,4 +25,8 @@
 	<delete id="deleteById">
 		delete from comment_tb where id = #{id};
 	</delete>
+	
+	<select id="findForOtherUserComment" resultType="com.tenco.hobby.repository.model.Comment">
+		select * from comment_tb where user_id = #{uesrId}
+	</select>
 </mapper>
