@@ -13,7 +13,7 @@
 
 
 <div class="board-container">
-	<%@ include file="/WEB-INF/views/board/layout/hobbyList.jsp"%>
+	<%@ include file="/WEB-INF/views/board/layout/hobbyCategory.jsp"%>
 
 	<div class="board-detail">
 		<div class="board-detail-button">
@@ -31,7 +31,7 @@
 		</div>
 
 		<h4>
-			<a href="">${board.hobby}</a>
+			<a href="">${board.hobby.getName()}</a>
 		</h4>
 
 

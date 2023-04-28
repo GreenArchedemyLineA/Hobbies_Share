@@ -17,10 +17,10 @@
 				<c:forEach var="hobby" items="${hobbyList}">
 					<c:choose>
 						<c:when test="${board.hobby == hobby.hobby}">
-							<option selected="selected" value="${hobby.id}">${hobby.hobby}</option>
+							<option selected="selected" value="${hobby.id}">${hobby.hobby.getName()}</option>
 						</c:when>
 						<c:otherwise>
-							<option value="${hobby.id}">${hobby.hobby}</option>
+							<option value="${hobby.id}">${hobby.hobby.getName()}</option>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

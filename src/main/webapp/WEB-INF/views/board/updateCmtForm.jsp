@@ -6,7 +6,7 @@
 
 
 <div class="board-detail">
-	<%@ include file="/WEB-INF/views/board/layout/hobbyList.jsp"%>
+	<%@ include file="/WEB-INF/views/board/layout/hobbyCategory.jsp"%>
 
 	<div class="boardDetail-button">
 		<c:choose>
