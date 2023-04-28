@@ -18,4 +18,8 @@
 		where proceed = 0
 		limit #{id}, 10;
 	</select>
+	
+	<select id="findAllUserList" resultType="com.tenco.hobby.repository.model.User">
+		select * from user_tb where user_role != "ADMIN";
+	</select>
 </mapper>

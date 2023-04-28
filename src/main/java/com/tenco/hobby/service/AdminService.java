@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.tenco.hobby.repository.interfaces.AdminRepository;
 import com.tenco.hobby.repository.model.QandA;
+import com.tenco.hobby.repository.model.User;
 
 @Service
 public class AdminService {
@@ -28,5 +29,10 @@ public class AdminService {
 		
 		List<QandA> qandAList = adminRepository.findRangeQandA(findId);
 		return qandAList;
+	}
+	
+	public List<User> allUserList(){
+		List<User> userList = adminRepository.findAllUserList();
+		return userList;
 	}
 }

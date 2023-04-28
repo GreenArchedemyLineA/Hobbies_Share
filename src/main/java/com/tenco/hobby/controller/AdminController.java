@@ -50,6 +50,9 @@ public class AdminController {
 		if(checkId != null) {
 			switch(checkId) {
 			case 1:
+				List<User> userList = adminService.allUserList();
+				System.out.println(userList);
+				model.addAttribute("userList", userList);
 				break;
 			case 2:
 				int currentPage = boardId == null ? 1 : boardId;
@@ -58,7 +61,6 @@ public class AdminController {
 				if(this.TOTALPAGE < endPage) {
 					endPage = this.TOTALPAGE;
 				}
-				System.out.println("start:"+startPage);
 				model.addAttribute("size", ((this.totalPosts - 1)/10) +1);
 				model.addAttribute("startPage", startPage);
 				model.addAttribute("endPage", endPage);
@@ -67,6 +69,8 @@ public class AdminController {
 				model.addAttribute(Define.QANDA, qandAList);
 				System.out.println(qandAList);
 				break;
+			case 3:
+				
 			}
 		}
 		

@@ -6,6 +6,26 @@
 <div class="blank">
 </div>
 	<c:choose>
+		<c:when test="${userList != null}">
+			<table class="styled-table">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>내용</th>
+				</tr>
+			</thead>
+			<c:forEach items="${userList}" var="user" >
+				<tr>
+					<td>
+						${user.id}
+					</td>
+					<td>
+						<a href="main/question/${user.id}">${user.username}</a>
+					</td>				
+				</tr>
+			</c:forEach>
+			</table>
+		</c:when>
 		<c:when test="${QandA != null}">
 		<div class="table-Q">
 			<table class="styled-table">
