@@ -12,10 +12,12 @@ import com.tenco.hobby.repository.model.QandA;
 public interface QuestionRepository {
 
 	public int insert(WriteQuestionFormDto writeQuestionFormDto);
-	
-	public int updateById();
-	
-	public int deleteByUserId();
-	
+
+	public int updateById(QandA qandA);
+
+	public int deleteById(Long id);
+
 	public List<QandA> findAll();
+
+	public QandA findById(Long id);
 }

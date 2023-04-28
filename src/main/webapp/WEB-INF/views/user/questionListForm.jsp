@@ -22,10 +22,16 @@
 			<c:forEach var="questionList" items="${questionList}">
 				<tr>
 					<td>${questionList.id}</td>
-					<td>${questionList.content}</td>
+					<td><a href="/user/auth/update-question/${questionList.id}">${questionList.content}</a></td>
 					<td>${questionList.formatName()}</td>
 					<td>${questionList.proceed}</td>
 					<td>${questionList.formatCreatedAt()}</td>
+					<c:choose>
+						<c:when test="${principal.id==questionList.userId}">
+							<td><a href="/user/auth/delete-question/${questionList.id}">삭제</a></td>
+						</c:when>
+						<c:otherwise></c:otherwise>
+					</c:choose>
 				</tr>
 			</c:forEach>
 		</tbody>

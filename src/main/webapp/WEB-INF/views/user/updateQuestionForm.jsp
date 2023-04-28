@@ -3,8 +3,8 @@
 
 		<div class="content-write">
 		
-			<form action="/user/auth/write-question" method="post">
-				<textarea id="mytextarea" name="content" style="height: 60vh" placeholder="문의하실 내용을 입력해주세요."></textarea>
+			<form action="/user/auth/update-question/${userQuestion.id}" method="post">
+				<textarea id="mytextarea" name="content" style="height: 60vh">${userQuestion.content}</textarea>
 		
 				<button type="submit" style="float: right; margin-top: 10px;">글쓰기</button>
 			</form>

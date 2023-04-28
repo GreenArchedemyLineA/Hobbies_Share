@@ -48,8 +48,9 @@ body {
 
 	<div class="error">
 		<div class="error-img">
-			<img alt="4" src="https://cdn-icons-png.flaticon.com/512/4020/4020013.png"> <img alt="0" src="https://cdn-icons-png.flaticon.com/512/4020/4020019.png"> <img alt="4"
-				src="https://cdn-icons-png.flaticon.com/512/8973/8973420.png">
+			<img alt="4" src="https://cdn-icons-png.flaticon.com/512/4020/4020013.png">
+			<img alt="0" src="https://cdn-icons-png.flaticon.com/512/4020/4020019.png">
+			<img alt="4" src="https://cdn-icons-png.flaticon.com/512/8973/8973420.png">
 
 		</div>
 
