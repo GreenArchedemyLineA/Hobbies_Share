@@ -1,10 +1,12 @@
 package com.tenco.hobby.controller;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
+import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.UserService;
 import com.tenco.hobby.util.Define;
@@ -367,6 +370,12 @@ public class UserController {
 
 	}
 
+	/**
+	 * Q&A 작성 처리
+	 * 
+	 * @param writeQuestionFormDto
+	 * @return 리다이렉트 Q&A 페이지
+	 */
 	@PostMapping("/auth/write-question")
 	public String writeQuestion(WriteQuestionFormDto writeQuestionFormDto) {
 
@@ -378,6 +387,55 @@ public class UserController {
 		}
 
 		userService.createQuestion(writeQuestionFormDto, principal.getId());
+
+		return "redirect:/main/Q_A";
+	}
+
+	/**
+	 * 
+	 * @param model
+	 * @param id
+	 * @return Q&A 수정 페이지
+	 */
+	@GetMapping("/auth/update-question/{id}")
+	public String updateQuestion(Model model, @PathVariable Long id) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		model.addAttribute("infoList", infoList);
+
+		QandA userQuestion = userService.readQuestion(id);
+		model.addAttribute("userQuestion", userQuestion);
+
+		return "/user/updateQuestionForm";
+	}
+
+	/**
+	 * Q&A 수정 처리
+	 * 
+	 * @param id
+	 * @param qAndA
+	 * @return 리다이렉트 Q&A 페이지
+	 */
+	@PostMapping("/auth/update-question/{id}")
+	public String updateQuestionProc(@PathVariable Long id, QandA qAndA) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		if (qAndA.getContent() == null || qAndA.getContent().isEmpty()) {
+			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
+		}
+
+		userService.updateQuestion(qAndA);
+
+		return "redirect:/main/Q_A";
+	}
+
+	@GetMapping("/auth/delete-question/{id}")
+	public String deleteQuestion(@PathVariable Long id) {
+
+		userService.deleteQuestion(id);
 
 		return "redirect:/main/Q_A";
 	}
