@@ -11,20 +11,29 @@
 
 	<!-- 수정 -->
 	<update id="updateById">
-		update question_tb set content = #{content} where id = #{userId}
+		update question_tb set content = #{content} where id = #{id}
 	</update>
 
 	<!-- 삭제 -->
-	<delete id="deleteByUserId">
-		delete from question_tb where userId = #{userId}
+	<delete id="deleteById">
+		delete from question_tb where id = #{id}
 	</delete>
-	
+
 	<!-- 조회 -->
 	<select id="findAll" resultType="com.tenco.hobby.repository.model.QandA">
 		select q.*, u.nickname
-		from question_tb as q 
+		from question_tb as q
 		inner join user_tb as u
 		on q.user_id = u.id
 	</select>
-	
+
+	<!-- 글 하나 조회 -->
+	<select id="findById" resultType="com.tenco.hobby.repository.model.QandA">
+		select q.*, u.nickname
+		from question_tb as q
+		inner join user_tb as u
+		on q.user_id = u.id
+		where q.id = #{id}
+	</select>
+
 </mapper>

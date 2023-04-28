@@ -50,12 +50,12 @@
 	justify-content: center;
 }
 
-tr {
+.profile-info>table>tbody>tr {
 	display: flex;
 	margin-bottom: 15px;
 }
 
-th {
+.profile-info>table>tbody>tr>th {
 	display: flex;
 	width: 150px;
 	margin-right: 15px;

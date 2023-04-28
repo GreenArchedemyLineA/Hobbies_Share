@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tenco.hobby.controller.MainController;
 import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
@@ -262,7 +263,50 @@ public class UserService {
 		if (result != 1) {
 			throw new CustomRestfullException("문의사항 등록에 실패 하였습니다.", HttpStatus.BAD_REQUEST);
 		}
+	}
 
+	/**
+	 * qna 읽어오기 기능
+	 * 
+	 * @param id
+	 * @return qustionEntity 응답
+	 */
+	@Transactional
+	public QandA readQuestion(Long id) {
+
+		QandA questionEntity = questionRepository.findById(id);
+
+		if (questionEntity == null) {
+			throw new CustomRestfullException("작성하신 글을 불러올 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return questionEntity;
+	}
+
+	/**
+	 * Q&A 수정 기능
+	 * 
+	 * @param qAndA
+	 */
+	@Transactional
+	public void updateQuestion(QandA qAndA) {
+
+		int result = questionRepository.updateById(qAndA);
+
+		if (result != 1) {
+			throw new CustomRestfullException("정보 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+
+	@Transactional
+	public void deleteQuestion(Long id) {
+
+		int result = questionRepository.deleteById(id);
+
+		if (result != 1) {
+			throw new CustomRestfullException("글 삭제를 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }
