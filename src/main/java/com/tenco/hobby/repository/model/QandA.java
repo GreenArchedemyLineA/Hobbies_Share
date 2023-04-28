@@ -2,6 +2,8 @@ package com.tenco.hobby.repository.model;
 
 import java.sql.Timestamp;
 
+import com.tenco.hobby.util.TimestampUtil;
+
 import lombok.Data;
 
 @Data
@@ -19,6 +21,10 @@ public class QandA {
 		String qnaName = nickname.substring(0, 1) + "**";
 
 		return qnaName;
+	}
+	
+	public String formatCreatedAt() {
 
+		return TimestampUtil.timestampToString(createdAt);
 	}
 }

@@ -6,8 +6,7 @@
 
 	<!-- 질문 생성 -->
 	<insert id="insert">
-		insert into question_tb (user_id, content)
-		values (#{userId}, #{content})
+		insert into question_tb(user_id, content) values(#{userId}, #{content})
 	</insert>
 
 	<!-- 수정 -->

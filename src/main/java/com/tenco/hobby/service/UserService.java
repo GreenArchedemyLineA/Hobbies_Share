@@ -254,14 +254,9 @@ public class UserService {
 	 * @param session
 	 */
 	@Transactional
-	public void createQuestion(WriteQuestionFormDto writeQuestionFormDto, HttpSession session) {
+	public void createQuestion(WriteQuestionFormDto writeQuestionFormDto, Long userId) {
 
-		User loginUser = (User) session.getAttribute(Define.PRINCIPAL);
-
-		QandA qna = new QandA();
-		qna.setUserId(loginUser.getId());
-		qna.setContent(writeQuestionFormDto.getContent());
-
+		writeQuestionFormDto.setUserId(userId);
 		int result = questionRepository.insert(writeQuestionFormDto);
 
 		if (result != 1) {
