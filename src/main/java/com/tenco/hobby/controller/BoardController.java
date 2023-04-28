@@ -1,7 +1,14 @@
 package com.tenco.hobby.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import com.tenco.hobby.dto.CommentDto;
 import com.tenco.hobby.dto.UpdateFormDto;
@@ -48,18 +57,24 @@ public class BoardController {
 		model.addAttribute("hobbyList", hobbyList);
 		return "/board/list";
 	}
-	
+
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return 취미별 게시글 조회
+	 */
 	@GetMapping("/hobbyList/{id}")
 	public String hobbyList(@PathVariable Long id, Model model) {
-		// {id} => model 
+		// {id} => model
 		List<Board> boardList = boardService.readHobbyList(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("id", id);
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("hobbyList", hobbyList);		
-		
-		return "/board/hobbyList";		
-	}	
+		model.addAttribute("hobbyList", hobbyList);
+
+		return "/board/hobbyList";
+	}
 
 	/**
 	 * @return 글작성 폼
@@ -109,7 +124,7 @@ public class BoardController {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		Board board = boardService.readBoard(id);
 		List<Comment> commentList = boardService.readComment(id);
-		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();		
+		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("board", board);
 		model.addAttribute("comment", commentList);
 		model.addAttribute(Define.PRINCIPAL, principal);
@@ -141,7 +156,6 @@ public class BoardController {
 	/**
 	 * @param id
 	 * @param model
-	 * @return 글 수정
 	 * @return 글 수정 폼
 	 */
 	@GetMapping("/update/{id}")
@@ -181,7 +195,7 @@ public class BoardController {
 
 		Board board = boardService.readBoard(boardId);
 		List<Comment> commentList = boardService.readComment(boardId);
-		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();		
+		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("board", board);
 		model.addAttribute("comment", commentList);
 		model.addAttribute("cid", id);
@@ -221,6 +235,70 @@ public class BoardController {
 
 		boardService.deleteComment(id);
 		return "redirect:/board/detail/" + boardId;
+	}
+
+	@GetMapping("/reportBoard/{id}")
+	public ModelAndView reportBoard(@PathVariable Long id, HttpServletResponse response) throws IOException {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		boardService.createReportPost(id, principal.getId());
+
+		View view = new View() {
+
+			@Override
+			public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+				response.setContentType("text/html; charset=UTF-8");
+				response.setCharacterEncoding("UTF-8");
+				PrintWriter outs = response.getWriter();
+				outs.println("<html>");
+				outs.println("<head>");
+				outs.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+				outs.println("<script type='text/javascript'>");
+				outs.println("alert('신고가 접수되었습니다');");
+				outs.println("history.back();");
+				outs.println("</script>");
+				outs.println("</head>");
+				outs.println("</body>");
+				outs.println("</html>");
+				outs.flush();
+			}
+		};
+		return new ModelAndView(view);
+
+	}
+
+	@GetMapping("/reportCmt/{id}")
+	public ModelAndView reportCmt(@PathVariable Long id, HttpServletResponse response) throws IOException {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		boardService.createReportCmt(id, principal.getId());
+
+		View view = new View() {
+
+			@Override
+			public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+				response.setContentType("text/html; charset=UTF-8");
+				response.setCharacterEncoding("UTF-8");
+				PrintWriter outs = response.getWriter();
+				outs.println("<html>");
+				outs.println("<head>");
+				outs.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+				outs.println("<script type='text/javascript'>");
+				outs.println("alert('신고가 접수되었습니다');");
+				outs.println("history.back();");
+				outs.println("</script>");
+				outs.println("</head>");
+				outs.println("</body>");
+				outs.println("</html>");
+				outs.flush();
+			}
+		};
+		return new ModelAndView(view);
+
 	}
 
 }

@@ -13,10 +13,12 @@ import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.BoardRepository;
 import com.tenco.hobby.repository.interfaces.CommentRepository;
 import com.tenco.hobby.repository.interfaces.HobbyRepository;
+import com.tenco.hobby.repository.interfaces.ReportRepository;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.BoardHobbies;
 import com.tenco.hobby.repository.model.Comment;
 import com.tenco.hobby.repository.model.Hobby;
+import com.tenco.hobby.repository.model.Report;
 
 @Service
 public class BoardService {
@@ -27,6 +29,8 @@ public class BoardService {
 	private CommentRepository commentRepository;
 	@Autowired
 	private HobbyRepository hobbyRepository;
+	@Autowired
+	private ReportRepository reportRepository;
 
 	/**
 	 * 전체 글조회
@@ -35,9 +39,10 @@ public class BoardService {
 		List<Board> list = boardRepository.findAll();
 		return list;
 	}
-	
+
 	/**
 	 * 글선택조회
+	 * 
 	 * @param id
 	 */
 	public Board readBoard(Long id) {
@@ -54,18 +59,19 @@ public class BoardService {
 		List<BoardHobbies> list = hobbyRepository.findAllHobbies();
 		return list;
 	}
-	
+
 	/**
 	 * @param id
 	 * @return 취미카테고리 글 조회
 	 */
-	public List<Board> readHobbyList(Long id){		
-		List<Board>	list = boardRepository.findByHobbyId(id);	
+	public List<Board> readHobbyList(Long id) {
+		List<Board> list = boardRepository.findByHobbyId(id);
 		return list;
 	}
 
 	/**
-	 * 댓글 조회 
+	 * 댓글 조회
+	 * 
 	 * @param boardId
 	 * @return comment
 	 */
@@ -77,6 +83,7 @@ public class BoardService {
 
 	/**
 	 * 글작성
+	 * 
 	 * @param writeFormDto
 	 * @param principalId
 	 */
@@ -95,6 +102,7 @@ public class BoardService {
 
 	/**
 	 * 댓글 작성
+	 * 
 	 * @param commentDto
 	 * @param principalId
 	 * @param boardId
@@ -113,6 +121,7 @@ public class BoardService {
 
 	/**
 	 * 글 수정
+	 * 
 	 * @param updateFormDto
 	 * @param principalId
 	 * @param id
@@ -134,6 +143,7 @@ public class BoardService {
 
 	/**
 	 * 댓글 수정
+	 * 
 	 * @param commentDto
 	 * @param id
 	 */
@@ -150,6 +160,7 @@ public class BoardService {
 
 	/**
 	 * 글삭제
+	 * 
 	 * @param id
 	 */
 	public void deletePost(Long id) {
@@ -162,6 +173,7 @@ public class BoardService {
 
 	/**
 	 * 댓글 삭제
+	 * 
 	 * @param id
 	 */
 	public void deleteComment(Long id) {
@@ -169,6 +181,37 @@ public class BoardService {
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("댓글삭제 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	/**
+	 * 게시글 신고
+	 * 
+	 * @param id
+	 * @param principalId
+	 */
+	public void createReportPost(Long id, Long principalId) {
+
+		Report report = new Report();
+		report.setReportUserId(principalId);
+		report.setReportBoardId(id);
+
+		int resultRowCount = reportRepository.insertReportBoard(report);
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("게시글 신고 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	public void createReportCmt(Long id, Long principalId) {
+
+		Report report = new Report();
+		report.setReportUserId(principalId);
+		report.setReportCommentId(id);
+
+		int resultRowCount = reportRepository.insertReportComment(report);
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("댓글 신고 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
 
 }
