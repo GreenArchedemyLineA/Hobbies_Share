@@ -44,7 +44,7 @@
 		<div class="service">
 			<div class="service-list">
 				<div class="guideContainer" id="boardContainer">
-					<div>기능1</div>
+					<div><a href="/board/list">게시글</a></div>
 				</div>
 				<div class="guideContainer">
 					<div>기능2</div>
