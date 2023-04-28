@@ -2,8 +2,10 @@ package com.tenco.hobby.repository.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import com.tenco.hobby.enums.UserRole;
+import com.tenco.hobby.util.RecommendSystem;
 import com.tenco.hobby.util.TimestampUtil;
 
 import lombok.Data;
@@ -53,6 +55,28 @@ public class User {
 		String formatPhone = phone.substring(0, 3) + " - " + phone.substring(3, 7) + " - " + phone.substring(7);
 
 		return formatPhone;
+	}
+	
+	public Integer getGeneration() {
+		int year = this.birth.getYear() + 1900;
+		int nowGeneration = 60;
+		int nowYear = LocalDateTime.now().getYear();
+		if(nowYear - year <= 59) {
+			nowGeneration = 50;
+		}
+		if(nowYear - year <= 49) {
+			nowGeneration = 40;
+		}
+		if(nowYear - year <= 39) {
+			nowGeneration = 30;
+		}
+		if(nowYear - year <= 29 ) {
+			nowGeneration = 20;
+		}
+		if(nowYear - year <= 19) {
+			nowGeneration = 10;
+		}
+		return nowGeneration;
 	}
 
 }

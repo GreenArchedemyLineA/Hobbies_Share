@@ -14,54 +14,50 @@
 			</div>
 		
 			<div class="aside" id="aside-recommend">
-				<h3>추천</h3>
-				<div class="recommend">
-					<a href="/board/list">asdfaaaaaaaaaaaaaaaaa</a>
-				</div>
-				<div class="recommend">
-					<a href="#">엥??</a>
-				</div>
-				<div class="recommend">
-					<a href="#">asdf</a>
-				</div>
-				<div class="recommend">
-					<a href="#">asdf</a>
-				</div>
-				<div class="recommend">
-					<a href="#">asdf</a>
-				</div>
-				<div class="recommend">
-					<a href="#">asdf</a>
-				</div>
-				<div class="recommend">
-					<a href="#">asdf</a>
-				</div>
-				<div class="recommend">
-					<a href="#">asdf</a>
-				</div>
-				<div class="recommend">
-					<a href="#">asdf</a>
-				</div>
-				<div class="recommend">
-					<a href="#">asdf</a>
-				</div>
+				<h3>HobbyFi가 추천하는 유저리스트</h3>
 			</div>
 		</div>
-		<script src="/static/js/recommend.js"></script>
+		<script>
+		const targetDiv = document.getElementById("aside-recommend");
+			 fetch("/recommend/age?id=${principal.getGeneration()}",{
+				 method: "GET",
+				 headers: {
+					 "Content-Type": "application/json",
+				 },	 
+			 })
+			 .then((response) => response.json())
+			 .then((data)=>{
+				 data.map((obj)=>{
+					 console.log(obj)
+					 if(obj.email !== "${principal.email}"){
+						 const divTag = document.createElement("div");
+						 divTag.classList.add('recommend')
+						 const aTag = document.createElement("a");
+						 aTag.innerText = obj.nickname;
+						 aTag.href="#"
+						 divTag.appendChild(aTag);
+						 targetDiv.appendChild(divTag);
+					 }
+				 })
+			 })
+		</script>
 		<div class="service">
 			<div class="service-list">
-				<div class="guideContainer">
+				<div class="guideContainer" id="boardContainer">
 					<div>기능1</div>
 				</div>
 				<div class="guideContainer">
 					<div>기능2</div>
 				</div>
 				<div class="guideContainer" style="cursor: pointer;" onclick="goQnA()">
-		
 					<div>Q & A</div>
 				</div>
 		
 				<script type="text/javascript">
+					const boardContainer = document.getElementById("boardContainer");
+					boardContainer.addEventListener("click", ()=>{
+						location.href = "/board/list"
+					})
 					function goQnA() {
 						location.href = "/main/Q_A";
 					}

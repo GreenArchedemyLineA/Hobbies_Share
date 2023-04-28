@@ -77,11 +77,11 @@ public class RecommendSystem {
 			}
 		});
 		userAgeMap.put(10, userList10);
-		userAgeMap.put(20, userList10);
-		userAgeMap.put(30, userList10);
-		userAgeMap.put(40, userList10);
-		userAgeMap.put(50, userList10);
-		userAgeMap.put(60, userList10);
+		userAgeMap.put(20, userList20);
+		userAgeMap.put(30, userList30);
+		userAgeMap.put(40, userList40);
+		userAgeMap.put(50, userList50);
+		userAgeMap.put(60, userList60);
 	}
 
 	private void setUserHobbiesMap(List<UserHobbies> hobbiesList) throws NoSuchFieldException, IllegalAccessException {

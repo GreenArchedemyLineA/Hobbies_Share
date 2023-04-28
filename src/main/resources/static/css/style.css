@@ -49,6 +49,7 @@ ul>li>a {
 	position: fixed;
 	align-items: center;
 	height: 70%;
+	width: 100%;
 	top: 10%;
 	right: 0;
 }
@@ -173,6 +174,7 @@ ul>li>a {
 }
 
 .guideContainer {
+	z-index: 999;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -188,19 +190,28 @@ ul>li>a {
 .asidebar {
 	display: flex;
 	position: fixed;
+	justify-content: flex-end;
 	align-items: center;
 	height: 70%;
 	top: 10%;
 	right: 0;
 }
 
+.aside > h3{
+	color: #009900;
+}
 .aside-hidden {
 	display: none;
 	align-items: center;
 }
 
 .recommend {
-	text-align: right;
+	text-align: left;
+}
+.recommend > a{
+	font-size: 20px;
+	text-decoration: none;
+	color: #99FF99;
 }
 
 #hide-show {
