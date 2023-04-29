@@ -51,18 +51,15 @@ public class BoardController {
 	
 	@GetMapping("/hobbyList/{id}")
 	public String hobbyList(@PathVariable Long id, Model model) {
-		
+		// {id} => model 
 		List<Board> boardList = boardService.readHobbyList(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
+		model.addAttribute("id", id);
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("hobbyList", hobbyList);
-		
+		model.addAttribute("hobbyList", hobbyList);		
 		
 		return "/board/hobbyList";		
-	}
-	
-
-	
+	}	
 
 	/**
 	 * @return 글작성 폼

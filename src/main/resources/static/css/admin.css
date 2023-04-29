@@ -137,3 +137,8 @@ a{
 	text-decoration: none;
 	color: black;
 }
+.answerContainer{
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+}

@@ -1,28 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="layout/adminHeader.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="/static/css/adminAnswer.css">
-</head>
-<body>
+
+<div class="answerContainer">
+<div class="blank">
+</div>
 	<div>
 		<table>
 			<tr>
 				<th>고객</th>
-				<td>${question.userId}님</td>
+				<td>${user.username}님</td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td>${question.content} ${question.content}${question.content}${question.content}${question.content}</td>
+				<td>${question.content}</td>
 			</tr>
 		</table>
 	</div>
 	<div>
-		<form action="#">
+		<form action="/admin/main/user/${question.id}" method="post">
 			<table>
 				<tr>
 					<td>답변</td>
@@ -36,6 +33,7 @@
 			<button type="submit">답변</button>
 		</form>
 	</div>
+</div>
 	<script>
 		const answer = document.getElementById("answer");
 		answer.innerHTML = 

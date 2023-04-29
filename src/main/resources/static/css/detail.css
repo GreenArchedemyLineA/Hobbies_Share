@@ -2,5 +2,32 @@
 	display: flex;
 }
 
+.board-detail-button {
+	display: flex;
+	justify-content: space-between;
+}
 
+.board-detail {
+	box-sizing: border-box;
+	width: 1100px;
+	margin-left: 100px;
+}
 
+.board-title {
+	padding: 10px 0 ;
+	border-bottom: solid 1px gray;
+}
+
+.board-content{
+	padding: 10px; 
+	border-bottom: solid 1px gray;
+}
+
+.board-comment{
+	padding: 10px;
+}
+
+.board-detail-comment{
+	padding: 10px;
+	border-bottom: solid 1px gray;
+}

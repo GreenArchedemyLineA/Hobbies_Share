@@ -22,4 +22,20 @@
 	<select id="findAllUserList" resultType="com.tenco.hobby.repository.model.User">
 		select * from user_tb where user_role != "ADMIN";
 	</select>
+	
+	<insert id="insertAnswer">
+		insert into answer_tb(user_id, content, question_id)
+		values (#{userId}, #{answer}, #{questionId});
+	</insert>
+	<update id="updateQuestion">
+		update question_tb
+		set proceed = 1
+		where id = #{id};
+	</update>
+	<select id="findAllReportBoard" resultType="com.tenco.hobby.repository.model.ReportBoard">
+		select * from report_board_tb;
+	</select>
+	<select id="findAllReportComment" resultType="com.tenco.hobby.repository.model.Report">
+		select * from report_comment_tb;
+	</select>
 </mapper>

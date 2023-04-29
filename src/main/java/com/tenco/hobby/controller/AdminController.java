@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tenco.hobby.dto.AdminSignInDTO;
-import com.tenco.hobby.handler.exception.UnAuthorizedException;
+import com.tenco.hobby.dto.AnswerFormDTO;
 import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.AdminService;
@@ -47,7 +46,8 @@ public class AdminController {
 	}
 	@GetMapping("/main")
 	public String adminMain(Integer checkId, @RequestParam(name="boardId", required=false) Integer boardId, Model model) {
-		if(checkId != null) {
+			if(checkId == null) checkId = 1;
+			System.out.println(checkId);
 			switch(checkId) {
 			case 1:
 				List<User> userList = adminService.allUserList();
@@ -65,22 +65,23 @@ public class AdminController {
 				model.addAttribute("startPage", startPage);
 				model.addAttribute("endPage", endPage);
 				model.addAttribute("boardId", currentPage);
-				List<QandA> qandAList = adminService.pagefindById(currentPage);
+				List<QandA> qandAList = adminService.pagefindById(Integer.toUnsignedLong(currentPage));
 				model.addAttribute(Define.QANDA, qandAList);
 				System.out.println(qandAList);
 				break;
 			case 3:
 				
 			}
-		}
-		
+			adminService.test();
 		return "admin/adminPage";
 	}
 	@GetMapping("/main/question/{id}")
-	public String questionForm(@PathVariable Integer id, Model model) {
+	public String questionForm(@PathVariable Long id, Model model) {
 		System.out.println(id);
 		QandA question = adminService.questionfindById(id);
+		User user = userService.readInfo(question.getId());
 		model.addAttribute("question", question);
+		model.addAttribute("user", user);
 		return "admin/answerForm";	
 	}
 	@GetMapping("/login")
@@ -92,6 +93,20 @@ public class AdminController {
 	public String adminSignInProc(AdminSignInDTO adminSignInDTO) {
 		User user = userService.adminLogin(adminSignInDTO);
 		session.setAttribute(Define.PRINCIPAL, user);
+		return "redirect:/admin/main";
+	}
+	
+	@GetMapping("/main/user/{id}")
+	public String userManage(@PathVariable Long id) {
+		User user = userService.readInfo(id);
+		
+		return "admin/userManage";
+	}
+	@PostMapping("/main/user/{id}")
+	public String userManage(@PathVariable Long id, AnswerFormDTO answerFormDTO) {
+		answerFormDTO.setQuestionId(id);
+		answerFormDTO.setUserId(((User)session.getAttribute(Define.PRINCIPAL)).getId());
+		adminService.createAnswer(answerFormDTO);
 		return "redirect:/admin/main";
 	}
 }
