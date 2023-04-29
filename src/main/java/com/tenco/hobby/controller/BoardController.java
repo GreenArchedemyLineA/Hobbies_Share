@@ -170,7 +170,6 @@ public class BoardController {
 
 	/**
 	 * 글 수정 폼
-	 * 
 	 * @param id
 	 * @param updateFormDTO
 	 * @return 글 전체 조회
@@ -178,7 +177,7 @@ public class BoardController {
 	@PostMapping("/update-proc/{id}")
 	public String updateProc(@PathVariable Long id, UpdateFormDto updateFormDTO) {
 
-		User principal = (User) session.getAttribute("principal");
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		if (updateFormDTO.getTitle() == null || updateFormDTO.getTitle().isEmpty()) {
 			throw new CustomRestfullException("제목을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
@@ -207,11 +206,13 @@ public class BoardController {
 
 	@PostMapping("/cmt-proc/{id}/{boardId}")
 	public String updateCommentProc(@PathVariable Long id, @PathVariable Long boardId, CommentDto commentDto) {
-
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
 		if (commentDto.getContent() == null || commentDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
-		boardService.updateComment(commentDto, id);
+		boardService.updateComment(commentDto, id, principal.getId());
 
 		return "redirect:/board/detail/" + boardId;
 
@@ -219,21 +220,24 @@ public class BoardController {
 
 	/**
 	 * 글 삭제
-	 * 
 	 * @param id
 	 * @return 글 전체 조회
 	 */
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id) {
 
-		boardService.deletePost(id);
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
+		boardService.deletePost(id, principal.getId());
 		return "redirect:/board/list";
 	}
 
 	@GetMapping("/delete-cmt/{id}/{boardId}")
 	public String deleteComment(@PathVariable Long id, @PathVariable Long boardId) {
 
-		boardService.deleteComment(id);
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
+		boardService.deleteComment(id, principal.getId());
 		return "redirect:/board/detail/" + boardId;
 	}
 
