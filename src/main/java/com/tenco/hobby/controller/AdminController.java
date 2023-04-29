@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.tenco.hobby.dto.UpdateInfoFormDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,5 +109,13 @@ public class AdminController {
 		answerFormDTO.setUserId(((User)session.getAttribute(Define.PRINCIPAL)).getId());
 		adminService.createAnswer(answerFormDTO);
 		return "redirect:/admin/main";
+	}
+
+	// 융저 회원 수정(관리자)
+	@PostMapping("/main/usermanage/{id}")
+	public String userManiging(@PathVariable Long id, UpdateInfoFormDto updateInfoFormDto){
+		// 수정 필요 userService.updateInfo(updateInfoFormDto, id);
+		adminService.updateUserInfo(updateInfoFormDto, id);
+		return null;
 	}
 }
