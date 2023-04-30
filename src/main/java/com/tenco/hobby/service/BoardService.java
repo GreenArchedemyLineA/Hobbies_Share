@@ -2,6 +2,7 @@ package com.tenco.hobby.service;
 
 import java.util.List;
 
+import com.tenco.hobby.repository.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,6 @@ import com.tenco.hobby.repository.interfaces.CommentRepository;
 import com.tenco.hobby.repository.interfaces.HobbyRepository;
 import com.tenco.hobby.repository.interfaces.MessageRepository;
 import com.tenco.hobby.repository.interfaces.ReportRepository;
-import com.tenco.hobby.repository.model.Board;
-import com.tenco.hobby.repository.model.BoardHobbies;
-import com.tenco.hobby.repository.model.Comment;
-import com.tenco.hobby.repository.model.Hobby;
-import com.tenco.hobby.repository.model.Message;
-import com.tenco.hobby.repository.model.Report;
-import com.tenco.hobby.repository.model.User;
 
 @Service
 public class BoardService {
@@ -50,7 +44,12 @@ public class BoardService {
 
 	/**
 	 * 글선택조회
+<<<<<<< HEAD
 s	 * @param id
+=======
+	 * 
+	 * @param id
+>>>>>>> a3a909c5a8402219d01c06b6ad409e62ee2b68d3
 	 */
 	@Transactional
 	public Board readBoard(Long id) {
@@ -188,6 +187,7 @@ s	 * @param id
 
 	/**
 	 * 글삭제
+	 * 
 	 * @param id
 	 */
 	@Transactional
@@ -210,6 +210,7 @@ s	 * @param id
 
 	/**
 	 * 댓글 삭제
+	 * 
 	 * @param id
 	 */
 	@Transactional
@@ -229,7 +230,6 @@ s	 * @param id
 			throw new CustomRestfullException("댓글삭제 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 	/**
 	 * 게시글 신고
 	 * @param id
@@ -238,11 +238,11 @@ s	 * @param id
 	@Transactional
 	public void createReportPost(Long id, Long principalId) {
 
-		Report report = new Report();
-		report.setReportUserId(principalId);
-		report.setReportBoardId(id);
+		ReportBoard reportBoard = new ReportBoard();
+		reportBoard.setUserId(principalId);
+		reportBoard.setBoardId(id);
 
-		int resultRowCount = reportRepository.insertReportBoard(report);
+		int resultRowCount = reportRepository.insertReportBoard(reportBoard);
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("게시글 신고 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -256,11 +256,11 @@ s	 * @param id
 	@Transactional
 	public void createReportCmt(Long id, Long principalId) {
 
-		Report report = new Report();
-		report.setReportUserId(principalId);
-		report.setReportCommentId(id);
+		ReportComment reportComment = new ReportComment();
+		reportComment.setUserId(principalId);
+		reportComment.setCommentId(id);
 
-		int resultRowCount = reportRepository.insertReportComment(report);
+		int resultRowCount = reportRepository.insertReportComment(reportComment);
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("댓글 신고 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -306,6 +306,20 @@ s	 * @param id
 		return list;
 	}
 	
-	
 
+	@Transactional
+	public List<Board> readOtherUserBoardList(Long userId) {
+
+		List<Board> otherUserBoardList = boardRepository.findForOtherUserBoardList(userId);
+
+		return otherUserBoardList;
+	}
+
+	@Transactional
+	public List<Comment> readOtherUserCommentList(Long userId) {
+
+		List<Comment> otherUserCommentList = commentRepository.findForOtherUserComment(userId);
+
+		return otherUserCommentList;
+	}
 }

@@ -1,5 +1,7 @@
 package com.tenco.hobby.repository.interfaces;
 
+import com.tenco.hobby.repository.model.ReportBoard;
+import com.tenco.hobby.repository.model.ReportComment;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tenco.hobby.repository.model.Report;
@@ -7,8 +9,8 @@ import com.tenco.hobby.repository.model.Report;
 @Mapper
 public interface ReportRepository {
 	
-	public int insertReportBoard(Report report);
-	public int insertReportComment(Report report);
+	public int insertReportBoard(ReportBoard report);
+	public int insertReportComment(ReportComment report);
 	
 
 }

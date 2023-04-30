@@ -11,10 +11,17 @@ import com.tenco.hobby.repository.model.Comment;
 public interface BoardRepository {
 
 	public int insert(Board board);
+
 	public int updateById(Board board);
+
 	public int deleteById(Long id);
+
 	public List<Board> findAll();
+
 	public Board findById(Long id);
+
 	public List<Board> findByHobbyId(Long hobbyId);
+
+	public List<Board> findForOtherUserBoardList(Long userId);
 
 }

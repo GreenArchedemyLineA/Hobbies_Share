@@ -26,8 +26,11 @@ import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
+import com.tenco.hobby.repository.model.Board;
+import com.tenco.hobby.repository.model.Comment;
 import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
+import com.tenco.hobby.service.BoardService;
 import com.tenco.hobby.service.UserService;
 import com.tenco.hobby.util.Define;
 
@@ -37,6 +40,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private BoardService boardService;
 
 	@Autowired
 	private HttpSession session;
@@ -380,7 +386,6 @@ public class UserController {
 	public String writeQuestion(WriteQuestionFormDto writeQuestionFormDto) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		System.out.println(principal.getId());
 
 		if (writeQuestionFormDto.getContent() == null || writeQuestionFormDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
@@ -432,12 +437,61 @@ public class UserController {
 		return "redirect:/main/Q_A";
 	}
 
+	/**
+	 * Q&A 삭제 처리
+	 * 
+	 * @param id
+	 * @return 리다이렉트 Q&A 페이지
+	 */
 	@GetMapping("/auth/delete-question/{id}")
 	public String deleteQuestion(@PathVariable Long id) {
 
 		userService.deleteQuestion(id);
 
 		return "redirect:/main/Q_A";
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return 추천 유저 프로필 페이지
+	 */
+	@GetMapping("/auth/info/profile/{userId}")
+	public String recommendUserInfo(@PathVariable Long userId, Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		model.addAttribute("infoList", infoList);
+
+		User otherUserInfo = userService.readInfo(userId);
+		model.addAttribute("otherUserInfo", otherUserInfo);
+
+		return "/layout/userProfilePage";
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return 추천 유저 작성한 글 리스트 페이지
+	 */
+	@GetMapping("/auth/info/write/{userId}")
+	public String recommendUserWrite(@PathVariable Long userId, Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		model.addAttribute("infoList", infoList);
+
+		List<Board> writtenBoardList = boardService.readOtherUserBoardList(userId);
+		model.addAttribute("writtenBoardList", writtenBoardList);
+
+		List<Comment> writtenCommentList = boardService.readOtherUserCommentList(userId);
+		model.addAttribute("writtenCommentList", writtenCommentList);
+
+		return "/layout/userWritePage";
 	}
 
 }
