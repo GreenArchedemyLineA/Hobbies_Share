@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.tenco.hobby.dto.UpdateInfoFormDto;
+import com.tenco.hobby.repository.model.ReportBoard;
+import com.tenco.hobby.repository.model.ReportComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,8 +73,12 @@ public class AdminController {
 				System.out.println(qandAList);
 				break;
 			case 3:
+				List<ReportBoard> reportBoardList = adminService.findAllReportBoard();
+				model.addAttribute("reportBoard", reportBoardList);
 				break;
 			case 4:
+				List<ReportComment> reportCommentList = adminService.findAllReportComment();
+				model.addAttribute("reportComment", reportCommentList);
 				break;
 			}
 		return "admin/adminPage";
