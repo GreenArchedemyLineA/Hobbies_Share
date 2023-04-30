@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import com.tenco.hobby.dto.CommentDto;
+import com.tenco.hobby.dto.MessageFormDto;
 import com.tenco.hobby.dto.UpdateFormDto;
 import com.tenco.hobby.dto.WriteFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
@@ -32,6 +33,7 @@ import com.tenco.hobby.repository.model.Comment;
 import com.tenco.hobby.repository.model.Hobby;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.BoardService;
+import com.tenco.hobby.service.UserService;
 import com.tenco.hobby.util.Define;
 
 @Controller
@@ -42,6 +44,8 @@ public class BoardController {
 	private HttpSession session;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 
@@ -59,7 +63,6 @@ public class BoardController {
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param model
 	 * @return 취미별 게시글 조회
@@ -105,7 +108,7 @@ public class BoardController {
 			throw new CustomRestfullException("내용을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 		// 확인*******************************************************************
-		if (writeFormDto.getHobbyId() == null) {
+		if (writeFormDto.getHobbyId() == null || writeFormDto.getHobbyId().intValue() < 0) {
 			throw new CustomRestfullException("취미를 선택해주세요", HttpStatus.BAD_REQUEST);
 		}
 
@@ -302,7 +305,41 @@ public class BoardController {
 			}
 		};
 		return new ModelAndView(view);
-
 	}
+	
+	@GetMapping("/sendMsg/{userId}")
+	public String sendMessage(@PathVariable Long userId, Model model) {
+		
+		User userEntity = userService.readInfo(userId);
+		model.addAttribute("user", userEntity);	
+		model.addAttribute("userId", userId);
+		
+		return "/board/messageForm";
+		
+	}
+	@PostMapping("/send-Proc/{userId}")
+	public String sendMsgProc(@PathVariable Long userId, MessageFormDto messageFormDto) {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
+		boardService.createMessage(messageFormDto, userId, principal.getId());		
+		return "/board/list";
+	}
+	
+	@GetMapping("/select-R")
+	public String selectRMsg() {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
+		boardService.readRMessage(principal.getId());
+		
+		
+		return "";
+	}
+	
+
+	
+	
+	
 
 }
