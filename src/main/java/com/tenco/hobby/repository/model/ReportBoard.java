@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ReportBoard extends Report{
 	private Long id;
 	private Long userId;
-	@
+	
 	private Long boardId;
 	private Boolean proceed;
 }

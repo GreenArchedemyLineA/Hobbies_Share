@@ -265,7 +265,7 @@ public class UserService {
 	}
 
 	/**
-	 * qna 읽어오기 기능
+	 * Q&A 읽어오기 기능
 	 * 
 	 * @param id
 	 * @return qustionEntity 응답

@@ -20,14 +20,17 @@ import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.BoardHobbies;
 import com.tenco.hobby.repository.model.Comment;
-import com.tenco.hobby.repository.model.Hobby;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.BoardService;
+import com.tenco.hobby.service.UserService;
 import com.tenco.hobby.util.Define;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
+	
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private HttpSession session;
@@ -41,6 +44,16 @@ public class BoardController {
 	 */
 	@GetMapping("/list")
 	public String list(Model model) {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
 
 		List<Board> boardList = boardService.readBoardList();
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -51,6 +64,16 @@ public class BoardController {
 	
 	@GetMapping("/hobbyList/{id}")
 	public String hobbyList(@PathVariable Long id, Model model) {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
 		// {id} => model 
 		List<Board> boardList = boardService.readHobbyList(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -66,6 +89,16 @@ public class BoardController {
 	 */
 	@GetMapping("/write")
 	public String write(Model model) {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
 
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("hobbyList", hobbyList);
@@ -105,8 +138,17 @@ public class BoardController {
 	 */
 	@GetMapping("/detail/{id}")
 	public String detail(@PathVariable Long id, Model model) {
-
+		
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
+
 		Board board = boardService.readBoard(id);
 		List<Comment> commentList = boardService.readComment(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();		
@@ -146,6 +188,16 @@ public class BoardController {
 	 */
 	@GetMapping("/update/{id}")
 	public String update(@PathVariable Long id, Model model) {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
 
 		Board board = boardService.readBoard(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -178,6 +230,16 @@ public class BoardController {
 
 	@GetMapping("/update-cmt/{id}/{boardId}")
 	public String updateComment(@PathVariable Long id, @PathVariable Long boardId, Model model) {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
 
 		Board board = boardService.readBoard(boardId);
 		List<Comment> commentList = boardService.readComment(boardId);
