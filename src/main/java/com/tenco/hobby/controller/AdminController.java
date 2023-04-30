@@ -71,9 +71,10 @@ public class AdminController {
 				System.out.println(qandAList);
 				break;
 			case 3:
-				
+				break;
+			case 4:
+				break;
 			}
-			adminService.test();
 		return "admin/adminPage";
 	}
 	@GetMapping("/main/question/{id}")
@@ -116,6 +117,16 @@ public class AdminController {
 	public String userManiging(@PathVariable Long id, UpdateInfoFormDto updateInfoFormDto){
 		// 수정 필요 userService.updateInfo(updateInfoFormDto, id);
 		adminService.updateUserInfo(updateInfoFormDto, id);
+		return null;
+	}
+
+	@PostMapping("/main/reportBoard/{id}")
+	public String checkReportBoard(@PathVariable Long id){
+		return null;
+	}
+
+	@PostMapping("/main/reportCommetn/{id}")
+	public String checkReportComment(@PathVariable Long id){
 		return null;
 	}
 }

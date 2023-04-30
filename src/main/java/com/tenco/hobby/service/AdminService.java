@@ -69,4 +69,16 @@ public class AdminService {
 			throw new CustomRestfullException("정보 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	@Transactional
+	public Report findAllReportBoard(){
+		Report reportBoard = (Report)adminRepository.findAllReportBoard();
+		return reportBoard;
+	}
+
+	@Transactional
+	public Report findAllReportComment(){
+		Report reportBoard = (Report)adminRepository.findAllReportComment();
+		return reportBoard;
+	}
 }
