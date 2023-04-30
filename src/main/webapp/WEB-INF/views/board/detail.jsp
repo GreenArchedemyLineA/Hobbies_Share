@@ -33,7 +33,9 @@
 		<div>
 			<div class="board-title">
 				<h1>${board.title}</h1>
-				<h4>${board.nickname}</h4>${board.formatCreatedAt()}
+				<h4>${board.nickname}</h4> 
+				<a href="/board/sendMsg/${board.userId}">쪽지보내기</a>
+				${board.formatCreatedAt()}
 			</div>
 			<div class="board-content">${board.content}</div>	
 		</div>

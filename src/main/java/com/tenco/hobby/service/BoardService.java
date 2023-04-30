@@ -8,17 +8,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.hobby.dto.CommentDto;
+import com.tenco.hobby.dto.MessageFormDto;
 import com.tenco.hobby.dto.UpdateFormDto;
 import com.tenco.hobby.dto.WriteFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.BoardRepository;
 import com.tenco.hobby.repository.interfaces.CommentRepository;
 import com.tenco.hobby.repository.interfaces.HobbyRepository;
+import com.tenco.hobby.repository.interfaces.MessageRepository;
 import com.tenco.hobby.repository.interfaces.ReportRepository;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.BoardHobbies;
 import com.tenco.hobby.repository.model.Comment;
 import com.tenco.hobby.repository.model.Hobby;
+import com.tenco.hobby.repository.model.Message;
 import com.tenco.hobby.repository.model.Report;
 import com.tenco.hobby.repository.model.User;
 
@@ -33,6 +36,8 @@ public class BoardService {
 	private HobbyRepository hobbyRepository;
 	@Autowired
 	private ReportRepository reportRepository;
+	@Autowired
+	private MessageRepository messageRepository;
 
 	/**
 	 * 전체 글조회
@@ -45,7 +50,7 @@ public class BoardService {
 
 	/**
 	 * 글선택조회
-	 * @param id
+s	 * @param id
 	 */
 	@Transactional
 	public Board readBoard(Long id) {
@@ -243,6 +248,11 @@ public class BoardService {
 		}
 	}
 
+	/**
+	 * 댓글 신고
+	 * @param id
+	 * @param principalId
+	 */
 	@Transactional
 	public void createReportCmt(Long id, Long principalId) {
 
@@ -254,7 +264,48 @@ public class BoardService {
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("댓글 신고 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
+	
+	/**
+	 * 쪽지 전송
+	 * @param messageFormDto
+	 * @param userId
+	 * @param principalId
+	 */
+	@Transactional
+	public void createMessage(MessageFormDto messageFormDto, Long userId, Long principalId) {
+		
+		Message message = new Message();
+		message.setSender(principalId);
+		message.setReceiver(userId);
+		message.setMessage(messageFormDto.getMessage());
+		
+		int resultRowCount = messageRepository.insert(message);
+		if(resultRowCount != 1) {
+			throw new CustomRestfullException("쪽지 전송실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * 받은 메세지 확인
+	 * @param principalId
+	 * @return
+	 */
+	@Transactional
+	public List<Message> readRMessage(Long principalId){
+		
+		List<Message> list = messageRepository.findByReceiver(principalId);
+		
+		return list;
+	}
+	@Transactional
+	public List<Message> readSMessage(Long principalId){
+		
+		List<Message> list = messageRepository.findBySender(principalId);
+		
+		return list;
+	}
+	
+	
 
 }
