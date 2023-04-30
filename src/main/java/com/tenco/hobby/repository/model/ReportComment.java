@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class ReportComment extends Report{
     private Long id;
-    private Long userId;
-    private Long commentId;
+    private Long reportUserId;
+    private Long reportCommentId;
     private Boolean proceed;
 }

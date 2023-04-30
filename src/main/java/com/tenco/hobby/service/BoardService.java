@@ -239,8 +239,8 @@ s	 * @param id
 	public void createReportPost(Long id, Long principalId) {
 
 		ReportBoard reportBoard = new ReportBoard();
-		reportBoard.setUserId(principalId);
-		reportBoard.setBoardId(id);
+		reportBoard.setReportUserId(principalId);
+		reportBoard.setReportBoardId(id);
 
 		int resultRowCount = reportRepository.insertReportBoard(reportBoard);
 		if (resultRowCount != 1) {
@@ -257,8 +257,8 @@ s	 * @param id
 	public void createReportCmt(Long id, Long principalId) {
 
 		ReportComment reportComment = new ReportComment();
-		reportComment.setUserId(principalId);
-		reportComment.setCommentId(id);
+		reportComment.setReportUserId(principalId);
+		reportComment.setReportCommentId(id);
 
 		int resultRowCount = reportRepository.insertReportComment(reportComment);
 		if (resultRowCount != 1) {

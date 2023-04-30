@@ -11,6 +11,4 @@ public interface ReportRepository {
 	
 	public int insertReportBoard(ReportBoard report);
 	public int insertReportComment(ReportComment report);
-	
-
 }

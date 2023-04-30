@@ -33,9 +33,9 @@
 		where id = #{id};
 	</update>
 	<select id="findAllReportBoard" resultType="com.tenco.hobby.repository.model.ReportBoard">
-		select * from report_board_tb proceed = 0;
+		select * from report_board_tb where proceed = 0;
 	</select>
-	<select id="findAllReportComment" resultType="com.tenco.hobby.repository.model.Report">
-		select * from report_comment_tb proceed = 0;
+	<select id="findAllReportComment" resultType="com.tenco.hobby.repository.model.ReportComment">
+		select * from report_comment_tb where proceed = 0;
 	</select>
 </mapper>
