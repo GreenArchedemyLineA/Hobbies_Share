@@ -83,6 +83,50 @@
 			</ul>
 		</div>
 		</c:when>
+		<c:when test="${reportBoard != null}">
+			<div class="table-Q">
+				<table class="styled-table">
+					<thead>
+					<tr>
+						<th>신고유저</th>
+						<th>신고글</th>
+					</tr>
+					</thead>
+					<c:forEach var="board" items="${reportBoard}">
+						<tr>
+							<td>
+								${board.reportUserId}
+							</td>
+							<td>
+								${board.reportBoardId}
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</c:when>
+		<c:when test="${reportComment != null}">
+			<div class="table-Q">
+				<table class="styled-table">
+					<thead>
+					<tr>
+						<th>신고유저</th>
+						<th>신고댓글</th>
+					</tr>
+					</thead>
+					<c:forEach var="comment" items="${reportComment}">
+						<tr>
+							<td>
+								${comment.reportUserId}
+							</td>
+							<td>
+								${comment.reportCommentId}
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</c:when>
 		<c:otherwise>
 			asdf
 		</c:otherwise>

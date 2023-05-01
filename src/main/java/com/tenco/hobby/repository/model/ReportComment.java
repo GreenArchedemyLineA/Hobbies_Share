@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ReportBoard extends Report {
-	private Long id;
-	private Long userId;
-	private Long boardId;
-	private Long reportUserId;
-	private Long reportBoardId;
-	private Boolean proceed;
+public class ReportComment extends Report{
+    private Long id;
+    private Long reportUserId;
+    private Long reportCommentId;
+    private Boolean proceed;
 }

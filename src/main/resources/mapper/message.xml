@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tenco.hobby.repository.interfaces.MessageRepository">
+
+	<insert id="insert">
+		insert into message_tb (sender, receiver, message)
+		values( #{sender}, #{receiver}, #{message})
+	</insert>
+
+	<select id="findByReceiver" resultType="com.tenco.hobby.repository.model.Message">
+		select m.*, u.nickname
+		from message_tb as m
+		inner join user_tb as u
+		on m.sender = u.id
+		where m.receiver = #{receiver}
+	</select>
+
+	<select id="findBySender" resultType="com.tenco.hobby.repository.model.Message">
+		select m.*, u.nickname
+		from message_tb as m
+		inner join user_tb as u
+		on m.receiver = u.id
+		where m.sender = #{sender}
+	</select>
+
+</mapper>

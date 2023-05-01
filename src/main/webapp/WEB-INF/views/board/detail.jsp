@@ -16,10 +16,14 @@
 			<c:choose>
 				<c:when test="${principal.id == board.userId}">
 					<div>
-						<a href="/board/update/${board.id}">수정</a> <a href="/board/delete/${board.id}">삭제</a>
+						<a href="/board/update/${board.id}">수정</a>
+						 <a href="/board/delete/${board.id}">삭제</a>
 					</div>
 				</c:when>
 				<c:otherwise>
+					<div>
+						<a href="/board/reportBoard/${board.id}">신고</a>
+					</div>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -29,7 +33,9 @@
 		<div>
 			<div class="board-title">
 				<h1>${board.title}</h1>
-				<h4>${board.nickname}</h4>${board.formatCreatedAt()}
+				<h4>${board.nickname}</h4> 
+				<a href="/board/sendMsg/${board.userId}">쪽지보내기</a>
+				${board.formatCreatedAt()}
 			</div>
 			<div class="board-content">${board.content}</div>	
 		</div>
@@ -52,7 +58,7 @@
 						</div></div>
 			        </c:when>
 			        <c:otherwise>
-			        </div></div>
+			        <a href="/board/reportCmt/${comment.id}">신고</a></div></div>
 			        </c:otherwise>
 	            </c:choose>
 	    </c:forEach>

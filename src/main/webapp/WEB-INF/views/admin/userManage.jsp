@@ -126,7 +126,7 @@ body {
 	<div class="blank"></div>
 	<div>
 		<div class="test">
-			<form action="#" class="joinForm">
+			<form action="/main/usermanage/${id}" class="joinForm">
 				<h2>회원 정보 수정</h2>
 				<div class="textForm">
 					<input name="loginId" type="text" class="id" placeholder="아이디"> </input>
