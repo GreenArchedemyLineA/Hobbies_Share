@@ -131,7 +131,6 @@ public class UserService {
 
 	/**
 	 * 프로필 수정 처리
-	 * 
 	 * @param avatarSelecFormDto
 	 */
 	@Transactional
@@ -324,17 +323,23 @@ public class UserService {
 	 * @param principalId
 	 */
 	@Transactional
-	public void createMessage(MessageFormDto messageFormDto, Long userId, Long principalId) {
+	public boolean createMessage(MessageFormDto messageFormDto, Long userId, Long principalId) {
 		
 		Message message = new Message();
 		message.setSender(principalId);
 		message.setReceiver(userId);
 		message.setMessage(messageFormDto.getMessage());
 		
+		boolean success = true;
+		
 		int resultRowCount = messageRepository.insert(message);
 		if(resultRowCount != 1) {
-			throw new CustomRestfullException("쪽지 전송실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+			return false;
+		}else if(resultRowCount == 1) {
+			return true;			
+		}		
+		
+		return success;
 	}
 	
 	/**

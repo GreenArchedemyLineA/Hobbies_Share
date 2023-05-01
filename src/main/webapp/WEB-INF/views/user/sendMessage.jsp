@@ -24,22 +24,13 @@
 				</div>
 				<div class="profile-info">
 					<table>
+					<c:forEach var="send" items="${sendList}">					
 						<tr>
-							<th>이름</th>
-							<td></td>
+							<td>${send.nickname}</td>
+							<td>${send.message}</td>
+							<td>${send.formatCreatedAt()}</td>
 						</tr>
-						<tr>
-							<th>닉네임</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>이메일</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th></td>
-						</tr>
-		
+					</c:forEach>
 					</table>
 				</div>
 			</div>

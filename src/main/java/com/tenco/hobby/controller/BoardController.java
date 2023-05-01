@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import com.tenco.hobby.dto.CommentDto;
-import com.tenco.hobby.dto.MessageFormDto;
 import com.tenco.hobby.dto.UpdateFormDto;
 import com.tenco.hobby.dto.WriteFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
@@ -53,24 +52,22 @@ public class BoardController {
 	 */
 	@GetMapping("/list")
 	public String list(Model model) {
-
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		if (principal == null) {
-			return "/board/list";
-		}
-
-		User infoList = userService.readInfo(principal.getId());
-		if (infoList == null) {
-			model.addAttribute("infoList", null);
-
-		} else {
-			model.addAttribute("infoList", infoList);
-		}
-
+		
 		List<Board> boardList = boardService.readBoardList();
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("hobbyList", hobbyList);
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		if (principal != null) {
+			User infoList = userService.readInfo(principal.getId());
+			if (infoList == null) {
+				model.addAttribute("infoList", null);
+
+			} else {
+				model.addAttribute("infoList", infoList);
+			}
+		}
 		return "/board/list";
 	}
 
@@ -125,6 +122,7 @@ public class BoardController {
 
 	/**
 	 * 글작성
+	 * 
 	 * @param writeFormDto
 	 * @return 게시글 전체 조회
 	 */
@@ -161,11 +159,11 @@ public class BoardController {
 		User infoList = userService.readInfo(principal.getId());
 		if (infoList == null) {
 			model.addAttribute("infoList", null);
-
+			
 		} else {
 			model.addAttribute("infoList", infoList);
 		}
-
+		
 		Board board = boardService.readBoard(id);
 		List<Comment> commentList = boardService.readComment(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -173,6 +171,8 @@ public class BoardController {
 		model.addAttribute("comment", commentList);
 		model.addAttribute(Define.PRINCIPAL, principal);
 		model.addAttribute("hobbyList", hobbyList);
+		
+
 
 		return "/board/detail";
 	}
@@ -285,7 +285,6 @@ public class BoardController {
 
 	/**
 	 * 글 삭제
-	 * 
 	 * @param id
 	 * @return 글 전체 조회
 	 */

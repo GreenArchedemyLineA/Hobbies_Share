@@ -32,7 +32,7 @@
 								<td>${board.hobby.getName()}</td>
 								<td><a href="/board/detail/${board.id}">${board.title}</a></td>
 								<td>${board.nickname}</td>
-								<td>${board.createdAt}</td>
+								<td>${board.formatCreatedAt()}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
