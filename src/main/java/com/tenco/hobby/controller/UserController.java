@@ -1,22 +1,23 @@
 package com.tenco.hobby.controller;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tenco.hobby.dto.AvatarSelecFormDto;
@@ -24,9 +25,9 @@ import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
 import com.tenco.hobby.dto.MessageFormDto;
-import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
+import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.Comment;
@@ -41,6 +42,8 @@ import com.tenco.hobby.util.Define;
 @RequestMapping("/user")
 public class UserController {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
 	private UserService userService;
 
@@ -49,12 +52,6 @@ public class UserController {
 
 	@Autowired
 	private HttpSession session;
-
-//	@ModelAttribute(Define.PRINCIPAL)
-//	public User setUser() {
-//		User user = (User) session.getAttribute(Define.PRINCIPAL); 
-//		return user;
-//	}
 
 	@GetMapping("/auth/myPage")
 	public String myPage(Model model) {
@@ -501,7 +498,7 @@ public class UserController {
 
 		return "/layout/userWritePage";
 	}
-	
+
 	/**
 	 * @param userId
 	 * @param model
@@ -509,64 +506,61 @@ public class UserController {
 	 */
 	@GetMapping("/sendMsg/{userId}")
 	public String sendMessage(@PathVariable Long userId, Model model) {
-		
+
 		User userEntity = userService.readInfo(userId);
-		model.addAttribute("user", userEntity);	
+		model.addAttribute("user", userEntity);
 		model.addAttribute("userId", userId);
-		
+
 		return "/board/messageForm";
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @return 쪽지함
 	 */
 	@GetMapping("/auth/myMessage")
 	public String myMessage() {
-		
-		return "/user/myMessage";		
+
+		return "/user/myMessage";
 	}
-	
-	
-	/** 쪽지 전송
+
+	/**
+	 * 쪽지 전송
+	 * 
 	 * @param userId
 	 * @param messageFormDto
-	 * @return 
+	 * @return
 	 */
 	@PostMapping("/send-Proc/{userId}")
 	public String sendMsgProc(@PathVariable Long userId, MessageFormDto messageFormDto) {
-		
+
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
-		userService.createMessage(messageFormDto, userId, principal.getId());		
+
+		userService.createMessage(messageFormDto, userId, principal.getId());
 		return "";
 	}
-	
 
 	@GetMapping("/auth/select-R-msg")
 	public String selectReceiveMsg(Model model) {
-		
+
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
+
 		List<Message> receiveList = userService.readReceiveMessage(principal.getId());
 		System.out.println(receiveList);
 		model.addAttribute("receiveList", receiveList);
-		
-		
+
 		return "/user/receiveMessage";
 	}
-	
+
 	@GetMapping("/auth/select-S-msg")
 	public String selectSendMsg() {
-		
+
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
+
 		userService.readSendMessage(principal.getId());
-		
-		
+
 		return "/user/sendMessage";
 	}
-	
 
 }

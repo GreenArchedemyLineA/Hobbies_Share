@@ -16,11 +16,17 @@ import com.tenco.hobby.repository.model.User;
 @Mapper
 public interface UserRepository {
 
+//	이메일 중복체크
+	public User existsByEmail(String email);
+
+//	닉네임 중복체크
+	public User existsByNickname(String nickname);
+
 //	회원가입
-	public int insert(JoinUpFormDto joinUpDto);
+	public int insert(JoinUpFormDto joinUpFormDto);
 
 //	로그인
-	public User findByEmail(LogInFormDto logInDto);
+	public User findByEmail(LogInFormDto logInFormDto);
 
 //	프로필 수정
 	public int updateAvatar(AvatarSelecFormDto avatarSelecFormDto);
