@@ -25,15 +25,6 @@ html, body {
 	margin: 10px;
 }
 
-.guideContainer {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: aqua;
-	height: 180px;
-	width: 180px;
-}
-
 .header>ul>li>a {
 	text-decoration: none;
 	color: black;
@@ -178,7 +169,7 @@ html, body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: aqua;
+	flex-direction:column;
 	height: 180px;
 	width: 180px;
 }
