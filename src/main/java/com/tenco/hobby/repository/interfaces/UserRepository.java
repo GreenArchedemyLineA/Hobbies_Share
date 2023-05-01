@@ -42,5 +42,4 @@ public interface UserRepository {
 
 //	유저 전체 목록
 	public List<User> findByAll();
-
 }

@@ -19,7 +19,7 @@
 		</div>
 		<script>
 		const targetDiv = document.getElementById("aside-recommend");
-			 fetch("/recommend/age?id=${principal.getGeneration()}",{
+			 fetch("/recommend/id?id=${principal.id}",{
 				 method: "GET",
 				 headers: {
 					 "Content-Type": "application/json",

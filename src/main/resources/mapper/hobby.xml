@@ -7,6 +7,9 @@
 	<resultMap type="com.tenco.hobby.repository.model.UserHobbies" id="UserHobbies">
 		<result column="hobby" property="hobby" />
 		<association property="user" javaType="com.tenco.hobby.repository.model.User">
+			<result column="id" property="id"/>
+			<result column="email" property="email"/>
+			<result column="nickname" property="nickname"/>
 			<result column="username" property="username"/>
 			<result column="birth" property="birth"/>
 			<result column="phone" property="phone"/>
@@ -26,6 +29,16 @@
 	
 	<select id="findAllHobbies" resultType="com.tenco.hobby.repository.model.BoardHobbies">
 		select * from hobbies
+	</select>
+	
+	<select id="findUserHobbies" resultMap="UserHobbies">
+		select u.*, h.hobby
+		from user_tb as u
+		join user_hobbies as uh
+		on u.id = uh.user_id
+		join hobbies as h
+		on uh.hobby = h.id
+		where u.id = 1;
 	</select>
 	
 	
