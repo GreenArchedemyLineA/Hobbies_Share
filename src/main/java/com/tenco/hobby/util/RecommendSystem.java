@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.tenco.hobby.enums.UserHobby;
+import com.tenco.hobby.repository.interfaces.BoardRepository;
 import com.tenco.hobby.repository.interfaces.HobbyRepository;
 import com.tenco.hobby.repository.interfaces.UserRepository;
+import com.tenco.hobby.repository.model.Board;
+import com.tenco.hobby.repository.model.ReportBoard;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.repository.model.UserHobbies;
 
@@ -26,22 +29,26 @@ public class RecommendSystem {
 	private final int AGE60 = 60;
 	private UserRepository userRepository;
 	private HobbyRepository hobbyRepository;
-	private static Map<Integer, List<User>> userAgeMap = new HashMap<>();;
-	private static Map<UserHobby, List<User>> userHobbiesMap = new HashMap<>();;
+	private BoardRepository boardRepository;
+	private static Map<Integer, List<User>> userAgeMap = new HashMap<>();
+	private static Map<UserHobby, List<User>> userHobbiesMap = new HashMap<>();
 
 	@Autowired // 생성자 주입
 	public RecommendSystem(
 			UserRepository userRepository,
-			HobbyRepository hobbyRepository
+			HobbyRepository hobbyRepository,
+			BoardRepository boardRepository
 			) throws NoSuchFieldException, IllegalAccessException {
 		this.userRepository = userRepository;
 		this.hobbyRepository = hobbyRepository;
+		this.boardRepository = boardRepository;
 		List<User> userList = userRepository.findByAll();
 		List<UserHobbies> hobbiesList = hobbyRepository.findByAll();
-		List<UserHobbies> userHobbies;
+		List<Board> boardList = boardRepository.findAll();
+		System.out.println(boardList.toString());
 		setUserAgeMap(userList);
 		setUserHobbiesMap(hobbiesList);
-		System.out.println(9/10);
+		thread.start();
 	}
 	
 	private void setUserAgeMap(List<User> userList) {
@@ -137,4 +144,27 @@ public class RecommendSystem {
 		List<User> userhobbyRecommendList = userHobbiesMap.get(name);
 		return userhobbyRecommendList;
 	}
+	
+	Thread thread = new Thread(new Runnable() {
+		private final int THIRTYMINUTES = 1000 * 60 * 30;
+		@Override
+		public void run(){
+			try {
+				while(true) {
+					List<User> userList = userRepository.findByAll();
+					List<UserHobbies> hobbiesList = hobbyRepository.findByAll();
+					List<Board> boardList = boardRepository.findAll();
+					setUserAgeMap(userList);
+					setUserHobbiesMap(hobbiesList);
+					try {
+						Thread.sleep(THIRTYMINUTES);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			} catch (NoSuchFieldException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+	});
 }
