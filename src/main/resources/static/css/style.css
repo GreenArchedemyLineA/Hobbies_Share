@@ -116,6 +116,16 @@ html, body {
 	justify-content: space-between;
 }
 
+.id_input-re-1 {
+	color: green;
+	display: none;
+}
+
+.id_input-re-2 {
+	color: red;
+	display: none;
+}
+
 .form-group input {
 	height: 30px;
 	width: 250px;

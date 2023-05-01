@@ -1,11 +1,13 @@
+
 .board-container {
 	display: flex;
+	margin-top: 30px;
 }
 
 .board-detail {
 	display: flex;
 	flex-direction: column;
-	width: 1100px;
+	width: 75%;
 	margin-left: 100px;
 	box-sizing: border-box;
 }

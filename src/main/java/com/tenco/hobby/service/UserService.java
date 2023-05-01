@@ -39,8 +39,37 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
 	@Autowired
 	private MessageRepository messageRepository;
+
+	/**
+	 * 
+	 * @param email
+	 * @return 이메일 중복 체크
+	 */
+	public boolean checkEmail(String email) {
+		int result = userRepository.existsByEmail(email) == null ? 0 : 1;
+		if (result == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 
+	 * @param nickname
+	 * @return 닉네임 중복 체크
+	 */
+	public boolean checkNickname(String nickname) {
+		int result = userRepository.existsByNickname(nickname) == null ? 0 : 1;
+		if (result == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * 회원가입 처리
@@ -305,6 +334,7 @@ public class UserService {
 
 	/**
 	 * Q&A 삭제 기능
+	 * 
 	 * @param id
 	 */
 	@Transactional
@@ -316,47 +346,48 @@ public class UserService {
 			throw new CustomRestfullException("글 삭제를 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 쪽지 전송
+	 * 
 	 * @param messageFormDto
 	 * @param userId
 	 * @param principalId
 	 */
 	@Transactional
 	public void createMessage(MessageFormDto messageFormDto, Long userId, Long principalId) {
-		
+
 		Message message = new Message();
 		message.setSender(principalId);
 		message.setReceiver(userId);
 		message.setMessage(messageFormDto.getMessage());
-		
+
 		int resultRowCount = messageRepository.insert(message);
-		if(resultRowCount != 1) {
+		if (resultRowCount != 1) {
 			throw new CustomRestfullException("쪽지 전송실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 받은 메세지 확인
+	 * 
 	 * @param principalId
 	 * @return
 	 */
 	@Transactional
-	public List<Message> readReceiveMessage(Long principalId){
-		
+	public List<Message> readReceiveMessage(Long principalId) {
+
 		List<Message> list = messageRepository.findByReceiver(principalId);
-		
+
 		return list;
 	}
+
 	@Transactional
-	public List<Message> readSendMessage(Long principalId){
-		
+	public List<Message> readSendMessage(Long principalId) {
+
 		List<Message> list = messageRepository.findBySender(principalId);
-		
+
 		return list;
 	}
-	
-	
 
 }
