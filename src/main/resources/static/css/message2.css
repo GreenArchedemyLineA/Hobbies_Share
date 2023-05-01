@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.profile-wrap {
+	display: flex;
+	flex-direction: column;
+	height: 60vh;
+	align-items: center;
+}
+
+.profile {
+	display: flex;
+	justify-content: center;
+	margin: 20px 10px;
+}
+
+.profile-list {
+	display: flex;
+	font-size: 20px;
+}
+
+.profile-list>div {
+	margin: 10px;
+}
+
+.menu-bar > ul{
+	display: flex;
+}
+
+.menu-bar>ul>li {
+	list-style: none;
+	margin: 0 5px;
+}
+
+.profile-info>table {
+	overflow-y: scroll;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+	height: 430px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 800px;
+	justify-content: center;
+}
+
+.profile-info>table>tbody>tr {
+	
+}
+
+.profile-info>table>tbody>tr>th {
+	
+}

@@ -35,7 +35,7 @@
 
 			<div class="board-writer-info">
 				<h4>${board.nickname}</h4>
-				<a onclick="new_window(${board.userId})">쪽지보내기</a>
+				<a onclick="sendMsg_window(${board.userId})">쪽지보내기</a>
 				<p>${board.formatCreatedAt()}</p>
 			</div>
 			<div class="board-content">${board.content}</div>

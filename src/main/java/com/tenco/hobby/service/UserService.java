@@ -354,6 +354,12 @@ public class UserService {
 		
 		return list;
 	}
+	
+	/**
+	 * 보낸 메세지 확인
+	 * @param principalId
+	 * @return
+	 */
 	@Transactional
 	public List<Message> readSendMessage(Long principalId){
 		

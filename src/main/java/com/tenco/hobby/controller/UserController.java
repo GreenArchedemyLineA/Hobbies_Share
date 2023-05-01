@@ -1,19 +1,16 @@
 package com.tenco.hobby.controller;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +21,9 @@ import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
 import com.tenco.hobby.dto.MessageFormDto;
-import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
+import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.Comment;
@@ -531,9 +528,7 @@ public class UserController {
 		
 		boolean success = userService.createMessage(messageFormDto, userId, principal.getId());
 		
-		model.addAttribute("success", success);
-		
-		
+		model.addAttribute("success", success);		
 		return "/user/messageResult";
 	}
 	
@@ -541,7 +536,7 @@ public class UserController {
 	 * @return 쪽지함
 	 */
 	@GetMapping("/auth/myMessage")
-	public String myMessage() {
+	public String myMessage() {	
 		
 		return "/user/myMessage";		
 	}
@@ -554,7 +549,7 @@ public class UserController {
 		List<Message> receiveList = userService.readReceiveMessage(principal.getId());
 		model.addAttribute("receiveList", receiveList);
 		
-		
+		System.out.println(receiveList.toString());
 		return "/user/receiveMessage";
 	}
 	

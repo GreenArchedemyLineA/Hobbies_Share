@@ -137,7 +137,6 @@ public class BoardController {
 		if (writeFormDto.getContent() == null || writeFormDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
-		// 확인*******************************************************************
 		if (writeFormDto.getHobbyId() == 0 || writeFormDto.getHobbyId().longValue() < 0) {
 			throw new CustomRestfullException("취미를 선택해주세요", HttpStatus.BAD_REQUEST);
 		}
@@ -179,7 +178,6 @@ public class BoardController {
 
 	/**
 	 * 댓글 작성
-	 * 
 	 * @param commentDto
 	 * @param boardId
 	 * @return 글 상세페이지

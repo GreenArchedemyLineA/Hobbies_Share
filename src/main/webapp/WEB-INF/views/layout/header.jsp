@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript" src="/static/js/message.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -26,7 +27,7 @@
 					<c:when test="${principal != null}">
 						<li><a href="/user/auth/myPage"> <img alt="" src="<c:url value="${infoList.setUpUserImage()}"/>">
 						</a></li>
-						<li><a href="/user/auth/myMessage">쪽지</a></li>
+						<li><a onclick="messageBox_window()">쪽지</a></li>
 						<li><a href="/user/auth/myPage">마이페이지</a></li>
 						<li><a href="/user/auth/log-out">로그아웃</a></li>
 					</c:when>

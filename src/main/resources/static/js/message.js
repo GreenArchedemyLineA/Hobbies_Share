@@ -3,10 +3,18 @@
  */
 
 
-function new_window(id) {
+function sendMsg_window(id) {
 	window.open(
 		"/user/auth/sendMsg/"+id,
 		"insert",
-		"width=500, height=300, top=250, left=650"
+		"resizable=no,width=500, height=300, top=250, left=650"
+	);
+}
+
+function messageBox_window(){
+	window.open(
+		"/user/auth/myMessage",
+		"select",
+		"width=870, height=600, top=200, left=570"
 	);
 }
