@@ -2,22 +2,24 @@ package com.tenco.hobby.service;
 
 import java.util.List;
 
-import com.tenco.hobby.repository.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.hobby.dto.CommentDto;
-import com.tenco.hobby.dto.MessageFormDto;
 import com.tenco.hobby.dto.UpdateFormDto;
 import com.tenco.hobby.dto.WriteFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.BoardRepository;
 import com.tenco.hobby.repository.interfaces.CommentRepository;
 import com.tenco.hobby.repository.interfaces.HobbyRepository;
-import com.tenco.hobby.repository.interfaces.MessageRepository;
 import com.tenco.hobby.repository.interfaces.ReportRepository;
+import com.tenco.hobby.repository.model.Board;
+import com.tenco.hobby.repository.model.BoardHobbies;
+import com.tenco.hobby.repository.model.Comment;
+import com.tenco.hobby.repository.model.ReportBoard;
+import com.tenco.hobby.repository.model.ReportComment;
 
 @Service
 public class BoardService {

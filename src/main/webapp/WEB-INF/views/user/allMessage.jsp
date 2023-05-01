@@ -5,11 +5,10 @@
 
 
 <div class="container">
-
 	<div class="title-wrap">
 		<%@ include file="/WEB-INF/views/user/layout/messageBar.jsp"%>
 		<div class="title">
-			<h1>보낸 쪽지</h1>
+			<h1>전체 쪽지</h1>
 		</div>
 
 	</div>
@@ -19,15 +18,17 @@
 		<div class="message-list">
 			<table>
 				<tr>
-					<th>보낸사람</th>
+					<th>보낸 사람</th>
+					<th>받는 사람</th>
 					<th>쪽지</th>
 					<th>전송시각</th>
 				</tr>
-				<c:forEach var="send" items="${sendList}">
+				<c:forEach var="all" items="${allList}">
 					<tr>
-						<td>${send.nickname}</td>
-						<td>${send.message}</td>
-						<td>${send.formatCreatedAt()}</td>
+						<td>${all.senderNickname}</td>
+						<td>${all.receiverNickname}</td>
+						<td>${all.message}</td>
+						<td>${all.formatCreatedAt()}</td>
 					</tr>
 				</c:forEach>
 			</table>

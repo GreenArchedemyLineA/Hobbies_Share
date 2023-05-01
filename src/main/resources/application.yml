@@ -19,11 +19,7 @@ spring:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     url: jdbc:log4jdbc:mysql://localhost:3306/HOBBIES_SHARE?serverTimezone=Asia/Seoul
     username: root
-<<<<<<< HEAD
-    password: asd1234
-=======
     password: 1234
->>>>>>> 69adc2336edd45fa02ca1300dc43d82eb0679e80
 
 #  sql:
 #    init:

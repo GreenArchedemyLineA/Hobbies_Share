@@ -1,45 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="/static/css/message.css">
 
 
-<div class="profile">
-	<h1>받은 쪽지</h1>
-</div>
-<div class="main">
+<div class="container">
 
-	<div class="menu-bar">
-		<ul>
-			<li><a href="/user/auth/select-S-msg">보낸쪽지</a></li>
-			<li><a href="/user/auth/select-R-msg">받은쪽지</a></li>
-		</ul>
+	<div class="title-wrap">
+		<%@ include file="/WEB-INF/views/user/layout/messageBar.jsp"%>
+
+	<div class="title">
+		<h1>받은 쪽지</h1>
 	</div>
+
 </div>
+<div class="message-wrap">
 
-<div class="profile-wrap">
 
-	<div class="profile-list">
-
-		<div class="profile-info">
-
-			<table>
-
+	<div class="message-list">
+		<table>
+			<tr>
+				<th>보낸사람</th>
+				<th>쪽지</th>
+				<th>전송시각</th>
+			</tr>
+			<c:forEach var="receive" items="${receiveList}">
 				<tr>
-					<th>보낸사람</th>
-					<th>메세지</th>
-					<th>보낸시간</th>
-
+					<td>${receive.nickname}</td>
+					<td>${receive.message}</td>
+					<td>${receive.formatCreatedAt()}</td>
 				</tr>
-				<c:forEach var="receive" items="${receiveList}">
-					<tr>
-						<td>${receive.nickname}</td>
-						<td>${receive.message}</td>
-						<td>${receive.formatCreatedAt()}</td>
-					</tr>
-				</c:forEach>
+			</c:forEach>
+
+		</table>
 
 
-			</table>
-		</div>
 	</div>
+
+
+</div>
+
+
+
+
 </div>

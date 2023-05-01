@@ -24,21 +24,41 @@ body {
 	display: flex;
 }
 
+.menu-bar>ul {
+	display: flex;
+}
+
+ul>li {
+	list-style: none;
+	padding: 5px;
+}
+
+ul>li>a {
+	text-decoration: none;
+	color: black;
+}
+
 .title {
 	display: flex;
 	justify-content: center;
 	margin: 10px 10px;
 }
 
+.message-list>table {
+	border: 1px solid #ccc;
+	border-radius: 15px;
 
-/*overflow-y: scroll;*/
-
-table{
-	width: 100%;
 }
 
+table {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-y: scroll;
+}
 
-
-
-
-
+th, td {
+	text-align: center;
+	padding-bottom: 5px; 
+	
+}

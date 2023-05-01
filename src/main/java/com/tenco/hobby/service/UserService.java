@@ -375,7 +375,6 @@ public class UserService {
 
 	/**
 	 * 받은 메세지 확인
-	 * 
 	 * @param principalId
 	 * @return
 	 */
@@ -386,21 +385,25 @@ public class UserService {
 
 		return list;
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * 보낸 메세지 확인
 	 * @param principalId
 	 * @return
 	 */
-=======
 
->>>>>>> 69adc2336edd45fa02ca1300dc43d82eb0679e80
 	@Transactional
 	public List<Message> readSendMessage(Long principalId) {
 
 		List<Message> list = messageRepository.findBySender(principalId);
 
+		return list;
+	}
+	
+	public List<Message> readAllMessage(Long principalId){
+		
+		List<Message> list = messageRepository.findByAll(principalId);
+		
 		return list;
 	}
 

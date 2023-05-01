@@ -13,7 +13,7 @@ function sendMsg_window(id) {
 
 function messageBox_window(){
 	window.open(
-		"/user/auth/myMessage",
+		"/user/auth/select-A-msg",
 		"select",
 		"width=870, height=600, top=200, left=570"
 	);
