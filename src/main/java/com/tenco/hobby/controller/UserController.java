@@ -504,19 +504,35 @@ public class UserController {
 	 * @param model
 	 * @return 쪽지입력창
 	 */
-	@GetMapping("/sendMsg/{userId}")
-	public String sendMessage(@PathVariable Long userId, Model model) {
-
+	@GetMapping("/auth/sendMsg/{userId}")
+	public String sendMessage(@PathVariable Long userId, Model model) {				
 		User userEntity = userService.readInfo(userId);
-		model.addAttribute("user", userEntity);
-		model.addAttribute("userId", userId);
-
+		model.addAttribute("user", userEntity);	
 		return "/board/messageForm";
 
 	}
-
+	
+	/** 쪽지 전송
+	 * @param userId
+	 * @param messageFormDto
+	 * @return 
+	 */
+	@PostMapping("/auth/send-Proc/{userId}")
+	public String sendMsgProc(@PathVariable Long userId, MessageFormDto messageFormDto, Model model) {
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
+		if(messageFormDto.getMessage() == null || messageFormDto.getMessage().isEmpty()) {
+			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		boolean success = userService.createMessage(messageFormDto, userId, principal.getId());
+		
+		model.addAttribute("success", success);
+		
+		
+		return "/user/messageResult";
+	}
 	/**
-	 * 
 	 * @return 쪽지함
 	 */
 	@GetMapping("/auth/myMessage")
@@ -525,21 +541,6 @@ public class UserController {
 		return "/user/myMessage";
 	}
 
-	/**
-	 * 쪽지 전송
-	 * 
-	 * @param userId
-	 * @param messageFormDto
-	 * @return
-	 */
-	@PostMapping("/send-Proc/{userId}")
-	public String sendMsgProc(@PathVariable Long userId, MessageFormDto messageFormDto) {
-
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-
-		userService.createMessage(messageFormDto, userId, principal.getId());
-		return "";
-	}
 
 	@GetMapping("/auth/select-R-msg")
 	public String selectReceiveMsg(Model model) {
@@ -547,19 +548,19 @@ public class UserController {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
 		List<Message> receiveList = userService.readReceiveMessage(principal.getId());
-		System.out.println(receiveList);
 		model.addAttribute("receiveList", receiveList);
 
 		return "/user/receiveMessage";
 	}
 
 	@GetMapping("/auth/select-S-msg")
-	public String selectSendMsg() {
-
+	public String selectSendMsg(Model model) {
+		
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-
-		userService.readSendMessage(principal.getId());
-
+		
+		List<Message> sendList = userService.readSendMessage(principal.getId());
+		model.addAttribute("sendList", sendList);
+		
 		return "/user/sendMessage";
 	}
 

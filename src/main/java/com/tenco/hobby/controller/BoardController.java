@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import com.tenco.hobby.dto.CommentDto;
-import com.tenco.hobby.dto.MessageFormDto;
 import com.tenco.hobby.dto.UpdateFormDto;
 import com.tenco.hobby.dto.WriteFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
@@ -53,7 +52,6 @@ public class BoardController {
 	 */
 	@GetMapping("/list")
 	public String list(Model model) {
-
 		List<Board> boardList = boardService.readBoardList();
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("boardList", boardList);
@@ -69,7 +67,6 @@ public class BoardController {
 				model.addAttribute("infoList", infoList);
 			}
 		}
-
 		return "/board/list";
 	}
 
@@ -157,7 +154,6 @@ public class BoardController {
 	 */
 	@GetMapping("/detail/{id}")
 	public String detail(@PathVariable Long id, Model model) {
-
 		Board board = boardService.readBoard(id);
 		List<Comment> commentList = boardService.readComment(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -288,7 +284,6 @@ public class BoardController {
 
 	/**
 	 * 글 삭제
-	 * 
 	 * @param id
 	 * @return 글 전체 조회
 	 */

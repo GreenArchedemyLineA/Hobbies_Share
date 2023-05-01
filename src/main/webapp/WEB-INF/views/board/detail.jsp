@@ -5,10 +5,10 @@
 
 <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">  -->
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
-
-<%@ include file="/WEB-INF/views/board/layout/hobbyCategory.jsp"%>
+<script type="text/javascript" src="/static/js/message.js"></script>
 
 <div class="board-container">
+	<%@ include file="/WEB-INF/views/board/layout/hobbyCategory.jsp"%>
 
 	<div class="board-detail">
 		<div class="board-detail-button">
@@ -26,6 +26,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+
 
 
 		<div class="board-wrap">

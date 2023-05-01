@@ -68,7 +68,7 @@
 			<img src="https://cdn.crowdpic.net/detail-thumb/thumb_d_2F583E5543F7E19139C6FCFFBF9607A6.jpg">
 		</div>
 		<canvas id="myChart" width="500" height="150"></canvas>
-		<div class="nolja">인기 취미 6개</div>
+		<div class="nolja">유저들이 가진 가장 많은 취미 6개</div>
 	</div>
 
 <%@ include file="/WEB-INF/views/layout/footer.jsp"%>

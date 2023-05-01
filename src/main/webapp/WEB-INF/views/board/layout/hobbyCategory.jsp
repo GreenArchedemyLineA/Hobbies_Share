@@ -21,3 +21,4 @@
 					</c:forEach>
 				</ul>
 			</nav>
+		</div>
