@@ -34,7 +34,7 @@
 						 divTag.classList.add('recommend')
 						 const aTag = document.createElement("a");
 						 aTag.innerText = obj.nickname;
-						 aTag.href="#"
+						 aTag.href="/user/auth/info/profile/${principal.id}"
 						 divTag.appendChild(aTag);
 						 targetDiv.appendChild(divTag);
 					 }
