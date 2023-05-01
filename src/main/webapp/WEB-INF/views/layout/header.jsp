@@ -26,7 +26,7 @@
 					<c:when test="${principal != null}">
 						<li><a href="/user/auth/myPage"> <img alt="" src="<c:url value="${infoList.setUpUserImage()}"/>">
 						</a></li>
-						<li><a href="#">쪽지</a></li>
+						<li><a href="/user/auth/myMessage">쪽지</a></li>
 						<li><a href="/user/auth/myPage">마이페이지</a></li>
 						<li><a href="/user/auth/log-out">로그아웃</a></li>
 					</c:when>

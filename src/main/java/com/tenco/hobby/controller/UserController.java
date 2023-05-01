@@ -29,6 +29,7 @@ import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.Comment;
+import com.tenco.hobby.repository.model.Message;
 import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.BoardService;
@@ -510,6 +511,18 @@ public class UserController {
 		return "/board/messageForm";
 		
 	}
+	
+	/**
+	 * 
+	 * @return 쪽지함
+	 */
+	@GetMapping("/auth/myMessage")
+	public String myMessage() {
+		
+		return "/user/myMessage";		
+	}
+	
+	
 	/** 쪽지 전송
 	 * @param userId
 	 * @param messageFormDto
@@ -524,15 +537,29 @@ public class UserController {
 		return "";
 	}
 	
-	@GetMapping("/select-R")
-	public String selectRMsg() {
+
+	@GetMapping("/auth/select-R-msg")
+	public String selectReceiveMsg(Model model) {
 		
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		
-		userService.readRMessage(principal.getId());
+		List<Message> receiveList = userService.readReceiveMessage(principal.getId());
+		System.out.println(receiveList);
+		model.addAttribute("receiveList", receiveList);
 		
 		
-		return "";
+		return "/user/receiveMessage";
+	}
+	
+	@GetMapping("/auth/select-S-msg")
+	public String selectSendMsg() {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
+		userService.readSendMessage(principal.getId());
+		
+		
+		return "/user/sendMessage";
 	}
 	
 

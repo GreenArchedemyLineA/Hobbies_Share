@@ -343,14 +343,14 @@ public class UserService {
 	 * @return
 	 */
 	@Transactional
-	public List<Message> readRMessage(Long principalId){
+	public List<Message> readReceiveMessage(Long principalId){
 		
 		List<Message> list = messageRepository.findByReceiver(principalId);
 		
 		return list;
 	}
 	@Transactional
-	public List<Message> readSMessage(Long principalId){
+	public List<Message> readSendMessage(Long principalId){
 		
 		List<Message> list = messageRepository.findBySender(principalId);
 		

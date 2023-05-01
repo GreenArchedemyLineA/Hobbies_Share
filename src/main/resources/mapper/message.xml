@@ -10,7 +10,7 @@
 	</insert>
 
 	<select id="findByReceiver" resultType="com.tenco.hobby.repository.model.Message">
-		select m.*, u.nickname
+		select m.*, nickname
 		from message_tb as m
 		inner join user_tb as u
 		on m.sender = u.id
@@ -18,7 +18,7 @@
 	</select>
 
 	<select id="findBySender" resultType="com.tenco.hobby.repository.model.Message">
-		select m.*, u.nickname
+		select m.*, nickname
 		from message_tb as m
 		inner join user_tb as u
 		on m.receiver = u.id

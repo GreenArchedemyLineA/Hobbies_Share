@@ -6,48 +6,40 @@
 		
 			<div class="menu-bar">
 				<ul>
-					<li><a href="#">보낸쪽지</a></li>
-					<li><a href="#">받은쪽지</a></li>
+					<li><a href="/user/auth/select-S-msg">보낸쪽지</a></li>
+					<li><a href="/user/auth/select-R-msg">받은쪽지</a></li>
 				</ul>
 			</div>
 		</div>
 		
 		<div class="profile-wrap">
 			<div class="profile">
-				<h1>개인 정보</h1>
+				<h1>보낸 쪽지</h1>
 			</div>
 		
 			<div class="profile-list">
 				<div class="profile-img">
-					<img alt="" src="<c:url value="${infoList.setUpUserImage()}"/>">
+					<img alt="" src="<c:url value=""/>">
 					<p>프로필 사진</p>
 				</div>
 				<div class="profile-info">
 					<table>
 						<tr>
 							<th>이름</th>
-							<td>${infoList.username}</td>
+							<td></td>
 						</tr>
 						<tr>
 							<th>닉네임</th>
-							<td>${infoList.nickname}</td>
+							<td></td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td>${infoList.email}</td>
+							<td></td>
 						</tr>
 						<tr>
-							<th>생일</th>
-							<td>${infoList.formatBirth()}</td>
+							<th></td>
 						</tr>
-						<tr>
-							<th>전화번호</th>
-							<td>${infoList.formatPhone()}</td>
-						</tr>
-						<tr>
-							<th>계정 생성일자</th>
-							<td>${infoList.formatCreatedAt()}</td>
-						</tr>
+		
 					</table>
 				</div>
 			</div>
