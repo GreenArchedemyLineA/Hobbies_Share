@@ -22,6 +22,7 @@ import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
+import com.tenco.hobby.dto.MessageFormDto;
 import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
@@ -493,5 +494,46 @@ public class UserController {
 
 		return "/layout/userWritePage";
 	}
+	
+	/**
+	 * @param userId
+	 * @param model
+	 * @return 쪽지입력창
+	 */
+	@GetMapping("/sendMsg/{userId}")
+	public String sendMessage(@PathVariable Long userId, Model model) {
+		
+		User userEntity = userService.readInfo(userId);
+		model.addAttribute("user", userEntity);	
+		model.addAttribute("userId", userId);
+		
+		return "/board/messageForm";
+		
+	}
+	/** 쪽지 전송
+	 * @param userId
+	 * @param messageFormDto
+	 * @return 
+	 */
+	@PostMapping("/send-Proc/{userId}")
+	public String sendMsgProc(@PathVariable Long userId, MessageFormDto messageFormDto) {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
+		userService.createMessage(messageFormDto, userId, principal.getId());		
+		return "";
+	}
+	
+	@GetMapping("/select-R")
+	public String selectRMsg() {
+		
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		
+		userService.readRMessage(principal.getId());
+		
+		
+		return "";
+	}
+	
 
 }

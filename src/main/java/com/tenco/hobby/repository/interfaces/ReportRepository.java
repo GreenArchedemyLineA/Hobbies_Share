@@ -1,10 +1,9 @@
 package com.tenco.hobby.repository.interfaces;
 
-import com.tenco.hobby.repository.model.ReportBoard;
-import com.tenco.hobby.repository.model.ReportComment;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.tenco.hobby.repository.model.Report;
+import com.tenco.hobby.repository.model.ReportBoard;
+import com.tenco.hobby.repository.model.ReportComment;
 
 @Mapper
 public interface ReportRepository {

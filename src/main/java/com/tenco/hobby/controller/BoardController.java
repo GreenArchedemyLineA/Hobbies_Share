@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,7 +28,6 @@ import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.BoardHobbies;
 import com.tenco.hobby.repository.model.Comment;
-import com.tenco.hobby.repository.model.Hobby;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.BoardService;
 import com.tenco.hobby.service.UserService;
@@ -92,7 +89,6 @@ public class BoardController {
 
 	/**
 	 * 글작성
-	 * 
 	 * @param writeFormDto
 	 * @return 게시글 전체 조회
 	 */
@@ -108,7 +104,7 @@ public class BoardController {
 			throw new CustomRestfullException("내용을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 		// 확인*******************************************************************
-		if (writeFormDto.getHobbyId() == null || writeFormDto.getHobbyId().intValue() < 0) {
+		if (writeFormDto.getHobbyId() == 0 || writeFormDto.getHobbyId().longValue() < 0) {
 			throw new CustomRestfullException("취미를 선택해주세요", HttpStatus.BAD_REQUEST);
 		}
 
@@ -307,36 +303,7 @@ public class BoardController {
 		return new ModelAndView(view);
 	}
 	
-	@GetMapping("/sendMsg/{userId}")
-	public String sendMessage(@PathVariable Long userId, Model model) {
-		
-		User userEntity = userService.readInfo(userId);
-		model.addAttribute("user", userEntity);	
-		model.addAttribute("userId", userId);
-		
-		return "/board/messageForm";
-		
-	}
-	@PostMapping("/send-Proc/{userId}")
-	public String sendMsgProc(@PathVariable Long userId, MessageFormDto messageFormDto) {
-		
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
-		boardService.createMessage(messageFormDto, userId, principal.getId());		
-		return "/board/list";
-	}
-	
-	@GetMapping("/select-R")
-	public String selectRMsg() {
-		
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
-		boardService.readRMessage(principal.getId());
-		
-		
-		return "";
-	}
-	
+
 
 	
 	

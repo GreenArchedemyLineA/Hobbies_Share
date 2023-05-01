@@ -30,8 +30,7 @@ public class BoardService {
 	private HobbyRepository hobbyRepository;
 	@Autowired
 	private ReportRepository reportRepository;
-	@Autowired
-	private MessageRepository messageRepository;
+
 
 	/**
 	 * 전체 글조회
@@ -44,12 +43,8 @@ public class BoardService {
 
 	/**
 	 * 글선택조회
-<<<<<<< HEAD
-s	 * @param id
-=======
-	 * 
 	 * @param id
->>>>>>> a3a909c5a8402219d01c06b6ad409e62ee2b68d3
+	 * @param id
 	 */
 	@Transactional
 	public Board readBoard(Long id) {
@@ -91,7 +86,6 @@ s	 * @param id
 
 	/**
 	 * 글작성
-	 * 
 	 * @param writeFormDto
 	 * @param principalId
 	 */
@@ -161,7 +155,6 @@ s	 * @param id
 
 	/**
 	 * 댓글 수정
-	 * 
 	 * @param commentDto
 	 * @param id
 	 */
@@ -264,48 +257,7 @@ s	 * @param id
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("댓글 신고 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
-	
-	/**
-	 * 쪽지 전송
-	 * @param messageFormDto
-	 * @param userId
-	 * @param principalId
-	 */
-	@Transactional
-	public void createMessage(MessageFormDto messageFormDto, Long userId, Long principalId) {
-		
-		Message message = new Message();
-		message.setSender(principalId);
-		message.setReceiver(userId);
-		message.setMessage(messageFormDto.getMessage());
-		
-		int resultRowCount = messageRepository.insert(message);
-		if(resultRowCount != 1) {
-			throw new CustomRestfullException("쪽지 전송실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	/**
-	 * 받은 메세지 확인
-	 * @param principalId
-	 * @return
-	 */
-	@Transactional
-	public List<Message> readRMessage(Long principalId){
-		
-		List<Message> list = messageRepository.findByReceiver(principalId);
-		
-		return list;
-	}
-	@Transactional
-	public List<Message> readSMessage(Long principalId){
-		
-		List<Message> list = messageRepository.findBySender(principalId);
-		
-		return list;
-	}
-	
+	}	
 
 	@Transactional
 	public List<Board> readOtherUserBoardList(Long userId) {

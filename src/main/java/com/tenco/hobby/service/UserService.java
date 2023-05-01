@@ -15,12 +15,15 @@ import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
+import com.tenco.hobby.dto.MessageFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
+import com.tenco.hobby.repository.interfaces.MessageRepository;
 import com.tenco.hobby.repository.interfaces.QuestionRepository;
 import com.tenco.hobby.repository.interfaces.UserRepository;
+import com.tenco.hobby.repository.model.Message;
 import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.util.Define;
@@ -36,6 +39,8 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private MessageRepository messageRepository;
 
 	/**
 	 * 회원가입 처리
@@ -300,7 +305,6 @@ public class UserService {
 
 	/**
 	 * Q&A 삭제 기능
-	 * 
 	 * @param id
 	 */
 	@Transactional
@@ -312,5 +316,47 @@ public class UserService {
 			throw new CustomRestfullException("글 삭제를 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	/**
+	 * 쪽지 전송
+	 * @param messageFormDto
+	 * @param userId
+	 * @param principalId
+	 */
+	@Transactional
+	public void createMessage(MessageFormDto messageFormDto, Long userId, Long principalId) {
+		
+		Message message = new Message();
+		message.setSender(principalId);
+		message.setReceiver(userId);
+		message.setMessage(messageFormDto.getMessage());
+		
+		int resultRowCount = messageRepository.insert(message);
+		if(resultRowCount != 1) {
+			throw new CustomRestfullException("쪽지 전송실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * 받은 메세지 확인
+	 * @param principalId
+	 * @return
+	 */
+	@Transactional
+	public List<Message> readRMessage(Long principalId){
+		
+		List<Message> list = messageRepository.findByReceiver(principalId);
+		
+		return list;
+	}
+	@Transactional
+	public List<Message> readSMessage(Long principalId){
+		
+		List<Message> list = messageRepository.findBySender(principalId);
+		
+		return list;
+	}
+	
+	
 
 }

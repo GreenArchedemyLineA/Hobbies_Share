@@ -12,7 +12,7 @@
 				<input type="text" name="title" style="margin-bottom: 10px;" placeholder="제목을 입력해 주세요">
 		
 				<select name="hobbyId" >
-						<option value="none">취미 카테고리</option>
+						<option value="0">취미 카테고리</option>
 					<c:forEach var="hobby" items="${hobbyList}">
 						<option value="${hobby.id}">${hobby.hobby.getName()}</option>
 					</c:forEach>
