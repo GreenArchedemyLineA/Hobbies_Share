@@ -34,7 +34,7 @@ html, body {
 	width: 180px;
 }
 
-ul>li>a {
+.header>ul>li>a {
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
@@ -197,9 +197,10 @@ ul>li>a {
 	right: 0;
 }
 
-.aside > h3{
+.aside>h3 {
 	color: #009900;
 }
+
 .aside-hidden {
 	display: none;
 	align-items: center;
@@ -208,7 +209,8 @@ ul>li>a {
 .recommend {
 	text-align: right;
 }
-.recommend > a{
+
+.recommend>a {
 	font-size: 20px;
 	text-decoration: none;
 	color: #99FF99;
@@ -239,7 +241,7 @@ ul>li>a {
 	cursor: pointer;
 }
 
-.main{
+.main {
 	display: flex;
 	justify-content: center;
 }

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="aside">
-	<div>
-		<div>취미 리스트</div>
-		<div>
+		<nav class="side-menu">
+			<div class="side-menu-title">
+				<b>취미 리스트</b>
+			</div>
+		
 			<ul>
-				<li><a href="/board/list" class="notselected" id="link">글전체조회</a></li>
+				<li><a href="/board/list" id="link">글전체조회</a></li>
 				<c:forEach var="hobby" items="${hobbyList}">
 					<c:choose>
 						<c:when test="${hobby.id == id}">
@@ -18,6 +19,4 @@
 					</c:choose>
 				</c:forEach>
 			</ul>
-		</div>
-	</div>
-</div>
+		</nav>

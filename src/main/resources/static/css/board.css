@@ -1,80 +1,92 @@
-.content{
-    display: flex;
-    width: 100%;
-}
-.aside{
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 20px;
+.content {
+	display: flex;
+	width: 100%;
 }
 
-.aside > div{
-    width: 80%;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-.aside > div > div:nth-child(1){
-    margin: 10px;
+.side-menu {
+	width: 25%;
+	border: 3px solid #ccc;
+	border-radius: 15px;
+	margin: 25px 15px;
+	padding: 15px 10px;
 }
 
-.aside > div > div > ul{
-    margin: 10px;
-    list-style-type: none;
+.side-menu-title {
+	font-size: 18px;
+	margin-bottom: 10px;
 }
-.notselected{
-    text-decoration: none;
-    color: black;
+
+.side-menu ul li {
+	list-style: none;
 }
-.selected{
-    color: black;
-    text-decoration: underline;
+
+.side-menu ul li a {
+	text-decoration: none;
+	color: black;
 }
-.board{
-    width: 80%;
+
+.side-menu ul li a:hover {
+	font-weight: bold;
+}
+
+.side-menu ul li a.selected {
+	font-weight: bold;
+	background-color: #ccc;
+}
+
+.notselected {
+	text-decoration: none;
+	color: black;
+}
+
+.selected {
+	color: black;
+	text-decoration: underline;
+}
+
+.board {
+	width: 80%;
 }
 
 .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 100%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-.styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 100%;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
+.styled-table thead tr {
+	background-color: #009879;
+	color: #ffffff;
+	text-align: left;
+}
+
+.styled-table th, .styled-table td {
+	padding: 12px 15px;
 }
 
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+	background-color: #f3f3f3;
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+	border-bottom: 2px solid #009879;
 }
 
 .styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: #009879;
+	font-weight: bold;
+	color: #009879;
 }
 
-.hide-content{
-    width: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.hide-content {
+	width: 50px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
-

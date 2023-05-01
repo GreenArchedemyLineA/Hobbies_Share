@@ -1,6 +1,7 @@
 package com.tenco.hobby.controller;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -98,11 +99,16 @@ public class UserController {
 		}
 
 		if (joinUpFormDto.getNickname() == null || joinUpFormDto.getNickname().isEmpty()) {
-			throw new CustomRestfullException("이름을 입력해주세요.", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("닉네임을 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
 		if (joinUpFormDto.getBirth() == null) {
 			throw new CustomRestfullException("생일을 입력해주세요", HttpStatus.BAD_REQUEST);
+		}
+
+		if (joinUpFormDto.getPhone() == null || joinUpFormDto.getPhone().isEmpty()
+				|| joinUpFormDto.getPhone().toString().length() < 11) {
+			throw new CustomRestfullException("전화번호 11자리를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 
 		userService.createUser(joinUpFormDto);

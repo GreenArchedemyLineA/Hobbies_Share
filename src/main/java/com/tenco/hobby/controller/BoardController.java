@@ -38,11 +38,13 @@ import com.tenco.hobby.util.Define;
 public class BoardController {
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private HttpSession session;
+
 	@Autowired
 	private BoardService boardService;
-	@Autowired
-	private UserService userService;
 
 	/**
 	 * 
@@ -51,6 +53,19 @@ public class BoardController {
 	 */
 	@GetMapping("/list")
 	public String list(Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		if (principal == null) {
+			return "/board/list";
+		}
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
 
 		List<Board> boardList = boardService.readBoardList();
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -66,6 +81,17 @@ public class BoardController {
 	 */
 	@GetMapping("/hobbyList/{id}")
 	public String hobbyList(@PathVariable Long id, Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
+		// {id} => model
 		// {id} => model
 		List<Board> boardList = boardService.readHobbyList(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -81,6 +107,16 @@ public class BoardController {
 	 */
 	@GetMapping("/write")
 	public String write(Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
 
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("hobbyList", hobbyList);
@@ -121,6 +157,15 @@ public class BoardController {
 	public String detail(@PathVariable Long id, Model model) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
+
 		Board board = boardService.readBoard(id);
 		List<Comment> commentList = boardService.readComment(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -160,6 +205,16 @@ public class BoardController {
 	@GetMapping("/update/{id}")
 	public String update(@PathVariable Long id, Model model) {
 
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
+
 		Board board = boardService.readBoard(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("board", board);
@@ -169,6 +224,7 @@ public class BoardController {
 
 	/**
 	 * 글 수정 폼
+	 * 
 	 * @param id
 	 * @param updateFormDTO
 	 * @return 글 전체 조회
@@ -191,6 +247,16 @@ public class BoardController {
 	@GetMapping("/update-cmt/{id}/{boardId}")
 	public String updateComment(@PathVariable Long id, @PathVariable Long boardId, Model model) {
 
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		User infoList = userService.readInfo(principal.getId());
+		if (infoList == null) {
+			model.addAttribute("infoList", null);
+
+		} else {
+			model.addAttribute("infoList", infoList);
+		}
+
 		Board board = boardService.readBoard(boardId);
 		List<Comment> commentList = boardService.readComment(boardId);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -205,9 +271,9 @@ public class BoardController {
 
 	@PostMapping("/cmt-proc/{id}/{boardId}")
 	public String updateCommentProc(@PathVariable Long id, @PathVariable Long boardId, CommentDto commentDto) {
-		
+
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
+
 		if (commentDto.getContent() == null || commentDto.getContent().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
@@ -219,6 +285,7 @@ public class BoardController {
 
 	/**
 	 * 글 삭제
+	 * 
 	 * @param id
 	 * @return 글 전체 조회
 	 */
@@ -226,7 +293,7 @@ public class BoardController {
 	public String delete(@PathVariable Long id) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
+
 		boardService.deletePost(id, principal.getId());
 		return "redirect:/board/list";
 	}
@@ -235,7 +302,7 @@ public class BoardController {
 	public String deleteComment(@PathVariable Long id, @PathVariable Long boardId) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
+
 		boardService.deleteComment(id, principal.getId());
 		return "redirect:/board/detail/" + boardId;
 	}
@@ -302,11 +369,5 @@ public class BoardController {
 		};
 		return new ModelAndView(view);
 	}
-	
-
-
-	
-	
-	
 
 }
