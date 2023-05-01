@@ -10,16 +10,16 @@ import lombok.Data;
 @Data
 public class Board {
 
-	private Long id;	
+	private Long id;
 	private String title;
 	private String content;
-	private Long userId;	
+	private Long userId;
 	private Long hobbyId;
 	private Timestamp createdAt;
-	
+
 	private String nickname;
 	private UserHobby hobby;
-	
+
 	public String formatCreatedAt() {
 		return TimestampUtil.timestampToString(createdAt);
 	}

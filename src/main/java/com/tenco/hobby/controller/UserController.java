@@ -6,6 +6,11 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+<<<<<<< HEAD
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> 69adc2336edd45fa02ca1300dc43d82eb0679e80
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tenco.hobby.dto.AvatarSelecFormDto;
@@ -38,6 +45,8 @@ import com.tenco.hobby.util.Define;
 @RequestMapping("/user")
 public class UserController {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
 	private UserService userService;
 
@@ -46,12 +55,6 @@ public class UserController {
 
 	@Autowired
 	private HttpSession session;
-
-//	@ModelAttribute(Define.PRINCIPAL)
-//	public User setUser() {
-//		User user = (User) session.getAttribute(Define.PRINCIPAL); 
-//		return user;
-//	}
 
 	@GetMapping("/auth/myPage")
 	public String myPage(Model model) {
@@ -498,19 +501,18 @@ public class UserController {
 
 		return "/layout/userWritePage";
 	}
-	
+
 	/**
 	 * @param userId
 	 * @param model
 	 * @return 쪽지입력창
 	 */
 	@GetMapping("/auth/sendMsg/{userId}")
-	public String sendMessage(@PathVariable Long userId, Model model) {
-				
+	public String sendMessage(@PathVariable Long userId, Model model) {				
 		User userEntity = userService.readInfo(userId);
 		model.addAttribute("user", userEntity);	
 		return "/board/messageForm";
-		
+
 	}
 	
 	/** 쪽지 전송
@@ -531,28 +533,38 @@ public class UserController {
 		model.addAttribute("success", success);		
 		return "/user/messageResult";
 	}
-	
 	/**
 	 * @return 쪽지함
 	 */
 	@GetMapping("/auth/myMessage")
+<<<<<<< HEAD
 	public String myMessage() {	
 		
 		return "/user/myMessage";		
+=======
+	public String myMessage() {
+
+		return "/user/myMessage";
+>>>>>>> 69adc2336edd45fa02ca1300dc43d82eb0679e80
 	}
-	
+
+
 	@GetMapping("/auth/select-R-msg")
 	public String selectReceiveMsg(Model model) {
-		
+
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		
+
 		List<Message> receiveList = userService.readReceiveMessage(principal.getId());
 		model.addAttribute("receiveList", receiveList);
+<<<<<<< HEAD
 		
 		System.out.println(receiveList.toString());
+=======
+
+>>>>>>> 69adc2336edd45fa02ca1300dc43d82eb0679e80
 		return "/user/receiveMessage";
 	}
-	
+
 	@GetMapping("/auth/select-S-msg")
 	public String selectSendMsg(Model model) {
 		
@@ -563,6 +575,5 @@ public class UserController {
 		
 		return "/user/sendMessage";
 	}
-	
 
 }

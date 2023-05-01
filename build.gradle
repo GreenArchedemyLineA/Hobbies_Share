@@ -32,6 +32,8 @@ dependencies {
 	
 //	암호화
 	implementation 'org.springframework.security:spring-security-crypto'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {

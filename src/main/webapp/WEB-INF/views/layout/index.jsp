@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
-
+	  
 		<div class="main">
 			<img src="/static/images/banner.png" id="main">
 		</div>
@@ -42,21 +42,22 @@
 		</script>
 		<div class="service">
 			<div class="service-list">
-				<div class="guideContainer" id="boardContainer">
-					<div><a href="/board/list">게시글</a></div>
+				<div class="guideContainer" id="boardContainer" onclick="goBoard()">
+					<img src="https://cdn-icons-png.flaticon.com/512/4698/4698381.png" width="30%">
+					<div>게시글</div>
 				</div>
 				<div class="guideContainer">
 					<div>기능2</div>
 				</div>
 				<div class="guideContainer" style="cursor: pointer;" onclick="goQnA()">
+					<img src="https://cdn-icons-png.flaticon.com/512/4698/4698167.png " width="30%">
 					<div>Q & A</div>
 				</div>
 			
 				<script type="text/javascript">
-					const boardContainer = document.getElementById("boardContainer");
-					boardContainer.addEventListener("click", ()=>{
-						location.href = "/board/list"
-					})
+					function goBoard(){
+						location.href="/board/list"
+					}
 					function goQnA() {
 						location.href = "/main/Q_A";
 					}
@@ -64,9 +65,10 @@
 			</div>
 		</div>
 		<div>
-			<img src="https://cdn.crowdpic.net/detail-thumb/thumb_d_2F583E5543F7E19139C6FCFFBF9607A6.jpg"
-			></div>
-		<div class="nolja">취미를 같이 공유하자!</div>
+			<img src="https://cdn.crowdpic.net/detail-thumb/thumb_d_2F583E5543F7E19139C6FCFFBF9607A6.jpg">
+		</div>
+		<canvas id="myChart" width="500" height="150"></canvas>
+		<div class="nolja">유저들이 가진 가장 많은 취미 6개</div>
 	</div>
 
 <%@ include file="/WEB-INF/views/layout/footer.jsp"%>

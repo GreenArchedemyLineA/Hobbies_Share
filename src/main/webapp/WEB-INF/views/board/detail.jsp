@@ -28,14 +28,18 @@
 		</div>
 
 
+
 		<div class="board-wrap">
 			<div class="board-title">
 				<h1>${board.title}</h1>
 			</div>
-
 			<div class="board-writer-info">
 				<h4>${board.nickname}</h4>
+<<<<<<< HEAD
 				<a onclick="sendMsg_window(${board.userId})">쪽지보내기</a>
+=======
+				<a href="/board/sendMsg/${board.userId}">쪽지보내기</a>
+>>>>>>> 69adc2336edd45fa02ca1300dc43d82eb0679e80
 				<p>${board.formatCreatedAt()}</p>
 			</div>
 			<div class="board-content">${board.content}</div>
@@ -77,5 +81,5 @@
 </div>
 
 </div>
-
+</div>
 <%@ include file="/WEB-INF/views/layout/footer.jsp"%>
