@@ -44,7 +44,7 @@ public class BoardController {
 
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private BoardService boardService;
 
@@ -57,6 +57,9 @@ public class BoardController {
 	public String list(Model model) {
 
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		if (principal == null) {
+			return "/board/list";
+		}
 
 		User infoList = userService.readInfo(principal.getId());
 		if (infoList == null) {
@@ -80,7 +83,7 @@ public class BoardController {
 	 */
 	@GetMapping("/hobbyList/{id}")
 	public String hobbyList(@PathVariable Long id, Model model) {
-		
+
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
 		User infoList = userService.readInfo(principal.getId());
@@ -90,7 +93,7 @@ public class BoardController {
 		} else {
 			model.addAttribute("infoList", infoList);
 		}
-		// {id} => model 
+		// {id} => model
 		// {id} => model
 		List<Board> boardList = boardService.readHobbyList(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
@@ -140,7 +143,7 @@ public class BoardController {
 			throw new CustomRestfullException("내용을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 		// 확인*******************************************************************
-		if (writeFormDto.getHobbyId() == null || writeFormDto.getHobbyId().intValue() < 0) {
+		if (writeFormDto.getHobbyId() == null || writeFormDto.getHobbyId().longValue() < 1) {
 			throw new CustomRestfullException("취미를 선택해주세요", HttpStatus.BAD_REQUEST);
 		}
 

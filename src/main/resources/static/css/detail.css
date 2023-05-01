@@ -2,32 +2,69 @@
 	display: flex;
 }
 
+.board-detail {
+	display: flex;
+	flex-direction: column;
+	width: 1100px;
+	margin-left: 100px;
+	box-sizing: border-box;
+}
+
 .board-detail-button {
 	display: flex;
 	justify-content: space-between;
 }
 
-.board-detail {
-	box-sizing: border-box;
-	width: 1100px;
-	margin-left: 100px;
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.board-wrap {
+	
 }
 
 .board-title {
-	padding: 10px 0 ;
-	border-bottom: solid 1px gray;
+	padding: 10px 0;
 }
 
-.board-content{
-	padding: 10px; 
-	border-bottom: solid 1px gray;
+.board-writer-info {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	display: flex;
 }
 
-.board-comment{
+.board-content {
+	padding: 30px;
+	border-bottom: 1px solid #ccc;
+}
+
+.comment {
 	padding: 10px;
 }
 
-.board-detail-comment{
+.cmt-detail {
 	padding: 10px;
 	border-bottom: solid 1px gray;
+}
+
+.cmt-nickname {
+	border-bottom: 1px solid #ccc;
+}
+
+.cmt-content {
+	border-bottom: 1px solid #ccc;
+}
+
+.cmt-info {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cmt-manage {
+	
+}
+
+.cmt-writeform {
+	
 }

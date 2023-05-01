@@ -28,13 +28,12 @@
 			 .then((response) => response.json())
 			 .then((data)=>{
 				 data.map((obj)=>{
-					 console.log(obj)
 					 if(obj.email !== "${principal.email}"){
 						 const divTag = document.createElement("div");
 						 divTag.classList.add('recommend')
 						 const aTag = document.createElement("a");
 						 aTag.innerText = obj.nickname;
-						 aTag.href="/user/auth/info/profile/${principal.id}"
+						 aTag.href="/user/auth/info/profile/"+obj.id
 						 divTag.appendChild(aTag);
 						 targetDiv.appendChild(divTag);
 					 }
