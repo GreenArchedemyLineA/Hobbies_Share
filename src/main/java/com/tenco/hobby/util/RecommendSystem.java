@@ -102,9 +102,9 @@ public class RecommendSystem {
 		});
 	}
 	
-	private int seperateGeneration(int year) {
-		int nowGeneration = AGE60;
-		int nowYear = LocalDateTime.now().getYear();
+	private Integer seperateGeneration(int year) {
+		Integer nowGeneration = AGE60;
+		Integer nowYear = LocalDateTime.now().getYear();
 		if(nowYear - year <= 59) {
 			nowGeneration = AGE50;
 		}
@@ -131,20 +131,8 @@ public class RecommendSystem {
 			o[i] = (UserHobby) f[i].get(null);
 		}
 		return (E[]) o;
-//        f.setAccessible(true);
-//        Object o = f.get(null);
-//        return (E[]) o;
-//        return null;
 	}
-	public List<User> ageRecommendUserList(Integer id) {
-		List<User> userAgeRecommendList = userAgeMap.get(id);
-		return userAgeRecommendList;
-	}
-	public List<User> hobbyRecommendUserList(UserHobby name) {
-		List<User> userhobbyRecommendList = userHobbiesMap.get(name);
-		return userhobbyRecommendList;
-	}
-	
+
 	Thread thread = new Thread(new Runnable() {
 		private final int THIRTYMINUTES = 1000 * 60 * 30;
 		@Override
@@ -167,4 +155,25 @@ public class RecommendSystem {
 			}
 		}
 	});
+
+	public List<User> recommendUserList(User user) {
+		List<User> userList = new ArrayList<User>();
+		List<User> userAgeRecommendList = userAgeMap.get(seperateGeneration(user.getBirth().getYear()+1900));		
+		List<UserHobbies> userHobbies = hobbyRepository.findUserHobbies(user.getId());
+		Map<String, Boolean> map = new HashMap<>();
+		for(User recommendUser: userAgeRecommendList) {
+			userList.add(recommendUser);
+			map.put(recommendUser.getNickname(), true);
+		}
+		userHobbies.stream().forEach(hobby->{			
+			List<User> userhobbyRecommendList = userHobbiesMap.get(hobby.getHobby());
+			userhobbyRecommendList.stream().forEach(u->{
+				if(map.get(u.getNickname()) == null) {
+					map.put(u.getNickname(), true);
+					userList.add(u);
+				}
+			});
+		});
+		return userList;
+	}
 }
