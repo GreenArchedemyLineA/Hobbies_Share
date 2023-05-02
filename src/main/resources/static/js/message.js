@@ -18,3 +18,4 @@ function messageBox_window(){
 		"width=870, height=600, top=200, left=570"
 	);
 }
+
