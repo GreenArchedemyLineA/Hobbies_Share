@@ -310,7 +310,6 @@ public class UserController {
 
 	/**
 	 * 로그아웃 처리
-	 * 
 	 * @return 리다이렉트 메인
 	 */
 	@GetMapping("/auth/log-out")
@@ -399,7 +398,6 @@ public class UserController {
 	}
 
 	/**
-	 * 
 	 * @param model
 	 * @param id
 	 * @return Q&A 수정 페이지
@@ -420,7 +418,6 @@ public class UserController {
 
 	/**
 	 * Q&A 수정 처리
-	 * 
 	 * @param id
 	 * @param qAndA
 	 * @return 리다이렉트 Q&A 페이지
@@ -441,7 +438,6 @@ public class UserController {
 
 	/**
 	 * Q&A 삭제 처리
-	 * 
 	 * @param id
 	 * @return 리다이렉트 Q&A 페이지
 	 */
@@ -505,13 +501,11 @@ public class UserController {
 	public String sendMessage(@PathVariable Long userId, Model model) {
 		User userEntity = userService.readInfo(userId);
 		model.addAttribute("user", userEntity);
-		return "/board/messageForm";
-
+		return "/user/messageForm";
 	}
 
 	/**
 	 * 쪽지 전송
-	 * 
 	 * @param userId
 	 * @param messageFormDto
 	 * @return
@@ -520,6 +514,7 @@ public class UserController {
 	public String sendMsgProc(@PathVariable Long userId, MessageFormDto messageFormDto, Model model) {
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
+		System.out.println(messageFormDto.getMessage());
 		if (messageFormDto.getMessage() == null || messageFormDto.getMessage().isEmpty()) {
 			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
@@ -562,6 +557,10 @@ public class UserController {
 		return "/user/sendMessage";
 	}
 
+	/**
+	 * @param model
+	 * @return 전체쪽지함
+	 */
 	@GetMapping("/auth/select-A-msg")
 	public String selectAllMsg(Model model) {
 

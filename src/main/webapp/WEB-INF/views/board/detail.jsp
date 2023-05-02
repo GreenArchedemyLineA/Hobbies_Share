@@ -42,7 +42,7 @@
 						<p>${board.nickname}</p>
 					</div>
 					<div class="send-text">
-						<a href="/board/sendMsg/${board.userId}"><img src="https://cdn-icons-png.flaticon.com/512/7858/7858863.png"></a>
+						<a onclick="sendMsg_window(${board.userId})"><img src="https://cdn-icons-png.flaticon.com/512/7858/7858863.png"></a>
 					</div>
 				</div>
 				<div class="board-created">

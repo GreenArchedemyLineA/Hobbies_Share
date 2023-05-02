@@ -10,7 +10,7 @@
 <body>
 	<div style="display: flex; width: 100%; height: 100%; justify-content:center; align-items: center;">
 		<div class="login-wrapper">
-	        <h2>Login</h2>
+	        <h2>Admin Login</h2>
 	        <form method="post" action="/admin/admin-proc" id="login-form">
 	            <input type="email" name="email" placeholder="Email">
 	            <input type="password" name="password" placeholder="Password">
