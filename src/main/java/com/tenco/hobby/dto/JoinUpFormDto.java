@@ -11,9 +11,6 @@ import lombok.Data;
 public class JoinUpFormDto {
 
 	private String email;
-
-	private boolean checkEmail;
-
 	private String password;
 	private String username;
 	private String nickname;
