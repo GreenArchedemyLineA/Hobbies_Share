@@ -35,5 +35,12 @@
 		on q.user_id = u.id
 		where q.id = #{id}
 	</select>
-
+	
+	<select id="findQuestionList" resultType="com.tenco.hobby.repository.model.QandA">
+		select q.*, u.nickname
+		from question_tb as q
+		inner join user_tb as u
+		on q.user_id = u.id
+		where u.id = #{userId}
+	</select>
 </mapper>

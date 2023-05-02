@@ -43,12 +43,7 @@ public class RecommendSystem {
 		this.userRepository = userRepository;
 		this.hobbyRepository = hobbyRepository;
 		this.boardRepository = boardRepository;
-		List<User> userList = userRepository.findByAll();
-		List<UserHobbies> hobbiesList = hobbyRepository.findByAll();
-		List<Board> boardList = boardRepository.findAll();
-		System.out.println(boardList.toString());
-		setUserAgeMap(userList);
-		setUserHobbiesMap(hobbiesList);
+
 		thread.start();
 	}
 	
@@ -145,6 +140,7 @@ public class RecommendSystem {
 					List<Board> boardList = boardRepository.findAll();
 					setUserAgeMap(userList);
 					setUserHobbiesMap(hobbiesList);
+					System.out.println("check");
 					try {
 						Thread.sleep(THIRTYMINUTES);
 					}catch(InterruptedException e) {

@@ -24,6 +24,7 @@ import com.tenco.hobby.repository.interfaces.MessageRepository;
 import com.tenco.hobby.repository.interfaces.QuestionRepository;
 import com.tenco.hobby.repository.interfaces.UserRepository;
 import com.tenco.hobby.repository.model.Message;
+import com.tenco.hobby.repository.model.PopularUserDTO;
 import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.util.Define;
@@ -274,9 +275,9 @@ public class UserService {
 	 * @return QnA 리스트
 	 */
 	@Transactional
-	public List<QandA> readQuestionList() {
+	public List<QandA> readQuestionList(Long userId) {
 
-		List<QandA> questionList = questionRepository.findAll();
+		List<QandA> questionList = questionRepository.findQuestionList(userId);
 		return questionList;
 	}
 
@@ -406,5 +407,12 @@ public class UserService {
 		
 		return list;
 	}
-
+	
+	/**
+	 * @return PopularUserDTO
+	 */
+	public List<PopularUserDTO> findPopularUserList(){
+		List<PopularUserDTO> popularUserList = userRepository.popularList();
+		return popularUserList;
+	}
 }

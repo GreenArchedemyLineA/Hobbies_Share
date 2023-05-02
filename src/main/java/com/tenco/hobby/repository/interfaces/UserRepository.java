@@ -12,6 +12,7 @@ import com.tenco.hobby.dto.LogInFormDto;
 import com.tenco.hobby.dto.UpdateAdminInfoFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
+import com.tenco.hobby.repository.model.PopularUserDTO;
 import com.tenco.hobby.repository.model.User;
 
 @Mapper
@@ -52,4 +53,6 @@ public interface UserRepository {
 
 //	유저 전체 목록
 	public List<User> findByAll();
+	
+	public List<PopularUserDTO> popularList();
 }

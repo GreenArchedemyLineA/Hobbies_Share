@@ -20,4 +20,6 @@ public interface QuestionRepository {
 	public List<QandA> findAll();
 
 	public QandA findById(Long id);
+
+	public List<QandA> findQuestionList(Long userId);
 }

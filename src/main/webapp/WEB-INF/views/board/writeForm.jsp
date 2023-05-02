@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/static/css/board.css">
 <link rel="stylesheet" href="/static/css/editor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/q7njnrr4xgffp94zrs5bq8er9j59lt9z1pt9hg3n8yzh5tui/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
  
 		<div class="content-write">
 			<form action="/board/write-proc" method="post">
