@@ -8,6 +8,7 @@
 				<ul>
 					<li><a href="/user/auth/info/profile/${otherUserInfo.id}">프로필</a></li>
 					<li><a href="/user/auth/info/write/${otherUserInfo.id}">쓴 글</a></li>
+					<li><a onclick="sendMsg_window(${otherUserInfo.id})">쪽지보내기</a></li>
 				</ul>
 			</div>
 		</div>
