@@ -16,6 +16,9 @@ public class Message {
 	
 	private String nickname;
 	
+	private String senderNickname;
+	private String receiverNickname;
+	
 	public String formatCreatedAt() {
 		return TimestampUtil.timestampToString(createdAt);
 	}

@@ -25,4 +25,15 @@
 		where m.sender = #{sender}
 	</select>
 
+	<select id="findByAll" resultType="com.tenco.hobby.repository.model.Message">
+		select m.*, us.nickname as 'senderNickname', ur.nickname as 'receiverNickname'
+		from message_tb as m
+		left join user_tb as us
+		on m.sender = us.id
+		left join user_tb as ur
+		on m.receiver = ur.id
+		where m.receiver = #{receiver} or m.sender = #{receiver}
+
+	</select>
+
 </mapper>

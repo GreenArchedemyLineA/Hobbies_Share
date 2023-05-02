@@ -12,5 +12,6 @@ public interface MessageRepository {
 	public int insert(Message message);
 	public List<Message> findByReceiver(Long receiver);
 	public List<Message> findBySender(Long sender);
+	public List<Message> findByAll(Long receiver);
 
 }

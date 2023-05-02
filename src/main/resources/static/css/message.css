@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
+.container {
+	margin: 10px;
+}
+
+.title-wrap {
+	display: flex;
+	flex-direction: column;
+}
+
+.menu-bar {
+	display: flex;
+}
+
+.menu-bar>ul {
+	display: flex;
+}
+
+ul>li {
+	list-style: none;
+	padding: 5px;
+}
+
+ul>li>a {
+	text-decoration: none;
+	color: black;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+	margin: 10px 10px;
+}
+
+.message-list>table {
+	border: 1px solid #ccc;
+	border-radius: 15px;
+
+}
+
+table {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-y: scroll;
+}
+
+th, td {
+	text-align: center;
+	padding-bottom: 5px; 
+	
+}

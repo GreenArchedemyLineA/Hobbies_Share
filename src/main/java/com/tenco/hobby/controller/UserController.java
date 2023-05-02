@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tenco.hobby.dto.AvatarSelecFormDto;
@@ -64,7 +62,6 @@ public class UserController {
 	}
 
 	/**
-	 * 
 	 * @return 회원 가입 페이지
 	 */
 	@GetMapping("/join-up")
@@ -535,14 +532,10 @@ public class UserController {
 	}
 
 	/**
-	 * @return 쪽지함
+	 * 
+	 * @param model
+	 * @return 받은 쪽지함
 	 */
-	@GetMapping("/auth/myMessage")
-	public String myMessage() {
-
-		return "/user/myMessage";
-	}
-
 	@GetMapping("/auth/select-R-msg")
 	public String selectReceiveMsg(Model model) {
 
@@ -554,6 +547,10 @@ public class UserController {
 		return "/user/receiveMessage";
 	}
 
+	/**
+	 * @param model
+	 * @return 보낸 쪽지함
+	 */
 	@GetMapping("/auth/select-S-msg")
 	public String selectSendMsg(Model model) {
 
@@ -563,6 +560,18 @@ public class UserController {
 		model.addAttribute("sendList", sendList);
 
 		return "/user/sendMessage";
+	}
+
+	@GetMapping("/auth/select-A-msg")
+	public String selectAllMsg(Model model) {
+
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+
+		List<Message> allList = userService.readAllMessage(principal.getId());
+		model.addAttribute("allList", allList);
+
+		return "/user/allMessage";
+
 	}
 
 }
