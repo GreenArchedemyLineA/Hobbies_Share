@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="/static/css/message.css">
 
@@ -18,11 +17,13 @@
 
 		<div class="message-list">
 			<table>
-				<tr>
-					<th>보낸사람</th>
-					<th>쪽지</th>
-					<th>전송시각</th>
-				</tr>
+				<thead>
+					<tr>
+						<th>보낸사람</th>
+						<th>쪽지</th>
+						<th>전송시각</th>
+					</tr>
+				</thead>
 				<c:forEach var="send" items="${sendList}">
 					<tr>
 						<td>${send.nickname}</td>

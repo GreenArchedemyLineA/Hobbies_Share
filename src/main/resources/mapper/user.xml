@@ -57,5 +57,31 @@
 	<select id="findByAll" resultType="com.tenco.hobby.repository.model.User">
 		select * from user_tb
 	</select>
-
+	
+	<update id="updateUserByEmailByAdmin">
+		update user_tb 
+		set email = #{email}, password=#{password}, username = #{username}, phone = #{phone} user_role=#{restriction} 
+		where id = #{id}
+	</update>
+	
+	<resultMap type="com.tenco.hobby.repository.model.PopularUserDTO" id="PopularUser">
+		<result column="hobby" property="hobby" />
+		<association property="user" javaType="com.tenco.hobby.repository.model.User">
+			<result column="id" property="id"/>
+			<result column="email" property="email"/>
+			<result column="nickname" property="nickname"/>
+			<result column="username" property="username"/>
+			<result column="uploadFileName" property="upload_file_name"/>
+			<result column="birth" property="birth"/>
+			<result column="phone" property="phone"/>
+		</association>
+	</resultMap>
+	<select id="popularList" resultMap="PopularUser">
+		select u.*, count(receiver) as msg_count
+		from message_tb as m
+		join user_tb as u
+		on u.id = m.id
+		group by receiver
+		limit 6;
+	</select>
 </mapper>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tenco.hobby.dto.AvatarSelecFormDto;
@@ -31,6 +32,7 @@ import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.Comment;
 import com.tenco.hobby.repository.model.Message;
 import com.tenco.hobby.repository.model.QandA;
+import com.tenco.hobby.repository.model.ResponseQuestion;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.BoardService;
 import com.tenco.hobby.service.UserService;
@@ -572,5 +574,19 @@ public class UserController {
 		return "/user/allMessage";
 
 	}
+	
+	/**
+	 * Q & A 확인하기
+	 * @return question and answer
+	 */
+	@GetMapping("/auth/questionDetail/{id}")
+	public String detailQuestion(@PathVariable Long id, Model model) {
+		ResponseQuestion resq = userService.questionDetail(id);
+		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
+		User infoList = userService.readInfo(principal.getId());
+		model.addAttribute("infoList", infoList);
+		model.addAttribute("resq", resq);
+		return "user/questionAndAnswer";
+	}
 }

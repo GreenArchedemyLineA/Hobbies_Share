@@ -4,19 +4,20 @@
 
 
 
-	<div class="result-container">
-		<div class="result-content">
+<div class="result-container">
+	<div class="result-content">
 		<c:choose>
 			<c:when test="${success == true}">
-				<h1>쪽지 전송완료</h1>
+				<h1>쪽지 전송 완료</h1>
 			</c:when>
 			<c:otherwise>
-				<h1>쪽지 전송실패</h1>
+				<h1>쪽지 전송 실패</h1>
 			</c:otherwise>
 		</c:choose>
-		</div>
-		<button onclick="window.close()">확인</button>
-
 	</div>
+	<div class="confirm-btn">
+		<button onclick="window.close()">확인</button>
+	</div>
+</div>
 </body>
 </html>

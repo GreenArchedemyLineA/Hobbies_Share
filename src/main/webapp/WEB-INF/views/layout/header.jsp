@@ -20,7 +20,7 @@
 	<div class="container">
 		<div class="header">
 			<div>
-				<a href="/main/"><img src="/static/images/hobby-fi.png"></a>
+				<a href="/main/"><img src="/static/images/hobbyfi.png"></a>
 			</div>
 			<ul>
 				<c:choose>

@@ -27,6 +27,10 @@ public class RecommendController {
 		User user = userService.readInfo(Integer.toUnsignedLong(id));
 		List<User> userList = recommendSystem.recommendUserList(user);
 		Collections.shuffle(userList);
-		return userList;
+		if(userList.size() > 6) {
+			return userList.subList(0, 6);
+		}else {
+			return userList;
+		}
 	}
 }

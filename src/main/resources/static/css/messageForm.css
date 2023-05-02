@@ -45,24 +45,26 @@ input[type="submit"] {
 }
 
 .result-container {
+	height:100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 }
 
-button {
+.confirm-btn button{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: #008989;
-	margin-right: 10px;
-	margin-left: 10px;
 	border: none;
 	box-shadow: 2px 3px 3px #008989;
 	border-radius: 5px;
 	width: 70px;
 	height: 25px;
 	color: white;
+	font-weight: bold;
+	margin-top: 10px;
 }
 
 .result-content {

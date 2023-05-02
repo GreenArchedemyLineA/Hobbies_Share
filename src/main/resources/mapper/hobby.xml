@@ -11,6 +11,7 @@
 			<result column="email" property="email"/>
 			<result column="nickname" property="nickname"/>
 			<result column="username" property="username"/>
+			<result column="uploadFileName" property="upload_file_name"/>
 			<result column="birth" property="birth"/>
 			<result column="phone" property="phone"/>
 			<result column="user_role" property="userRole"/>

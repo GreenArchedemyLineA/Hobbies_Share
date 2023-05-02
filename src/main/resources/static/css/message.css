@@ -47,7 +47,6 @@ ul>li>a {
 .message-list>table {
 	border: 1px solid #ccc;
 	border-radius: 15px;
-
 }
 
 table {
@@ -55,10 +54,20 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 	overflow-y: scroll;
+	border-radius: 15px;
+}
+
+th {
+	font-size: 20px;
 }
 
 th, td {
 	text-align: center;
-	padding-bottom: 5px; 
-	
+	padding-bottom: 5px;
+}
+
+thead {
+	border-radius: 15px 15px 0 0;
+	background-color: #008989;
+	height: 30px;
 }
