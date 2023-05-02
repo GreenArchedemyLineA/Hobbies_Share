@@ -527,6 +527,7 @@ public class UserController {
 		boolean success = userService.createMessage(messageFormDto, userId, principal.getId());
 
 		model.addAttribute("success", success);
+
 		return "/user/messageResult";
 	}
 

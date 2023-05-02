@@ -1,5 +1,6 @@
-.board {
+.whole-board {
 	display: flex;
+	margin: 0 30px;
 }
 
 .side-menu {
@@ -11,12 +12,19 @@
 }
 
 .side-menu-title {
-	font-size: 18px;
+	font-size: 23px;
 	margin-bottom: 10px;
 }
 
 .side-menu ul li {
 	list-style: none;
+	margin: 3px 0;
+}
+
+.side-menu ul li:first-child {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
 
 .side-menu ul li a {
@@ -30,7 +38,7 @@
 
 .side-menu ul li a.selected {
 	font-weight: bold;
-	background-color: #ccc;
+	text-decoration: underline;
 }
 
 .notselected {
@@ -43,19 +51,47 @@
 	text-decoration: underline;
 }
 
+.board-list {
+	min-width: 85%;
+}
+
+.write-btn {
+	float: right;
+	margin: 25px;
+	border-radius: 15px;
+	width: 150px;
+	height: 50px;
+	background-color: #008989;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	border-style: none;
+}
+
+.write-btn:active {
+	background-color: #2EB8AC;
+}
+
 .styled-table {
-	border-collapse: collapse;
-	margin: 25px 0;
-	font-size: 0.9em;
+	min-width: 95%;
+	margin: 25px;
+	font-size: 1.2em;
 	font-family: sans-serif;
-	min-width: 100%;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	border-collapse: collapse;
 }
 
 .styled-table thead tr {
-	background-color: #009879;
+	background-color: #008989;
 	color: #ffffff;
 	text-align: left;
+}
+
+.styled-table tbody tr td a {
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 .styled-table th, .styled-table td {
@@ -66,17 +102,13 @@
 	border-bottom: 1px solid #dddddd;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
-	background-color: #f3f3f3;
-}
-
 .styled-table tbody tr:last-of-type {
-	border-bottom: 2px solid #009879;
+	border-bottom: 2px solid #008989;
 }
 
 .styled-table tbody tr.active-row {
 	font-weight: bold;
-	color: #009879;
+	color: #008989;
 }
 
 .hide-content {

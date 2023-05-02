@@ -153,6 +153,7 @@ public class BoardController {
 	 */
 	@GetMapping("/detail/{id}")
 	public String detail(@PathVariable Long id, Model model) {
+		
 		Board board = boardService.readBoard(id);
 		List<Comment> commentList = boardService.readComment(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
