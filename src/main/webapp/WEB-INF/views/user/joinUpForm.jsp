@@ -19,7 +19,7 @@
 <body>
 	<div class="container">
 		<div class="hobby-logo">
-			<a href="/main/"><img src="/static/images/hobby-fi.png"></a>
+			<a href="/main/"><img src="/static/images/hobbyfi.png"></a>
 		</div>
 
 		<div class="main">

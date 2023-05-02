@@ -111,7 +111,7 @@ html, body {
 }
 
 .form-group label {
-	width: 120px;
+	width: 190px;
 }
 
 .checker {
@@ -120,17 +120,29 @@ html, body {
 }
 
 .form-group input {
-	font-size: 22px;
-	line-height: 26px;
-	border-style: none;
+	margin-left: 10px;
+	position: relative;
+	width: 100%;
 	font-size: 18px;
-	width: 350px;
+	line-height: 19px;
+	border-style: none;
 }
 
 .custom-file {
+	position: relative;
+	height: 30%;
+	border: 1px solid #dadada;
+	border-radius: 6px;
+	box-shadow: 0 2px 6px 0 rgba(68, 68, 68, .08);
 	display: flex;
 	margin: 25px;
 	justify-content: space-between;
+	font-size: 18px;
+}
+
+.custom-file label:first-child {
+	padding: 15px;
+	width: 130px;
 }
 
 .custom-file-input {
@@ -139,21 +151,21 @@ html, body {
 }
 
 .custom-file-label {
+	padding: 15px 0 0 0;
 	display: flex;
-	width: 250px;
-	height: 30px;
+	width: 90%;
+	height: 25px;
 	justify-content: space-between;
 	color: #495057;
 	background-color: #fff;
-	border: 1px solid #ced4da;
-	border-radius: 5px;
 	align-items: center;
+	margin-right: 5px;
 }
 
 .custom-file-label::after {
 	content: "사진 찾기";
 	background-color: #ccc;
-	border-radius: 0 5px 5px 0;
+	border-radius: 5px;
 	padding: 5px 10px;
 }
 
@@ -247,4 +259,26 @@ html, body {
 .main {
 	display: flex;
 	justify-content: center;
+}
+
+.btn-setting-wrap {
+	margin-top: 15px
+}
+
+.btn-setting {
+	display: block;
+	width: 100%;
+	border-radius: 6px;
+	border: solid 1px rgba(0, 0, 0, .15);
+	background-color: #008989;
+	box-sizing: border-box;
+	padding: 13px 0;
+}
+
+.btn-setting .btn-text {
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 24px;
+	color: #fff;
+	letter-spacing: -.5px
 }

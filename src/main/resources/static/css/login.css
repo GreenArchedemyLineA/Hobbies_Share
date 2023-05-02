@@ -47,7 +47,7 @@ input[type=text]::-webkit-input-placeholder {
 	height: 30%;
 	border: 1px solid #dadada;
 	border-radius: 6px;
-	box-shadow: 0 2px 6px 0 rgba(68, 68, 68, .08)
+	box-shadow: 0 2px 6px 0 rgba(68, 68, 68, .08);
 }
 
 .input-row .icon-email {

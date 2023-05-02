@@ -43,7 +43,7 @@
 					</div>
 					<div class="send-text">
 						<c:choose>
-							<c:when test="${principal == null}">					
+							<c:when test="${principal == null}">
 								<a onclick="sendLogin()"><img src="https://cdn-icons-png.flaticon.com/512/7858/7858863.png"></a>
 							</c:when>
 							<c:otherwise>
@@ -64,6 +64,7 @@
 			<h4>댓글</h4>
 			<div class="cmt-wrap">
 				<c:forEach var="comment" items="${comment}">
+				<div style="margin: 10px 0; border: 1px solid #eee; border-radius: 6px; padding: 10px;">
 					<div class="cmt-nickname">
 						<h5>${comment.nickname}</h5>
 					</div>
@@ -82,6 +83,7 @@
 							</c:choose>
 						</div>
 					</div>
+				</div>
 				</c:forEach>
 			</div>
 			<div class="cmt-writeform">
