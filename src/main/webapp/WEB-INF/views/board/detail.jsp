@@ -42,7 +42,14 @@
 						<p>${board.nickname}</p>
 					</div>
 					<div class="send-text">
-						<a onclick="sendMsg_window(${board.userId})"><img src="https://cdn-icons-png.flaticon.com/512/7858/7858863.png"></a>
+						<c:choose>
+							<c:when test="${principal == null}">					
+								<a onclick="sendLogin()"><img src="https://cdn-icons-png.flaticon.com/512/7858/7858863.png"></a>
+							</c:when>
+							<c:otherwise>
+								<a onclick="sendMsg_window(${board.userId})"><img src="https://cdn-icons-png.flaticon.com/512/7858/7858863.png"></a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				<div class="board-created">

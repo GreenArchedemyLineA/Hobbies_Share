@@ -23,7 +23,7 @@
 	align-items: center;
 }
 
-.login-wrap {
+.login-wrap, .joinup-wrap {
 	width: 460px;
 	margin: 0 auto;
 }
@@ -33,7 +33,7 @@
 	justify-content: center;
 }
 
-.login-form {
+.login-form, .joinup-form {
 	display: flex;
 	flex-direction: column;
 }
@@ -92,6 +92,13 @@ input[type=text]::-webkit-input-placeholder {
 	color: #b1b1b1
 }
 
+.input-row.onetime input[type=password]::-webkit-input-placeholder {
+	position: relative;
+	top: -2px;
+	font-size: 16px;
+	color: #b1b1b1
+}
+
 .input-text {
 	margin-left: 10px;
 	position: relative;
@@ -103,7 +110,7 @@ input[type=text]::-webkit-input-placeholder {
 	padding: 10px;
 }
 
-.email-pw-wrap .input-row {
+.email-pw-wrap .input-row, .joinup-wrap .input-row {
 	display: table;
 	table-layout: fixed;
 	width: 100%;
@@ -144,7 +151,7 @@ input[type=text]::-webkit-input-placeholder {
 	height: 16px
 }
 
-.email-pw-wrap .input-row .input-text {
+.email-pw-wrap .input-row .input-text, .joinup-wrap .input-row .input-text {
 	display: table-cell;
 	padding-right: 30px
 }
@@ -174,11 +181,11 @@ input[type=text]::-webkit-input-placeholder {
 	font-size: 15px;
 }
 
-.btn-login-wrap {
+.btn-login-wrap, .btn-joinup-wrap {
 	margin-top: 15px
 }
 
-.btn-login {
+.btn-login, .btn-joinup {
 	display: block;
 	width: 100%;
 	padding: 13px 0 13px;
@@ -188,19 +195,19 @@ input[type=text]::-webkit-input-placeholder {
 	box-sizing: border-box
 }
 
-.btn-login .btn-text {
+.btn-login .btn-text, .btn-joinup .btn-text {
 	font-size: 20px;
 	font-weight: 700;
 	line-height: 24px;
 	color: #fff
 }
 
-.btn-login {
+.btn-login, .btn-joinup {
 	padding: 13px 0;
 	border-radius: 5.4px
 }
 
-.btn-login .btn-text {
+.btn-login .btn-text, .btn-joinup .btn-text {
 	font-size: 20px;
 	line-height: 24px;
 	letter-spacing: -.5px

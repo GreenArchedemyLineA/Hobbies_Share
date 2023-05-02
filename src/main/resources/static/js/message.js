@@ -18,3 +18,8 @@ function messageBox_window(){
 		"width=870, height=600, top=200, left=570"
 	);
 }
+
+function sendLogin(){
+	alert("로그인 후 이용해주세요!")
+	location.href = "/user/log-in";
+}

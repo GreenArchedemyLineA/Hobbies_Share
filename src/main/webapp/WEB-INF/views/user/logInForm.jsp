@@ -25,6 +25,7 @@
 				<div class="form-title">
 					<h2>로그인</h2>
 				</div>
+
 				<div class="email-pw-wrap">
 					<form action="/user/log-in" method="post" class="login-form">
 
@@ -54,7 +55,6 @@
 						</div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
