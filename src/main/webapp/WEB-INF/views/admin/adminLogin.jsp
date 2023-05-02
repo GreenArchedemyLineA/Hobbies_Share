@@ -3,15 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="ut">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="https://andybrewer.github.io/mvp/">
+<link rel="stylesheet" href="/static/css/admin.css">
 </head>
 <body>
-	<form method="post" action="/admin/admin-proc">
-		<input type="email" name="email" value="admin@tenco.com">
-		<input type="password" name="password" value="admin1234">
-		<input type="submit">
-	</form>
+	<div class="login-wrapper">
+        <h2>Login</h2>
+        <form method="post" action="/admin/admin-proc" id="login-form">
+            <input type="text" name="userName" placeholder="Email">
+            <input type="password" name="userPassword" placeholder="Password">
+            <label for="remember-check">
+                <input type="checkbox" id="remember-check">아이디 저장하기
+            </label>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <script>
+    	
+    </script>
 </body>
 </html>
