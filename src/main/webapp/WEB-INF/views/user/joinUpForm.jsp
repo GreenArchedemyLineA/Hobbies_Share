@@ -25,7 +25,7 @@
 		<div class="main">
 			<div class="joinup-wrap">
 				<div class="form-title">
-					<h2>회원가입</h2>
+					<h2>회원 가입</h2>
 				</div>
 
 				<div class="info-wrap">
@@ -60,7 +60,7 @@
 
 						<div class="btn-joinup-wrap">
 							<button type="submit" class="btn-joinup">
-								<span class="btn-text">로그인</span>
+								<span class="btn-text">회원 가입</span>
 							</button>
 						</div>
 					</form>

@@ -1,26 +1,31 @@
 @charset "UTF-8";
 
-.whole-service {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
 .first-section .service-list .guideContainer:nth-child(2) {
 	width: 500px;
-	padding: 10px;
-	height: 100%;
 }
 
-.service-list, .popular-list, .recent-post {
+.service-list, .list-section {
 	display: flex;
 	justify-content: center;
 	margin: 30px;
+	font-size: 20px;
 }
 
-.second-section {
+.service-list>div, .list-section>div {
+	margin: 10px;
+}
+
+.guideContainer, .popular-list, .recent-post {
 	display: flex;
+	align-items: center;
 	justify-content: center;
+	flex-direction: column;
+	height: 300px;
+	width: 300px;
+}
+
+.guideContainer>img {
+	margin-bottom: 5px;
 }
 
 .recommend>img {
@@ -29,13 +34,36 @@
 
 .recommend {
 	width: 200px;
-	font-size: 18px;
+	font-size: 15px;
 	padding: 10px 0;
+}
+
+.recommend {
+	display: flex;
+	width: 150px;
+	justify-content: space-between;
+}
+
+.recommend>a {
+	font-size: 20px;
+	text-decoration: none;
+	color: black;
+}
+
+.title {
+	margin-bottom: 10px;
 }
 
 .recent-post {
 	display: flex;
 	flex-direction: column;
+	width: 40vw;
+	text-align: center;
+}
+
+.recent-post>h2 {
+	width: 40vw;
+	text-align: center;
 }
 
 .guideContainer, .popular-list, .recent-post {
@@ -44,8 +72,38 @@
 	border-radius: 6px;
 }
 
-.popular-list img {
-	
-	border-radius: 70%;
+.userlist {
+	display: flex;
+	margin-top: 5vh;
 }
 
+.popularUserList:hover{
+	cursor: pointer;
+}
+
+.popularBoardList {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	margin: 20px 0;
+}
+
+.popularBoardList:hover{
+	cursor: pointer;
+}
+
+.popular-list {
+	width: 40vw;
+	text-align: center;
+}
+
+.popular-list>div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.popular-list img {
+	border-radius: 70%;
+	width: 10%;
+}

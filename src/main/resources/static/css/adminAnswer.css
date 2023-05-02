@@ -1,26 +1,32 @@
 @charset "UTF-8";
-table{
+
+table {
 	width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
 }
+
 th, td {
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-  }
-table > tbody > tr > th{
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+
+table>tbody>tr>th {
 	width: 30%;
 	border-right: 1px solid #444444;
 }
 
-.submitButton{
-	float:right; 
+.submitButton {
+	float: right;
 	margin-right: 20px;
 	margin-top: 20px;
-	font-weight: bold;
-	width: 100px; 
+	font-weight: 700;
+	width: 100px;
 	height: 40px;
-	border:none; 
-	color: white; 
+	border: none;
+	color: white;
 	background-color: #008989;
+	border-radius: 6px;
+	line-height: 24px;
+	font-size: 20px;
 }

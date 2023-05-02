@@ -6,46 +6,45 @@
 <div class="main">
 	<img src="/static/images/banner1.png" id="main">
 </div>
+<div class="whole-service">
+	<div class="first-section">
+		<div class="service-list" id="serviceContainer">
+			<div class="guideContainer" id="boardContainer" onclick="goBoard()" style="cursor: pointer;">
+				<img src="https://cdn-icons-png.flaticon.com/512/4698/4698381.png" width="30%">
+				<div>전체 게시글</div>
+			</div>
+			<div class="guideContainer">
+				<div class="title">HobbyFi가 추천하는 유저</div>
+			</div>
+			<div class="guideContainer" style="cursor: pointer;" onclick="goQnA()">
+				<img src="https://cdn-icons-png.flaticon.com/512/4698/4698167.png " width="30%">
+				<div>Q & A</div>
+			</div>
 
-<div class="first-section">
-	<div class="service-list" id="serviceContainer">
-		<div class="guideContainer" id="boardContainer" onclick="goBoard()" style="cursor: pointer;">
-			<img src="https://cdn-icons-png.flaticon.com/512/4698/4698381.png" width="30%">
-			<div>전체 게시글</div>
-		</div>
-		<div class="guideContainer">
-			<div>HobbyFi가 추천하는 유저</div>
-		</div>
-		<div class="guideContainer" style="cursor: pointer;" onclick="goQnA()">
-			<img src="https://cdn-icons-png.flaticon.com/512/4698/4698167.png " width="30%">
-			<div>Q & A</div>
-		</div>
-
-	</div>
-</div>
-
-<div class="second-section">
-	<div class="popular-list">
-		<div style="width: 40vw; text-align: center;">
-			<h2>인기 많은 유저</h2>
-			<c:forEach var="popularUser" items="${popularList}">
-				<div style="display: flex; align-items: center; justify-content: center;" onclick="findUser(${popularUser.user.id})">
-					<img src="${popularUser.user.setUpUserImage()}" width="10%"> <a> ${popularUser.user.nickname} </a>
-				</div>
-			</c:forEach>
 		</div>
 	</div>
-	<div style="width: 40vw; text-align: center;" class="recent-post">
-		<h2 style="width: 40vw text-align:center;">최근 게시글</h2>
-		<c:forEach var="board" items="${boardList}">
-			<div onclick="findBoard(${board.id})" class="popularBoardList">${board.title}</div>
-		</c:forEach>
 
+	<div class="second-section">
+		<div class="list-section">
+			<div class="popular-list">
+				<div class="title">인기 많은 유저</div>
+				<c:forEach var="popularUser" items="${popularList}">
+					<div onclick="findUser(${popularUser.user.id})" class="popularUserList">
+						<img src="${popularUser.user.setUpUserImage()}"> <a>${popularUser.user.nickname}</a>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="recent-post">
+				<div class="title">최근 게시글</div>
+				<c:forEach var="board" items="${boardList}">
+					<div onclick="findBoard(${board.id})" class="popularBoardList">${board.title}</div>
+				</c:forEach>
+			</div>
+		</div>
 	</div>
-</div>
 
 </div>
-
+</div>
 <script type="text/javascript">
 	function goBoard(){
 		location.href="/board/list"

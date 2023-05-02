@@ -136,7 +136,8 @@ input[type=text]::-webkit-input-placeholder {
 	width: 30px;
 }
 
-.email-pw-wrap .input-row .icon-cell .icon-email, .email-pw-wrap .input-row .icon-cell .icon-pw {
+.email-pw-wrap .input-row .icon-cell .icon-email, .email-pw-wrap .input-row .icon-cell .icon-pw
+	{
 	position: absolute;
 	top: 40%;
 	left: 17px;
@@ -151,7 +152,8 @@ input[type=text]::-webkit-input-placeholder {
 	height: 16px
 }
 
-.email-pw-wrap .input-row .input-text, .joinup-wrap .input-row .input-text {
+.email-pw-wrap .input-row .input-text, .joinup-wrap .input-row .input-text
+	{
 	display: table-cell;
 	padding-right: 30px
 }
@@ -188,27 +190,18 @@ input[type=text]::-webkit-input-placeholder {
 .btn-login, .btn-joinup {
 	display: block;
 	width: 100%;
-	padding: 13px 0 13px;
+	padding: 13px 0;
 	border-radius: 6px;
 	border: solid 1px rgba(0, 0, 0, .15);
 	background-color: #008989;
-	box-sizing: border-box
+	box-sizing: border-box;
+	border-radius: 6px;
 }
 
 .btn-login .btn-text, .btn-joinup .btn-text {
 	font-size: 20px;
 	font-weight: 700;
 	line-height: 24px;
-	color: #fff
-}
-
-.btn-login, .btn-joinup {
-	padding: 13px 0;
-	border-radius: 5.4px
-}
-
-.btn-login .btn-text, .btn-joinup .btn-text {
-	font-size: 20px;
-	line-height: 24px;
-	letter-spacing: -.5px
+	color: #fff;
+	letter-spacing: -.5px;
 }
