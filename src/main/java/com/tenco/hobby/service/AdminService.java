@@ -45,13 +45,6 @@ public class AdminService {
 		return userList;
 	}
 	
-	public void test() {
-		List<ReportBoard> reportBoard = adminRepository.findAllReportBoard();
-		List<ReportComment> reportComment = adminRepository.findAllReportComment();
-		System.out.println(reportBoard.toString());
-		System.out.println(reportComment.toString());
-	}
-	
 	@Transactional
 	public void createAnswer(AnswerFormDTO answerFormDTO) {
 		int answerResult = adminRepository.insertAnswer(answerFormDTO);
@@ -72,13 +65,23 @@ public class AdminService {
 
 	@Transactional
 	public List<ReportBoard> findAllReportBoard(){
-		List<ReportBoard> reportBoard = adminRepository.findAllReportBoard();
+		List<ReportBoard> reportBoardList = adminRepository.findAllReportBoard();
+		return reportBoardList;
+	}
+	
+	public ReportBoard findReportBoard(Long id) {
+		ReportBoard reportBoard = adminRepository.findReportBoardById(id);
 		return reportBoard;
 	}
-
+	
 	@Transactional
 	public List<ReportComment> findAllReportComment(){
 		List<ReportComment> reportComment = adminRepository.findAllReportComment();
 		return reportComment;
+	}
+	
+	public ReportComment findReportComment(Long id) {
+		ReportComment repoertComment = adminRepository.findReportCommentById(id);
+		return repoertComment;
 	}
 }

@@ -12,3 +12,15 @@ table > tbody > tr > th{
 	width: 30%;
 	border-right: 1px solid #444444;
 }
+
+.submitButton{
+	float:right; 
+	margin-right: 20px;
+	margin-top: 20px;
+	font-size: 20px;
+	width: 100px; 
+	height: 60px;
+	border:none; 
+	color: white; 
+	background-color: #008989;
+}

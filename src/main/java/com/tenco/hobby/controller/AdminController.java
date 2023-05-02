@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.AnswerFormDTO;
+import com.tenco.hobby.repository.model.Board;
+import com.tenco.hobby.repository.model.Comment;
 import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.service.AdminService;
+import com.tenco.hobby.service.BoardService;
 import com.tenco.hobby.service.UserService;
 import com.tenco.hobby.util.Define;
 
@@ -28,8 +31,9 @@ import com.tenco.hobby.util.Define;
 @RequestMapping("/admin")
 public class AdminController {
 	private UserService userService;
+	private BoardService boardService;
 	private AdminService adminService;
-
+	
 	private int totalPosts;
 	private final int POSTPERPAGE = 10;
 	private final int DISPLAYPAGENUM = 10;
@@ -40,9 +44,11 @@ public class AdminController {
 	@Autowired
 	public AdminController(
 			UserService userService,
+			BoardService boardService,
 			AdminService adminService
 			) {
 		this.userService = userService;
+		this.boardService = boardService;
 		this.adminService = adminService;
 		this.totalPosts = adminService.checkQandA().size();
 		this.TOTALPAGE = ((this.totalPosts - 1) / this.POSTPERPAGE) + 1;
@@ -105,9 +111,9 @@ public class AdminController {
 	}
 	
 	@GetMapping("/main/user/{id}")
-	public String userManage(@PathVariable Long id) {
+	public String userManage(@PathVariable Long id, Model model) {
 		User user = userService.readInfo(id);
-		
+		model.addAttribute("user", user);
 		return "admin/userManage";
 	}
 	@PostMapping("/main/user/{id}")
@@ -118,7 +124,7 @@ public class AdminController {
 		return "redirect:/admin/main";
 	}
 
-	// 융저 회원 수정(관리자)
+	// 유저 회원 수정(관리자)
 	@PostMapping("/main/usermanage/{id}")
 	public String userManiging(@PathVariable Long id, UpdateInfoFormDto updateInfoFormDto){
 		// 수정 필요 userService.updateInfo(updateInfoFormDto, id);
@@ -126,13 +132,33 @@ public class AdminController {
 		return null;
 	}
 
+	@GetMapping("/main/reportBoard/{id}")
+	public String detailReportBoard(@PathVariable Long id, Model model) {
+		ReportBoard reportBoard = adminService.findReportBoard(id);
+		User user = userService.readInfo(reportBoard.getReportUserId());
+		Board board = boardService.readBoard(reportBoard.getReportBoardId());
+		model.addAttribute("user", user);
+		model.addAttribute("board", board);
+		return "admin/reportBoard";
+	}
+	@GetMapping("/main/reportComment/{id}")
+	public String detailReportComment(@PathVariable Long id, Model model){
+		ReportComment reportComment = adminService.findReportComment(id);
+		User user = userService.readInfo(reportComment.getReportUserId());
+		Comment comment = boardService.findCommentById(reportComment.getReportCommentId());
+		model.addAttribute("user", user);
+		model.addAttribute("comment", comment);
+		return "admin/reportComment";
+	}
 	@PostMapping("/main/reportBoard/{id}")
 	public String checkReportBoard(@PathVariable Long id){
+		
 		return null;
 	}
 
-	@PostMapping("/main/reportCommetn/{id}")
+	@PostMapping("/main/reportComment/{id}")
 	public String checkReportComment(@PathVariable Long id){
+		
 		return null;
 	}
 }

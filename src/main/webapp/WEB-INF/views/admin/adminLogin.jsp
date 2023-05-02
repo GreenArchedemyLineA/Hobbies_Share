@@ -8,16 +8,15 @@
 <link rel="stylesheet" href="/static/css/admin.css">
 </head>
 <body>
-	<div class="login-wrapper">
-        <h2>Login</h2>
-        <form method="post" action="/admin/admin-proc" id="login-form">
-            <input type="text" name="userName" placeholder="Email">
-            <input type="password" name="userPassword" placeholder="Password">
-            <label for="remember-check">
-                <input type="checkbox" id="remember-check">아이디 저장하기
-            </label>
-            <input type="submit" value="Login">
-        </form>
+	<div style="display: flex; width: 100%; height: 100%; justify-content:center; align-items: center;">
+		<div class="login-wrapper">
+	        <h2>Login</h2>
+	        <form method="post" action="/admin/admin-proc" id="login-form">
+	            <input type="email" name="email" placeholder="Email">
+	            <input type="password" name="password" placeholder="Password">
+	            <input type="submit" value="Login">
+	        </form>
+	    </div>
     </div>
     <script>
     	

@@ -1,127 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="layout/adminHeader.jsp"%>
 <link rel="stylesheet" href="/static/css/adminAnswer.css">
-<style>
-* {
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  font-family:sans-serif;
+<link rel="stylesheet" href="/static/css/manage.css">
 
-}
-
-body {
-  background-image:#34495e;
-}
-
-.joinForm {
-  position:absolute;
-  width:60%;
-  height:400px;
-  padding: 30px, 20px;
-  background-color:#FFFFFF;
-  text-align:center;
-  top:40%;
-  left:60%;
-  transform: translate(-50%,-50%);
-  border-radius: 15px;
-}
-
-.joinForm h2 {
-  text-align: center;
-  margin: 30px;
-}
-
-.textForm {
-  border-bottom: 2px solid #adadad;
-  margin: 30px;
-  padding: 10px 10px;
-}
-
-
-.id {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.pw {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.name {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.email {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.nickname {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.cellphoneNo {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.btn {
-  position:relative;
-  left:40%;
-  transform: translateX(-50%);
-  margin-bottom: 40px;
-  width:80%;
-  height:40px;
-  background: #00994C;
-  background-position: left;
-  background-size: 200%;
-  color:white;
-  font-weight: bold;
-  border:none;
-  cursor:pointer;
-  transition: 0.4s;
-  display:inline;
-}
-
-.btn:hover {
-  background-position: right;
-}
-</style>
-
+<!-- 
+	private Long id;
+	private String email;
+	private String password;
+	private String username;
+	private String phone; -->
 <div class="answerContainer">
 	<div class="blank"></div>
 	<div>
@@ -129,26 +16,28 @@ body {
 			<form action="/main/usermanage/${id}" class="joinForm">
 				<h2>회원 정보 수정</h2>
 				<div class="textForm">
-					<input name="loginId" type="text" class="id" placeholder="아이디"> </input>
+					<input name="id" type="text" class="id" placeholder="아이디" value="${user.id}">
 				</div>
 				<div class="textForm">
-					<input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+					<input name="password" type="password" class="pw" placeholder="비밀번호">
 				</div>
 				<div class="textForm">
-					<input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+					<input name="username" type="password" class="name" placeholder="이름" value="${user.username}">
 				</div>
 				<div class="textForm">
-					<input name="name" type="password" class="name" placeholder="이름">
+					<input name="email" type="text" class="email" placeholder="이메일" value="${user.email}">
 				</div>
 				<div class="textForm">
-					<input name="email" type="text" class="email" placeholder="이메일">
+					<input name="phone" type="number" class="cellphoneNo" placeholder="전화번호" value="${user.phone}">
 				</div>
-				<div class="textForm">
-					<input name="nickname" type="text" class="nickname" placeholder="닉네임">
+				<div class="textForm" style="border:none;">
+					<label>정지여부: </label>
+					<select name="restriction">
+						<option value = 0>이용가능</option> 
+						<option value = 1>정지</option> 
+					</select>
 				</div>
-				<div class="textForm">
-					<input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
-				</div>
+
 				<input type="submit" class="btn" value="정보수정" />
 			</form>
 		</div>
