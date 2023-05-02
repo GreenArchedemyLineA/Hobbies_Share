@@ -19,10 +19,8 @@ function messageBox_window(){
 	);
 }
 
-<<<<<<< HEAD
-=======
+
 function sendLogin(){
 	alert("로그인 후 이용해주세요!")
 	location.href = "/user/log-in";
 }
->>>>>>> bc090301b21cd3f5d8842dc99cb4e720d6ca3f73

@@ -47,7 +47,6 @@ public class BoardController {
 	private BoardService boardService;
 
 	/**
-	 * 
 	 * @param model
 	 * @return 게시글 전체 조회
 	 */
@@ -124,7 +123,6 @@ public class BoardController {
 
 	/**
 	 * 글작성
-	 * 
 	 * @param writeFormDto
 	 * @return 게시글 전체 조회
 	 */
@@ -159,6 +157,7 @@ public class BoardController {
 		List<Comment> commentList = boardService.readComment(id);
 		List<BoardHobbies> hobbyList = boardService.readHobbyCategory();
 		model.addAttribute("board", board);
+		model.addAttribute("hobbyId", board.getHobbyId());
 		model.addAttribute("comment", commentList);
 		model.addAttribute("hobbyList", hobbyList);
 		
