@@ -98,7 +98,7 @@ a {
 	margin-right: 5px;
 }
 
-.cmt-writeform {
+.cmt-writeform, .rewrite-cmt {
 	display: flex;
 	flex-direction: column;
 	border: 1px solid #ccc;
@@ -119,14 +119,14 @@ a {
 	margin-left: 15px;
 }
 
-.cmt-writeform #mytextarea {
+.cmt-writeform #mytextarea, .rewrite-cmt #mytextarea {
 	margin-top: 5px;
 	border-style: none;
 	min-width: 90%;
 	border-style: none;
 }
 
-.cmt-writeform>form {
+.cmt-writeform>form, .rewrite-cmt>form {
 	display: flex;
 	flex-direction: column;
 	margin-left: 15px;

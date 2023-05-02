@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.tenco.hobby.dto.WriteQuestionFormDto;
 import com.tenco.hobby.repository.model.QandA;
+import com.tenco.hobby.repository.model.ResponseQuestion;
 
 @Mapper
 public interface QuestionRepository {
@@ -22,4 +23,6 @@ public interface QuestionRepository {
 	public QandA findById(Long id);
 
 	public List<QandA> findQuestionList(Long userId);
+	
+	public ResponseQuestion findDetailQuestion(Long questionId);
 }

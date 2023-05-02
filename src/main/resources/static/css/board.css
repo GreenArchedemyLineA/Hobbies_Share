@@ -111,6 +111,15 @@
 	color: #008989;
 }
 
+.styled-table tbody tr .delete-btn a {
+	font-size: 15px;
+	border-radius: 6px;
+}
+
+.styled-table tbody tr .delete-btn a:hover {
+	background-color: #eee;
+}
+
 .hide-content {
 	width: 50px;
 	overflow: hidden;

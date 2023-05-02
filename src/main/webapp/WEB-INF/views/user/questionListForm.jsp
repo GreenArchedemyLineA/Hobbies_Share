@@ -5,7 +5,9 @@
 
 <div class="board">
 
-	<a href="/user/auth/write-question">글쓰기</a>
+	<form action="/user/auth/write-question" method="get">
+		<button type="submit" class="write-btn">글쓰기</button>
+	</form>
 
 	<table class="styled-table">
 		<thead>
@@ -23,11 +25,11 @@
 				<tr>
 					<td>${questionList.id}</td>
 					<c:choose>
-						<c:when test="${questionList.proceed}">
+						<c:when test="${questionList.proceed} == 0">
 							<td><a href="/user/auth/update-question/${questionList.id}">${questionList.content}</a></td>
 						</c:when>
 						<c:otherwise>
-							<td><a href="/user/auth/answer/${questionList.id}">${questionList.content}</a></td>
+							<td><a href="/user/auth/questionDetail/${questionList.id}">${questionList.content}</a></td>
 						</c:otherwise>
 					</c:choose>
 					<td>${questionList.formatName()}</td>
@@ -35,7 +37,6 @@
 					<td>${questionList.proceed}</td>
 					<td>${questionList.formatCreatedAt()}</td>
 					<td><a href="/user/auth/delete-question/${questionList.id}">삭제</a></td>
-					
 				</tr>
 			</c:forEach>
 		</tbody>

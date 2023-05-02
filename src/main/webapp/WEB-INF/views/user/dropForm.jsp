@@ -20,7 +20,11 @@
 						<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" id="password" name="password">
 					</div>
 		
-					<button type="submit" class="btn btn-primary">회원 탈퇴</button>
+								<div class="btn-setting-wrap">
+				<button type="submit" class="btn-setting">
+					<span class="btn-text">회원 탈퇴</span>
+				</button>
+			</div>
 		
 				</form>
 			</div>

@@ -26,6 +26,7 @@ import com.tenco.hobby.repository.interfaces.UserRepository;
 import com.tenco.hobby.repository.model.Message;
 import com.tenco.hobby.repository.model.PopularUserDTO;
 import com.tenco.hobby.repository.model.QandA;
+import com.tenco.hobby.repository.model.ResponseQuestion;
 import com.tenco.hobby.repository.model.User;
 import com.tenco.hobby.util.Define;
 
@@ -414,5 +415,13 @@ public class UserService {
 	public List<PopularUserDTO> findPopularUserList(){
 		List<PopularUserDTO> popularUserList = userRepository.popularList();
 		return popularUserList;
+	}
+	
+	public ResponseQuestion questionDetail(Long id) {
+		ResponseQuestion responseQuestion= questionRepository.findDetailQuestion(id);
+		if(responseQuestion == null) {
+			throw new CustomRestfullException("존재하지 않는 Q & A 입니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return responseQuestion;
 	}
 }
