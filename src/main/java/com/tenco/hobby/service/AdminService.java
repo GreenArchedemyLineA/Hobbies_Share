@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.hobby.dto.AnswerFormDTO;
+import com.tenco.hobby.dto.UpdateAdminInfoFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.AdminRepository;
@@ -55,8 +56,8 @@ public class AdminService {
 	}
 
 	@Transactional
-	public void updateUserInfo(UpdateInfoFormDto updateInfoFormDto, Long id){
-		int result = userRepository.updateUserByEmail(updateInfoFormDto);
+	public void updateUserInfo(UpdateAdminInfoFormDto updateAdminInfoFormDto){
+		int result = userRepository.updateUserByEmailByAdmin(updateAdminInfoFormDto);
 
 		if(result != 1){
 			throw new CustomRestfullException("정보 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);

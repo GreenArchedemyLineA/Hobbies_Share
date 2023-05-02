@@ -33,8 +33,8 @@
 				<div class="textForm" style="border:none;">
 					<label>정지여부: </label>
 					<select name="restriction">
-						<option value = 0>이용가능</option> 
-						<option value = 1>정지</option> 
+						<option value = "USER">이용가능</option> 
+						<option value = "RESTRICT">정지</option> 
 					</select>
 				</div>
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tenco.hobby.dto.AdminSignInDTO;
 import com.tenco.hobby.dto.AnswerFormDTO;
+import com.tenco.hobby.dto.UpdateAdminInfoFormDto;
 import com.tenco.hobby.repository.model.Board;
 import com.tenco.hobby.repository.model.Comment;
 import com.tenco.hobby.repository.model.QandA;
@@ -126,10 +127,10 @@ public class AdminController {
 
 	// 유저 회원 수정(관리자)
 	@PostMapping("/main/usermanage/{id}")
-	public String userManiging(@PathVariable Long id, UpdateInfoFormDto updateInfoFormDto){
+	public String userManiging(@PathVariable Long id, UpdateAdminInfoFormDto updateAdminInfoFormDto){
 		// 수정 필요 userService.updateInfo(updateInfoFormDto, id);
-		adminService.updateUserInfo(updateInfoFormDto, id);
-		return null;
+		adminService.updateUserInfo(updateAdminInfoFormDto);
+		return "redirect:/admin/main/user/"+id;
 	}
 
 	@GetMapping("/main/reportBoard/{id}")
@@ -152,13 +153,17 @@ public class AdminController {
 	}
 	@PostMapping("/main/reportBoard/{id}")
 	public String checkReportBoard(@PathVariable Long id){
-		
-		return null;
+		ReportBoard reportBoard = adminService.findReportBoard(id);
+		User user = userService.readInfo(reportBoard.getReportUserId());
+		boardService.deletePost(reportBoard.getId(), user.getId());
+		return "redirect:/admin/main?checkId=3";
 	}
 
 	@PostMapping("/main/reportComment/{id}")
 	public String checkReportComment(@PathVariable Long id){
-		
-		return null;
+		ReportComment reportComment = adminService.findReportComment(id);
+		User user = userService.readInfo(reportComment.getReportUserId());
+		boardService.deleteComment(reportComment.getId(), user.getId());
+		return "redirect:/admin/main?checkId=4";
 	}
 }

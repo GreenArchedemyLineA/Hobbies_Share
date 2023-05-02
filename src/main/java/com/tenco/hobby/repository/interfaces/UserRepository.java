@@ -9,6 +9,7 @@ import com.tenco.hobby.dto.AvatarSelecFormDto;
 import com.tenco.hobby.dto.DropFormDto;
 import com.tenco.hobby.dto.JoinUpFormDto;
 import com.tenco.hobby.dto.LogInFormDto;
+import com.tenco.hobby.dto.UpdateAdminInfoFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.dto.UpdatePwdFormDto;
 import com.tenco.hobby.repository.model.User;
@@ -36,7 +37,10 @@ public interface UserRepository {
 
 //	회원 정보 수정
 	public int updateUserByEmail(UpdateInfoFormDto updateInfoFormDto);
-
+	
+//	회원 정보 수정2
+	public int updateUserByEmailByAdmin(UpdateAdminInfoFormDto updateAdminInfoFormDto);
+	
 //	비밀번호 변경
 	public int updatePasswordById(UpdatePwdFormDto updatePwdFormDto);
 

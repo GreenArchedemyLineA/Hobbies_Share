@@ -18,7 +18,9 @@
 			</tr>
 		</table>
 	</div>
-<button>신고 확인</button>
+	<div>
+		<button>신고 확인</button>	
+	</div>
 </div>
 </body>
 </html>

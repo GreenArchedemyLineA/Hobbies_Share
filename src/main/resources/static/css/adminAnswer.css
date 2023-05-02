@@ -17,9 +17,9 @@ table > tbody > tr > th{
 	float:right; 
 	margin-right: 20px;
 	margin-top: 20px;
-	font-size: 20px;
+	font-weight: bold;
 	width: 100px; 
-	height: 60px;
+	height: 40px;
 	border:none; 
 	color: white; 
 	background-color: #008989;
