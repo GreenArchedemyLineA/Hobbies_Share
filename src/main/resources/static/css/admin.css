@@ -1,34 +1,42 @@
 @charset "UTF-8";
-*{
+
+* {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 	outline: 0;
 }
-html, body{
+
+html, body {
 	width: 100%;
 	height: 100%;
 }
-a{
+
+a {
 	text-decoration: none;
 	color: black;
 }
-.container{
-	display:flex;
+
+.container {
+	display: flex;
 	height: 100%;
 }
-.header{
+
+.header {
 	width: 20%;
 }
 
-.main{
+.main {
 	width: 80%;
 }
-.blank{
+
+.blank {
 	height: 10%;
-	background-color: #000099;
+	background-color: #008989;
 }
-.logo{
-	height:20%;
+
+.logo {
+	height: 20%;
 	background-color: #404040;
 	font-weight: bold;
 	font-size: xx-large;
@@ -36,109 +44,168 @@ a{
 	justify-content: center;
 	align-items: center;
 }
-.logo > a{
+
+.logo>a {
 	color: #fff;
 }
-.header > ul{
-	height:80%;
-	margin:0px;
+
+.header>ul {
+	height: 80%;
+	margin: 0px;
 	padding: 0px;
 	list-style-type: none;
 	background-color: #404040;
 }
-.header > ul > li{
+
+.header>ul>li {
 	padding: 20px;
 	margin-bottom: 10px;
 	background-color: #404040;
 	border-top: 1px solid #808080;
-	color:white
-}
-.header > ul > li > a{
-	text-decoration: none;
-	color: white;
-	font-weight:bold;
-	text-align:center;
+	color: white
 }
 
-.header > ul > li:nth-last-child(1){
-	background-color: #000099;
-	border:none;
-	position:fixed;
+.header>ul>li>a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+.header>ul>li:nth-last-child(1) {
+	background-color: #008989;
+	border: none;
+	position: fixed;
 	margin: 0;
 	top: 2%;
 	right: 0;
 }
 
 .styled-table {
-    border-collapse: collapse;
-    margin: 0px 5%;
-    margin-top: 5vh;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 90%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-.styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
+	border-collapse: collapse;
+	margin: 0px 5%;
+	margin-top: 5vh;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 90%;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.styled-table th,
-.styled-table td {
-    padding: 20px 15px;
+.styled-table thead tr {
+	background-color: #008989;
+	color: #ffffff;
+	text-align: left;
 }
-.styled-table th:nth-child(1),
-.styled-table td:nth-child(1) {
-    width: 20%;
+
+.styled-table th, .styled-table td {
+	padding: 20px 15px;
+}
+
+.styled-table th:nth-child(1), .styled-table td:nth-child(1) {
+	width: 20%;
 }
 
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+	background-color: #f3f3f3;
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+	border-bottom: 2px solid #008989;
 }
 
 .styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: #009879;
+	font-weight: bold;
+	color: #009879;
 }
 
-.styled-table > tbody > td{
-	text-align:center;
+.styled-table>tbody>td {
+	text-align: center;
 }
 
-.table-Q{
+.table-Q {
 	min-height: calc(85vh - 6rem);
 }
 
-.pageNation{
+.pageNation {
 	width: 100%;
 	height: 6rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.pageNation > ul{
+
+.pageNation>ul {
 	list-style-type: none;
 	display: flex;
 }
-.pageNation > ul > li{
+
+.pageNation>ul>li {
 	margin: 0 10px;
 }
 
-.pageNation > ul > li > span > a{
+.pageNation>ul>li>span>a {
 	text-decoration: none;
 	color: black;
 }
-.answerContainer{
+
+.answerContainer {
 	display: flex;
 	flex-direction: column;
 	width: 80%;
 }
+
+.login-wrapper{
+    width: 600px;
+    height: 450px;
+    padding: 40px;
+    box-sizing: border-box;
+    
+}
+
+.login-wrapper > h2{
+    font-size: 24px;
+    color: #6A24FE;
+    margin-bottom: 20px;
+}
+#login-form > input{
+    width: 100%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+#login-form > input::placeholder{
+    color: #D2D2D2;
+}
+#login-form > input[type="submit"]{
+    color: #fff;
+    font-size: 16px;
+    background-color: #6A24FE;
+    margin-top: 20px;
+}
+#login-form > input[type="checkbox"]{
+    display: none;
+}
+#login-form > label{
+    color: #999999;
+}
+#login-form input[type="checkbox"] + label{
+    cursor: pointer;
+    padding-left: 26px;
+    background-image: url("checkbox.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#login-form input[type="checkbox"]:checked + label{
+    background-image: url("checkbox-active.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+

@@ -2,16 +2,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
-
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 
 <%@ include file="/WEB-INF/views/board/layout/hobbyCategory.jsp"%>
 
 
-	<div class="board-list">
-
-				<a href="/board/write">글쓰기</a>
-
+			<div class="board-list">
+			
+				<form action="/board/write" method="get">
+					<button type="submit" class="write-btn">글쓰기</button>
+				</form>
+			
 				<table class="styled-table">
 					<thead>
 						<tr>
@@ -34,10 +35,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-
 			</div>
 		</div>
-</div>
-</div>
+	</div>
 
 <%@ include file="/WEB-INF/views/layout/footer.jsp"%>

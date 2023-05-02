@@ -20,8 +20,16 @@ public class Board {
 	private String nickname;
 	private UserHobby hobby;
 
+	private String uploadFileName;
+
 	public String formatCreatedAt() {
 		return TimestampUtil.timestampToString(createdAt);
+	}
+
+	public String setUpUserImage() {
+
+		return uploadFileName == null ? "https://cdn-icons-png.flaticon.com/512/3529/3529423.png"
+				: "/images/uploads/" + uploadFileName;
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.hobby.dto.AnswerFormDTO;
+import com.tenco.hobby.dto.UpdateAdminInfoFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.AdminRepository;
@@ -45,13 +46,6 @@ public class AdminService {
 		return userList;
 	}
 	
-	public void test() {
-		List<ReportBoard> reportBoard = adminRepository.findAllReportBoard();
-		List<ReportComment> reportComment = adminRepository.findAllReportComment();
-		System.out.println(reportBoard.toString());
-		System.out.println(reportComment.toString());
-	}
-	
 	@Transactional
 	public void createAnswer(AnswerFormDTO answerFormDTO) {
 		int answerResult = adminRepository.insertAnswer(answerFormDTO);
@@ -62,8 +56,8 @@ public class AdminService {
 	}
 
 	@Transactional
-	public void updateUserInfo(UpdateInfoFormDto updateInfoFormDto, Long id){
-		int result = userRepository.updateUserByEmail(updateInfoFormDto);
+	public void updateUserInfo(UpdateAdminInfoFormDto updateAdminInfoFormDto){
+		int result = userRepository.updateUserByEmailByAdmin(updateAdminInfoFormDto);
 
 		if(result != 1){
 			throw new CustomRestfullException("정보 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,13 +66,23 @@ public class AdminService {
 
 	@Transactional
 	public List<ReportBoard> findAllReportBoard(){
-		List<ReportBoard> reportBoard = adminRepository.findAllReportBoard();
+		List<ReportBoard> reportBoardList = adminRepository.findAllReportBoard();
+		return reportBoardList;
+	}
+	
+	public ReportBoard findReportBoard(Long id) {
+		ReportBoard reportBoard = adminRepository.findReportBoardById(id);
 		return reportBoard;
 	}
-
+	
 	@Transactional
 	public List<ReportComment> findAllReportComment(){
 		List<ReportComment> reportComment = adminRepository.findAllReportComment();
 		return reportComment;
+	}
+	
+	public ReportComment findReportComment(Long id) {
+		ReportComment repoertComment = adminRepository.findReportCommentById(id);
+		return repoertComment;
 	}
 }

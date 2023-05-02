@@ -34,6 +34,7 @@ public class BoardService {
 	private ReportRepository reportRepository;
 
 
+	
 	/**
 	 * 전체 글조회
 	 */
@@ -275,5 +276,16 @@ public class BoardService {
 		List<Comment> otherUserCommentList = commentRepository.findForOtherUserComment(userId);
 
 		return otherUserCommentList;
+	}
+	
+	/*
+	 * 댓글 상세 조회
+	 * @author lhs
+	 * @return comment
+	 */
+	@Transactional
+	public Comment findCommentById(Long id) {
+		Comment comment = commentRepository.findById(id);
+		return comment;
 	}
 }

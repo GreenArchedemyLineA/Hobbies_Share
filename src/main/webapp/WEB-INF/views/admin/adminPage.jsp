@@ -93,7 +93,7 @@
 					</tr>
 					</thead>
 					<c:forEach var="board" items="${reportBoard}">
-						<tr>
+						<tr onclick="goDetailReportComment(${board.id})">
 							<td>
 								${board.reportUserId}
 							</td>
@@ -104,6 +104,11 @@
 					</c:forEach>
 				</table>
 			</div>
+			<script>
+				function goDetailReportComment(id){
+					location.href = '/admin/main/reportBoard/'+id;
+				}
+			</script>
 		</c:when>
 		<c:when test="${reportComment != null}">
 			<div class="table-Q">
@@ -115,7 +120,7 @@
 					</tr>
 					</thead>
 					<c:forEach var="comment" items="${reportComment}">
-						<tr>
+						<tr onclick="goDetailReportComment(${comment.id})">
 							<td>
 								${comment.reportUserId}
 							</td>
@@ -126,6 +131,11 @@
 					</c:forEach>
 				</table>
 			</div>
+			<script>
+				function goDetailReportComment(id){
+					location.href = '/admin/main/reportComment/'+id;
+				}
+			</script>
 		</c:when>
 		<c:otherwise>
 			asdf

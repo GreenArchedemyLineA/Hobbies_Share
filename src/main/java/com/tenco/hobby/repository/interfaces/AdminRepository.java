@@ -17,5 +17,6 @@ public interface AdminRepository {
 	int updateQuestion(Long Id);
 	List<ReportBoard>findAllReportBoard();
 	List<ReportComment>findAllReportComment();
-	
+	ReportBoard findReportBoardById(Long id);
+	ReportComment findReportCommentById(Long id);
 }

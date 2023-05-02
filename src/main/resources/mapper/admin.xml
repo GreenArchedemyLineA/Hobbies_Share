@@ -38,4 +38,10 @@
 	<select id="findAllReportComment" resultType="com.tenco.hobby.repository.model.ReportComment">
 		select * from report_comment_tb where proceed = 0;
 	</select>
+	<select id="findReportBoardById" resultType="com.tenco.hobby.repository.model.ReportBoard">
+		select * from report_board_tb where proceed = 0 and id = #{id};
+	</select>
+	<select id="findReportCommentById" resultType="com.tenco.hobby.repository.model.ReportComment">
+		select * from report_comment_tb where proceed = 0 and id = #{id};
+	</select>
 </mapper>

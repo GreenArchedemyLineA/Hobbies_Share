@@ -22,15 +22,15 @@
 		<form action="/admin/main/user/${question.id}" method="post">
 			<table>
 				<tr>
-					<td>답변</td>
+					<td>답변 작성</td>
 				</tr>
 				<tr>
-					<td>
-						<textarea cols="50" rows="30" id="answer" name="answer"></textarea>
+					<td style="display:flex; justify-content:center">
+						<textarea cols="100" rows="30" id="answer" name="answer"></textarea>
 					</td>
 				</tr>
 			</table>
-			<button type="submit">답변</button>
+			<button type="submit" class="submitButton">답변</button>
 		</form>
 	</div>
 </div>

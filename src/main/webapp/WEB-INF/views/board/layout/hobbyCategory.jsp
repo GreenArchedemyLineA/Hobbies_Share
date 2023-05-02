@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-		<div class="board">
+		<div class="whole-board">
 			<nav class="side-menu">
 				<div class="side-menu-title">
 					<b>취미 리스트</b>
@@ -21,4 +21,3 @@
 					</c:forEach>
 				</ul>
 			</nav>
-		</div>
