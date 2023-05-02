@@ -15,29 +15,27 @@
 				<th>내용</th>
 				<th>응답 현황</th>
 				<th colspan=2>작성일</th>
-			</tr>
+			</tr>  
 		</thead>
 		<tbody>
-				<tr>
-					<td>${resq.qandA.content}</td>
-					<td>${resq.qandA.proceed}</td>
-					<td>${resq.qandA.formatCreatedAt()}</td>
-				</tr>
+			<tr>
+				<td>${resq.qandA.content}</td>
+				<td>${resq.qandA.proceed}</td>
+				<td>${resq.qandA.formatCreatedAt()}</td>
+			</tr>
 		</tbody>
 	</table>
-	
+
 	<table class="styled-table">
 		<thead>
 			<tr>
-				<th>내용</th>
-				<th>응답 현황</th>
+				<th>답변</th>
 			</tr>
 		</thead>
 		<tbody>
-				<tr>
-					<td>${resq.answer.id}</td>
-					<td>${resq.answer.content}</td>
-				</tr>
+			<tr>
+				<td>${resq.answer.content}</td>
+			</tr>
 		</tbody>
 	</table>
 
