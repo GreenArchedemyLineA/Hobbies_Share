@@ -367,5 +367,11 @@ public class BoardController {
 		};
 		return new ModelAndView(view);
 	}
+	
+	@GetMapping("/dummy")
+	public String dummyCreate() {
+		boardService.dummy();
+		return "redirect:/main/";
+	}
 
 }

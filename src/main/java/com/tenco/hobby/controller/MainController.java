@@ -41,7 +41,6 @@ public class MainController {
 
 	@GetMapping("/")
 	public String main(Model model) {
-
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
 
 		List<Board> boardList = boardService.readBoardList();

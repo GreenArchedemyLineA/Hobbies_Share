@@ -1,5 +1,6 @@
 package com.tenco.hobby.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,20 @@ public class BoardService {
 	@Autowired
 	private ReportRepository reportRepository;
 
-
+	public void dummy() {
+		try {
+			new DummyCreate(boardRepository);
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * 전체 글조회
