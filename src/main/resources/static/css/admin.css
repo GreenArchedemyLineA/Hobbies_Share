@@ -168,7 +168,7 @@ a {
 
 .login-wrapper > h2{
     font-size: 24px;
-    color: #6A24FE;
+    color: #008989;
     margin-bottom: 20px;
 }
 #login-form > input{
@@ -186,7 +186,7 @@ a {
 #login-form > input[type="submit"]{
     color: #fff;
     font-size: 16px;
-    background-color: #6A24FE;
+    background-color: #008989;
     margin-top: 20px;
 }
 #login-form > input[type="checkbox"]{

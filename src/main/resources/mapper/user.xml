@@ -21,7 +21,7 @@
 
 	<!-- 로그인 -->
 	<select id="findByEmail" resultType="com.tenco.hobby.repository.model.User">
-		select * from user_tb where email = #{email}
+		select * from user_tb where email = #{email} and user_role = 'USER';
 	</select>
 
 	<!-- 프로필 변경 시 -->
@@ -60,7 +60,7 @@
 	
 	<update id="updateUserByEmailByAdmin">
 		update user_tb 
-		set email = #{email}, password=#{password}, username = #{username}, phone = #{phone} user_role=#{restriction} 
+		set email = #{email}, password=#{password}, username = #{username}, phone = #{phone}, user_role=#{restriction} 
 		where id = #{id}
 	</update>
 	

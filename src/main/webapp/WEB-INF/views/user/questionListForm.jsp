@@ -25,7 +25,7 @@
 				<tr>
 					<td>${questionList.id}</td>
 					<c:choose>
-						<c:when test="${questionList.proceed} == 0">
+						<c:when test="${questionList.proceed == false}">
 							<td><a href="/user/auth/update-question/${questionList.id}">${questionList.content}</a></td>
 						</c:when>
 						<c:otherwise>

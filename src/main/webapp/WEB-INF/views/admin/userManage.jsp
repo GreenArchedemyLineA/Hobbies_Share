@@ -13,7 +13,7 @@
 	<div class="blank"></div>
 	<div>
 		<div class="test">
-			<form action="/main/usermanage/${id}" class="joinForm">
+			<form action="/admin/main/usermanage/${id}" class="joinForm" method="post">
 				<h2>회원 정보 수정</h2>
 				<div class="textForm">
 					<input name="id" type="text" class="id" placeholder="아이디" value="${user.id}">

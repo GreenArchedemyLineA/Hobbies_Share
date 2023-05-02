@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,9 @@ public class AdminService {
 	private AdminRepository adminRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	public List<QandA> checkQandA(){
 		List<QandA> qandAList = adminRepository.findAllQandA();
 		return qandAList;
@@ -57,8 +61,8 @@ public class AdminService {
 
 	@Transactional
 	public void updateUserInfo(UpdateAdminInfoFormDto updateAdminInfoFormDto){
+		updateAdminInfoFormDto.setPassword(passwordEncoder.encode(updateAdminInfoFormDto.getPassword()));
 		int result = userRepository.updateUserByEmailByAdmin(updateAdminInfoFormDto);
-
 		if(result != 1){
 			throw new CustomRestfullException("정보 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
