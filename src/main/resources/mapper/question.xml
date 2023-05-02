@@ -56,12 +56,12 @@
 		<association property="answer" javaType="com.tenco.hobby.repository.model.Answer">
 			<result column="id" property="id"/>
 			<result column="user_id" property="userId"/>
-			<result column="content" property="content"/>
+			<result column="answerContent" property="content"/>
 			<result column="question_id" property="questionId"/>
 		</association>
 	</resultMap>
 	<select id="findDetailQuestion" resultMap="QandA">
-		select q.*, a.*
+		select q.*, a.id, a.user_id, a.content as 'answerContent', a.question_id
 		from question_tb as q
 		join answer_tb as a
 		on q.id = a.question_id
