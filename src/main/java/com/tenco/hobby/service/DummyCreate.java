@@ -24,6 +24,7 @@ public class DummyCreate {
 		this.hobbyArrays = getEnumValues(UserHobby.class);
 		this.board = new Board();
 		this.boardRepository = boardRepository;
+		this.hobbiesLength = this.hobbyArrays.length;
 		dummyDataCreated();
 	}
 	private <E extends UserHobby> E[] getEnumValues(Class<E> enumClass) throws NoSuchFieldException, IllegalAccessException{
@@ -41,11 +42,11 @@ public class DummyCreate {
 		for(int i = 0; i< 100; i++) {
 			UUID content = UUID.randomUUID();
 			UUID title = UUID.randomUUID();
-			int userId = random.nextInt(hobbiesLength)+1;
+			int userId = random.nextInt(5)+1;
 			int hobbyId = random.nextInt(hobbiesLength)+1;
 			board.setTitle(title.toString());
 			board.setContent(content.toString());
-			board.setId(Integer.toUnsignedLong(userId));
+			board.setUserId(Integer.toUnsignedLong(userId));
 			board.setHobbyId(Integer.toUnsignedLong(hobbyId));
 			
 			boardRepository.insert(board);

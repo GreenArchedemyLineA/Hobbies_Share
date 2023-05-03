@@ -11,14 +11,14 @@
 		<div class="service-list" id="serviceContainer">
 			<div class="guideContainer" id="boardContainer" onclick="goBoard()" style="cursor: pointer;">
 				<img src="https://cdn-icons-png.flaticon.com/512/4698/4698381.png" width="30%">
-				<div>전체 게시글</div>
+				<div class="title">전체 게시글</div>
 			</div>
 			<div class="guideContainer">
 				<div class="title">HobbyFi가 추천하는 유저</div>
 			</div>
 			<div class="guideContainer" style="cursor: pointer;" onclick="goQnA()">
 				<img src="https://cdn-icons-png.flaticon.com/512/4698/4698167.png " width="30%">
-				<div>Q & A</div>
+				<div class="title">Q & A</div>
 			</div>
 
 		</div>
@@ -80,6 +80,7 @@
 				const imgTag = document.createElement("img");
 				imgTag.src = setUpUserImage(obj.uploadFileName);
 				imgTag.width = "30";
+				imgTag.height ="30";
 				divTag.appendChild(imgTag);
 				divTag.appendChild(aTag);
 				targetDiv.childNodes[3].appendChild(divTag);
