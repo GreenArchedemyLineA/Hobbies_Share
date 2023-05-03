@@ -33,8 +33,8 @@
 							<tr>
 								<td>${writtenBoardList.id}</td>
 								<td>${writtenBoardList.hobby.getName()}</td>
-								<td><a href="/board/detail/${writtenBoardList.userId}">${writtenBoardList.title}</a></td>
-								<td>${writtenBoardList.createdAt}</td>
+								<td><a href="/board/detail/${writtenBoardList.id}">${writtenBoardList.title}</a></td>
+								<td>${writtenBoardList.formatCreatedAt()}</td>
 							</tr>
 						</c:forEach>
 		

@@ -64,7 +64,7 @@
 	border-radius: 6px;
 }
 
-.recommend:hover, .popularUserList:hover, .popularBoardList:hover {
+.guideContainer:nth-child(odd):hover, .recommend:hover, .popularUserList:hover, .popularBoardList:hover {
 	background-color: #eee;
 }
 
@@ -109,6 +109,15 @@
 	overflow: hidden;
 	white-space: nowrap;
 	margin: 10px 0;
+	padding: 5px 10 px;
+}
+
+.popularUserList {
+	padding: 10px;
+}
+
+.popularBoardList:last-child {
+	margin-bottom: 30px;
 }
 
 .popularUserList:hover, .popularBoardList:hover {
