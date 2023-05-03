@@ -14,7 +14,14 @@
 		values( #{userId} , #{commentId})
 	</insert>
 
-
+	<insert id="insertReportUser">
+		insert into report_tb(user_id)
+		values(#{id})
+	</insert>
+	
+	<select id="findReportCount" resultType="com.tenco.hobby.repository.model.ReportCount">
+		select * from report_tb where user_id = #{userId}
+	</select>
 
 
 </mapper>

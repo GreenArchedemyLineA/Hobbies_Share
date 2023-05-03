@@ -17,7 +17,9 @@
 			</tr>
 		</table>
 		<div class="check-btn">
-			<button>신고 확인</button>
+			<form method="post">		
+				<button>신고 확인</button>
+			</form>
 		</div>
 	</div>
 </div>

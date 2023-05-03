@@ -84,4 +84,10 @@
 		group by receiver
 		limit 6;
 	</select>
+	
+	<update id="updateUserRole">
+		update user_tb
+		set user_role = 'RESTRICT'
+		where id = #{id}
+	</update>
 </mapper>

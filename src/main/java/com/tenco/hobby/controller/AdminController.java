@@ -155,7 +155,7 @@ public class AdminController {
 	public String checkReportBoard(@PathVariable Long id){
 		ReportBoard reportBoard = adminService.findReportBoard(id);
 		User user = userService.readInfo(reportBoard.getReportUserId());
-		boardService.deletePost(reportBoard.getId(), user.getId());
+		adminService.createReportUser("BOARD", reportBoard.getReportBoardId(), reportBoard.getReportUserId());
 		return "redirect:/admin/main?checkId=3";
 	}
 
@@ -163,7 +163,7 @@ public class AdminController {
 	public String checkReportComment(@PathVariable Long id){
 		ReportComment reportComment = adminService.findReportComment(id);
 		User user = userService.readInfo(reportComment.getReportUserId());
-		boardService.deleteComment(reportComment.getId(), user.getId());
+		adminService.createReportUser("COMMENT", reportComment.getReportCommentId(), reportComment.getReportUserId());
 		return "redirect:/admin/main?checkId=4";
 	}
 }

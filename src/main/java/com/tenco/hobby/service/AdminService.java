@@ -13,10 +13,14 @@ import com.tenco.hobby.dto.UpdateAdminInfoFormDto;
 import com.tenco.hobby.dto.UpdateInfoFormDto;
 import com.tenco.hobby.handler.exception.CustomRestfullException;
 import com.tenco.hobby.repository.interfaces.AdminRepository;
+import com.tenco.hobby.repository.interfaces.BoardRepository;
+import com.tenco.hobby.repository.interfaces.CommentRepository;
+import com.tenco.hobby.repository.interfaces.ReportRepository;
 import com.tenco.hobby.repository.interfaces.UserRepository;
 import com.tenco.hobby.repository.model.QandA;
 import com.tenco.hobby.repository.model.ReportBoard;
 import com.tenco.hobby.repository.model.ReportComment;
+import com.tenco.hobby.repository.model.ReportCount;
 import com.tenco.hobby.repository.model.User;
 
 @Service
@@ -26,7 +30,13 @@ public class AdminService {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
+	private BoardRepository boardRepository;
+	@Autowired
+	private CommentRepository commentRepository;
+	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private ReportRepository reportRepository;
 	
 	public List<QandA> checkQandA(){
 		List<QandA> qandAList = adminRepository.findAllQandA();
@@ -88,5 +98,20 @@ public class AdminService {
 	public ReportComment findReportComment(Long id) {
 		ReportComment repoertComment = adminRepository.findReportCommentById(id);
 		return repoertComment;
+	}
+	
+	@Transactional
+	public void createReportUser(String types, Long id, Long userId) {
+		if(types.equals("BOARD")) {			
+			boardRepository.deleteById(id);
+		}else {
+			commentRepository.deleteById(id);
+		}
+		
+		reportRepository.insertReportUser(userId);
+		List<ReportCount>reportList = reportRepository.findReportCount(userId);
+		if(reportList.size() % 4 == 3) {
+			userRepository.updateUserRole(userId);
+		}
 	}
 }

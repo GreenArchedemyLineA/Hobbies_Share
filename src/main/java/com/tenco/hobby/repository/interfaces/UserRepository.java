@@ -50,9 +50,11 @@ public interface UserRepository {
 
 //	관리자
 	public User findByAdminEmail(AdminSignInDTO adminSignUpDTO);
-
+	
 //	유저 전체 목록
 	public List<User> findByAll();
 	
 	public List<PopularUserDTO> popularList();
+	
+	public int updateUserRole(Long id);
 }
