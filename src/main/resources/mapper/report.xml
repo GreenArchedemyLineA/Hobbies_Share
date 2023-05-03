@@ -6,12 +6,12 @@
 
 	<insert id="insertReportBoard">
 		insert into report_board_tb(report_user_id, report_board_id)
-		values( #{userId} , #{boardId})
+		values( #{reportUserId} , #{reportBoardId})
 	</insert>
 	
 	<insert id="insertReportComment">
 		insert into report_comment_tb(report_user_id, report_comment_id)
-		values( #{userId} , #{commentId})
+		values( #{reportUserId} , #{reportCommentId})
 	</insert>
 
 	<insert id="insertReportUser">
